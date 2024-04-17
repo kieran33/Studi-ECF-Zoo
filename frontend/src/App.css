@@ -1,38 +1,69 @@
-.App {
+* {
+  text-decoration: none;
+  font-family: roboto;
+}
+
+.barre_navigation_global {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  gap: 50px;
+}
+
+.barre_navigation_onglet {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 50px;
+}
+
+a:hover,
+button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+a {
+  color: #00752F;
+}
+
+.active {
+  color: white;
+  background-color: #00752F;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.bouton_zoo {
+  background-color: #00752F;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+}
+
+.centrer {
+  display: flex;
+  justify-content: center;
+  margin: 25px;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.paragraphe {
+  width: 600px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.image_decouvrez {
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image_decouvrez:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
