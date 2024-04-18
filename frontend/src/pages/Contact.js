@@ -1,11 +1,23 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
+import Footer from '../composants/Footer';
 
 const Contact = () => {
     return (
         <div>
             <Navigation />
-            <h1>Contact</h1>
+            <form className="formulaire">
+                <legend>Une question ? Contactez-nous</legend>
+                <input type="text" name="titre" className="champsFormulaire" id="titre" placeholder="Titre..." required></input>
+                <label htmlFor="titre"></label>
+
+                <textarea name="message" className="champsFormulaire" id="message" placeholder="Votre message..." required></textarea>
+                <label htmlFor="titre"></label>
+
+                <input type="email" name="email" className="champsFormulaire" id="email" placeholder="Votre email..." required></input>
+                <label htmlFor="titre"></label>
+            </form>
+            <Footer />
         </div>
     );
 };

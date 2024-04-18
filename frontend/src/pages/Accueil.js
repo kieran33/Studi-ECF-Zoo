@@ -5,8 +5,24 @@ import Footer from '../composants/Footer'
 import services from '../image/services-zoo.jpg';
 import habitats from '../image/paysage-jungle.jpg';
 import animaux from '../image/groupe-animaux.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Accueil = () => {
+
+    const navigate = useNavigate();
+
+    const directionAnimaux = () => {
+        navigate("/animaux");
+    };
+
+    const directionHabitats = () => {
+        navigate("/habitats");
+    };
+
+    const directionServices = () => {
+        navigate("/services");
+    };
+
     return (
         <div>
             <Navigation />
@@ -19,21 +35,21 @@ const Accueil = () => {
                     Donec sagittis fermentum nisi sed venenatis. Mauris ac volutpat ante, sed luctus libero.</p>
             </div>
             <div className="centrer">
-                <div>
+                <div className="decouvrez" onClick={directionAnimaux}>
                     <img src={animaux} className="image_decouvrez" alt="animaux zoo" />
-                    <p>Découvrez nos animaux</p>
+                    <div className="text_decouvrez">Découvrez nos animaux</div>
                 </div>
-                <div>
+                <div className="decouvrez" onClick={directionHabitats}>
                     <img src={habitats} className="image_decouvrez" alt="habitats zoo" />
-                    <p>Découvrez les habitats</p>
+                    <div className="text_decouvrez">Découvrez les habitats</div>
                 </div>
-                <div>
+                <div className="decouvrez" onClick={directionServices}>
                     <img src={services} className="image_decouvrez" width="50" alt="services zoo" />
-                    <p>Découvrez nos services</p>
+                    <div className="text_decouvrez">Découvrez nos services</div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </div >
     );
 };
 
