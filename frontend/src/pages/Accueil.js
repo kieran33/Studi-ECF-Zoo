@@ -35,17 +35,17 @@ const Accueil = () => {
                     Donec sagittis fermentum nisi sed venenatis. Mauris ac volutpat ante, sed luctus libero.</p>
             </div>
             <div className="centrer">
-                <div className="decouvrez" onClick={directionAnimaux}>
-                    <img src={animaux} className="image_decouvrez" alt="animaux zoo" />
-                    <div className="text_decouvrez">Découvrez nos animaux</div>
+                <div className="div_zoo" onClick={directionAnimaux}>
+                    <img src={animaux} className="image_zoo" alt="animaux zoo" />
+                    <div className="text_zoo">Découvrez nos animaux</div>
                 </div>
-                <div className="decouvrez" onClick={directionHabitats}>
-                    <img src={habitats} className="image_decouvrez" alt="habitats zoo" />
-                    <div className="text_decouvrez">Découvrez les habitats</div>
+                <div className="div_zoo" onClick={directionHabitats}>
+                    <img src={habitats} className="image_zoo" alt="habitats zoo" />
+                    <div className="text_zoo">Découvrez les habitats</div>
                 </div>
-                <div className="decouvrez" onClick={directionServices}>
-                    <img src={services} className="image_decouvrez" width="50" alt="services zoo" />
-                    <div className="text_decouvrez">Découvrez nos services</div>
+                <div className="div_zoo" onClick={directionServices}>
+                    <img src={services} className="image_zoo" width="50" alt="services zoo" />
+                    <div className="text_zoo">Découvrez nos services</div>
                 </div>
             </div>
             <Footer />

@@ -26,7 +26,8 @@ db.connect(err => {
         id INT AUTO_INCREMENT PRIMARY KEY,
         prenom VARCHAR(255) NOT NULL,
         race VARCHAR(255) NOT NULL,
-        habitat VARCHAR(255) NOT NULL
+        habitat VARCHAR(255) NOT NULL,
+        image VARCHAR(255) NOT NULL
     )`;
 
     const creerTableHabitats = `
@@ -34,7 +35,7 @@ db.connect(err => {
         id INT AUTO_INCREMENT PRIMARY KEY,
         nom VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL,
-        listeAnimaux VARCHAR(255) NOT NULL
+        image VARCHAR(255) NOT NULL
     )`;
 
     const creerTablePersonnels = `
@@ -49,7 +50,8 @@ db.connect(err => {
     CREATE TABLE IF NOT EXISTS services(
         id INT AUTO_INCREMENT PRIMARY KEY,
         nom VARCHAR(255) NOT NULL,
-        description VARCHAR(255) NOT NULL
+        description VARCHAR(255) NOT NULL,
+        image VARCHAR(255) NOT NULL
     )`;
 
     const creerTableAvisNonVerif = `
@@ -81,6 +83,26 @@ app.get("/animaux", (req, res) => {
     });
 });
 
+app.get("/habitats", (req, res) => {
+    const request = "SELECT * FROM habitats"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/services", (req, res) => {
+    const request = "SELECT * FROM services"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/personnels", (req, res) => {
+    const request = "SELECT * FROM personnels"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
 
 app.listen(port, () => {
     console.log('Serveur connecté au port ' + port);

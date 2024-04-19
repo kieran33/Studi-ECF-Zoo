@@ -56,11 +56,11 @@ a {
 }
 
 .paragraphe {
-  width: 600px;
+  width: 650px;
   text-align: center;
 }
 
-.image_decouvrez {
+.image_zoo {
   width: 400px;
   height: 200px;
   object-fit: cover;
@@ -68,23 +68,23 @@ a {
   transition: 0.1s all ease-in-out;
 }
 
-.image_decouvrez:hover {
+.image_zoo:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
 
-.text_decouvrez {
+.text_zoo {
   text-align: center;
   margin-top: 10px;
   display: none;
 }
 
-.decouvrez {
+.div_zoo {
   width: 400px;
   height: 200px;
 }
 
-.decouvrez:hover .text_decouvrez {
+.div_zoo:hover .text_zoo {
   display: block;
 }
 
@@ -102,7 +102,8 @@ a {
   margin-top: 50px;
 }
 
-.formulaire {
+.formulaire,
+.animal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,4 +126,26 @@ a {
 .champsFormulaire:focus {
   border: solid 2px #00752F;
   outline-style: none;
+}
+
+.animal,
+.habitat {
+  margin: 10px;
+}
+
+.image_service {
+  width: 1000px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.titre_service {
+  text-align: center;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

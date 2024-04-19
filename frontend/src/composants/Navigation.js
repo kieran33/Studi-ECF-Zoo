@@ -10,11 +10,15 @@ const Navigation = () => {
         navigate("/connexion");
     }
 
+    const directionAccueil = () => {
+        navigate("/");
+    };
+
     return (
         <div className="barre_navigation_global">
             <div>
-                <img src={logo} width="50" height="auto" atl="logo zoo ecf"
-                    onClick={directionConnexion}
+                <img src={logo} style={{ cursor: 'pointer' }} width="50" height="auto" atl="logo zoo ecf"
+                    onClick={directionAccueil}
                 />
             </div>
             <div className="barre_navigation_onglet">
