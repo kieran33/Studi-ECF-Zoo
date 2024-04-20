@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -101,6 +102,61 @@ app.get("/personnels", (req, res) => {
     const request = "SELECT * FROM personnels"
     db.query(request, (error, result) => {
         res.send(result);
+    });
+});
+
+app.post("/connexion", (req, res) => {
+    const { nom_utilisateur, mot_de_passe } = req.body;
+    console.log("nom utilisateur", nom_utilisateur)
+    console.log('mot de passe', mot_de_passe)
+
+    db.query("SELECT * FROM personnels WHERE nom_utilisateur = ?", [nom_utilisateur], (err, results) => {
+        if (err) {
+            res.status(500).send("Erreur dans la recherche du compte du personnel");
+        }
+        if (results.length === 0) {
+            res.status(401).send("Utilisateur non trouvé");
+        } else {
+            console.log('result', results)
+        }
+
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(mot_de_passe, salt, (err, hash) => {
+                console.log("mot de passe salt", mot_de_passe)
+                console.log("hash", hash)
+                const utilisateur = results[0];
+                bcrypt.compare(utilisateur.mot_de_passe, hash, (err, result) => {
+                    console.log('result bcrypt compare2', result)
+                    if (result) {
+                        res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
+                    } else {
+                        console.log(result)
+                        console.log('erreur bcrypt else', err)
+                        res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
+                    }
+                })
+            })
+        })
+
+        //const utilisateur = results[0];
+
+        //console.log('utilisateur nom_utilisateur', utilisateur.nom_utilisateur)
+        //console.log('utilisateur mot de passe', utilisateur.mot_de_passe)
+
+        /*bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe).then(function (result) {
+            console.log('result autre bcrypt', result)
+        });*/
+
+        /*bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe, (err, result) => {
+            console.log('je suis dans bcrypt', bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe))
+            if (result) {
+                res.status(200).json({ success: true, message: "connexion réussis" });
+            } else {
+                console.log(result)
+                console.log('erreur bcrypt else', err)
+                res.status(401).json({ success: false, message: "Mot de passe incorrect" });
+            }
+        });*/
     });
 });
 

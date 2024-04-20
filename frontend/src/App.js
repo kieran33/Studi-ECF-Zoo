@@ -7,6 +7,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Connexion from './pages/Connexion';
 import Erreur from './pages/Erreur';
+import DashboardAdmin from './pages/DashboardAdmin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />
+          <Route path="/dashboard-admin" element={<DashboardAdmin />} />
           <Route path="*" element={<Erreur />} />
         </Routes>
       </BrowserRouter>

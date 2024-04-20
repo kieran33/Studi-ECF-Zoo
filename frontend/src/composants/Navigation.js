@@ -4,6 +4,9 @@ import logo from '../image/logo-zoo-ecf.png';
 
 const Navigation = () => {
 
+    const role = localStorage.getItem('role');
+    const connecté = localStorage.getItem('connecté');
+
     const navigate = useNavigate();
 
     const directionConnexion = () => {
@@ -11,6 +14,12 @@ const Navigation = () => {
     }
 
     const directionAccueil = () => {
+        navigate("/");
+    };
+
+    const deconnexion = () => {
+        localStorage.removeItem('role');
+        localStorage.removeItem('connecté');
         navigate("/");
     };
 
@@ -37,7 +46,18 @@ const Navigation = () => {
                 <NavLink to={"/contact"}>
                     Contact
                 </NavLink>
-                <button className="bouton_zoo" onClick={directionConnexion}>Espace pro</button>
+                {role === "admin" ?
+                    <NavLink to={"/dashboard-admin"}>
+                        Dashboard admin
+                    </NavLink>
+                    :
+                    null
+                }
+                {connecté === "true" ?
+                    <button className="bouton_zoo" onClick={deconnexion}>Se déconnecter</button>
+                    :
+                    <button className="bouton_zoo" onClick={directionConnexion}>Espace pro</button>
+                }
             </div>
         </div>
     );
