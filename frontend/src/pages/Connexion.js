@@ -28,13 +28,13 @@ const Connexion = () => {
     const seConnecter = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3002/connexion", {
+            const reponse = await axios.post("http://localhost:3002/connexion", {
                 nom_utilisateur: nom_utilisateur,
                 mot_de_passe: mot_de_passe
             });
-            if (response.data.success && response.data.role === "admin") {
-                localStorage.setItem('role', response.data.role);
-                localStorage.setItem('connecté', response.data.success);
+            if (reponse.data.success) {
+                localStorage.setItem('role', reponse.data.role);
+                localStorage.setItem('connecté', reponse.data.success);
                 navigate("/");
             } else {
                 alert("Identifiants incorrets");

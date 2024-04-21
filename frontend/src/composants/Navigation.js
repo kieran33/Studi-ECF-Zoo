@@ -53,6 +53,20 @@ const Navigation = () => {
                     :
                     null
                 }
+                {role === "employé" ?
+                    <NavLink to={"/dashboard-employe"}>
+                        Dashboard employé
+                    </NavLink>
+                    :
+                    null
+                }
+                {role === "vétérinaire" ?
+                    <NavLink to={"/dashboard-veterinaire"}>
+                        Dashboard vétérinaire
+                    </NavLink>
+                    :
+                    null
+                }
                 {connecté === "true" ?
                     <button className="bouton_zoo" onClick={deconnexion}>Se déconnecter</button>
                     :

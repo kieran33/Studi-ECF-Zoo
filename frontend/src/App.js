@@ -8,6 +8,8 @@ import Contact from './pages/Contact';
 import Connexion from './pages/Connexion';
 import Erreur from './pages/Erreur';
 import DashboardAdmin from './pages/DashboardAdmin';
+import DashboardEmploye from './pages/DashboardEmploye';
+import DashboardVeterinaire from './pages/DashboardVeterinaire';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+          <Route path="/dashboard-employe" element={<DashboardEmploye />} />
+          <Route path="/dashboard-veterinaire" element={<DashboardVeterinaire />} />
           <Route path="*" element={<Erreur />} />
         </Routes>
       </BrowserRouter>

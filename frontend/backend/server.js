@@ -120,23 +120,42 @@ app.post("/connexion", (req, res) => {
             console.log('result', results)
         }
 
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(mot_de_passe, salt, (err, hash) => {
-                console.log("mot de passe salt", mot_de_passe)
-                console.log("hash", hash)
-                const utilisateur = results[0];
-                bcrypt.compare(utilisateur.mot_de_passe, hash, (err, result) => {
-                    console.log('result bcrypt compare2', result)
-                    if (result) {
-                        res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
-                    } else {
-                        console.log(result)
-                        console.log('erreur bcrypt else', err)
-                        res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
-                    }
+        if (mot_de_passe.includes("admin")) {
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(mot_de_passe, salt, (err, hash) => {
+                    console.log("mot de passe salt", mot_de_passe)
+                    console.log("hash", hash)
+                    const utilisateur = results[0];
+                    bcrypt.compare(utilisateur.mot_de_passe, hash, (err, result) => {
+                        console.log('result bcrypt compare2', result)
+                        if (result) {
+                            res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
+                        } else {
+                            console.log(result)
+                            console.log('erreur bcrypt else', err)
+                            res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
+                        }
+                    })
                 })
             })
-        })
+        }
+        else {
+            console.log("je suis dans else")
+            const utilisateur = results[0];
+            console.log("mot de passe", mot_de_passe)
+            console.log("utilisateur . mot de passe", utilisateur.mot_de_passe)
+            bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe, (err, result) => {
+                console.log('result bcrypt compare2', result)
+                if (result) {
+                    res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
+                } else {
+                    console.log(result)
+                    console.log('erreur bcrypt else', err)
+                    res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
+                }
+            })
+        }
+
 
         //const utilisateur = results[0];
 
@@ -157,6 +176,30 @@ app.post("/connexion", (req, res) => {
                 res.status(401).json({ success: false, message: "Mot de passe incorrect" });
             }
         });*/
+    });
+});
+
+app.post("/creer-personnels", (req, res) => {
+    const { nom_utilisateur, mot_de_passe, role } = req.body;
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(mot_de_passe, salt, (err, hash) => {
+            if (err) {
+                return res.status(500).send("Erreur lors du hashage");
+            }
+
+            const request = "INSERT INTO personnels (nom_utilisateur, mot_de_passe, role) VALUES (?, ?, ?)";
+
+            db.query(request, [nom_utilisateur, hash, role], (err, result) => {
+                if (err) {
+                    res.status(500).send("Erreur lors de la création du personnel");
+                }
+                else {
+                    console.log("Personnel créer avec succès");
+                    res.status(201).send("Personnel créer avec succès");
+                }
+            });
+        });
     });
 });
 
