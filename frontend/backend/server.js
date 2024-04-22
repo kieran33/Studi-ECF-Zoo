@@ -3,6 +3,8 @@ const mysql = require("mysql");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const path = require("path");
+const multer = require("multer");
 
 const app = express();
 
@@ -10,6 +12,35 @@ const port = 3002;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use("/image", express.static(path.join(__dirname, "image")));
+
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' http://localhost:5000;");
+    return next();
+});
+
+const repertoireImage = path.join(__dirname, "image");
+
+const stockage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, repertoireImage);
+    },
+    filename: function (req, file, cb) {
+        const nom_fichier = `image-${file.originalname.replace(/[^a-zA-Z0-9.]/g, "_")}`;
+        cb(null, nom_fichier);
+    }
+});
+
+const filtreFichier = (req, file, cb) => {
+    if (file.mimetype.startsWith("image")) {
+        cb(null, true);
+    } else {
+        cb(new Error("Seuls les fichiers image sont autorisés."), false);
+    }
+};
+
+const exporter = multer({ storage: stockage, fileFilter: filtreFichier });
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -200,6 +231,39 @@ app.post("/creer-personnels", (req, res) => {
                 }
             });
         });
+    });
+});
+
+app.post("/ajout-animaux", exporter.single("image"), (req, res) => {
+    const { prenom, race, habitat, description } = req.body;
+    const nom_image = req.file ? req.file.filename : null;
+
+    console.log('prenom animaux', prenom);
+    console.log('race animaux', race);
+    console.log('habitat animaux', habitat);
+    console.log('description animaux', description);
+    console.log('nom image', nom_image);
+
+    db.query("INSERT INTO animaux (prenom, race, habitat, image, description) VALUES (?, ?, ?, ?, ?)",
+        [prenom, race, habitat, nom_image, description], (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send("Erreur lors de l'ajout de l'animal");
+            }
+            else {
+                res.status(201).send("Animal ajouté avec succès");
+            }
+        });
+});
+
+app.delete("/animaux/supprimer/:id", (req, res) => {
+    const { id } = req.params;
+    const request = "DELETE FROM animaux WHERE id = ?";
+
+    db.query(request, id, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
     });
 });
 

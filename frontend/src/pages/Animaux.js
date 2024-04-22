@@ -50,7 +50,10 @@ const Animaux = () => {
                     {data.map((animal, index) => (
                         <div className="animal" key={index}>
                             <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                                <img className="image_zoo" style={{ width: '250px', height: '250px' }} src={`Liste-animaux/${animal.image}`} alt={animal.prenom}></img>
+                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                    /*src={`Liste-animaux/${animal.image}`} */
+                                    src={`http://localhost:3002/image/${animal.image}`}
+                                    alt={animal.prenom}></img>
                                 <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                             </div>
                         </div>
@@ -61,7 +64,10 @@ const Animaux = () => {
                     {dataTrier.map((animal, index) => (
                         <div className="animal" key={index}>
                             <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                                <img className="image_zoo" style={{ width: '250px', height: '250px' }} src={`Liste-animaux/${animal.image}`} alt={animal.prenom}></img>
+                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                    /*src={`Liste-animaux/${animal.image}`}*/
+                                    src={`http://localhost:3002/image/${animal.image}`}
+                                    alt={animal.prenom}></img>
                                 <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                             </div>
                         </div>
