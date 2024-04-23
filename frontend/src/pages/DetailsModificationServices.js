@@ -4,16 +4,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const DetailsModificationAnimaux = () => {
+const DetailsModificationServices = () => {
 
     const [data, setData] = useState([]);
     const { id } = useParams();
-    const [dataAnimal, setDataAnimal] = useState([]);
+    const [dataService, setDataService] = useState([]);
 
     const idNombre = Number(id);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
+        const response = await axios.get("http://localhost:3002/services");
         setData(response.data);
     };
 
@@ -23,22 +23,19 @@ const DetailsModificationAnimaux = () => {
 
     useEffect(() => {
         if (data.length > 0) {
-            setDataAnimal(data.find(animal => animal.id === idNombre));
+            setDataService(data.find(service => service.id === idNombre));
         }
     }, [data]);
 
-    const [animal, setAnimal] = useState({
+    const [service, setService] = useState({
         id: "",
-        prenom: "",
-        race: "",
-        habitat: "",
-        image: "",
+        nom: "",
         description: ""
     });
 
     useEffect(() => {
-        setAnimal(dataAnimal)
-    }, [dataAnimal]);
+        setService(dataService)
+    }, [dataService]);
 
     /*console.log('data animal', dataAnimal.prenom)
     console.log('animal id useSTATE', animal.id)
@@ -53,13 +50,13 @@ const DetailsModificationAnimaux = () => {
 
         const nouvelleValeur = value;
 
-        setAnimal({
-            ...animal,
+        setService({
+            ...service,
             [name]: nouvelleValeur,
         });
     };
 
-    const modifierAnimaux = async (e) => {
+    const modifierServices = async (e) => {
         e.preventDefault();
 
         const headers = {
@@ -68,14 +65,12 @@ const DetailsModificationAnimaux = () => {
 
         const formData = new FormData();
 
-        formData.append("prenom", animal.prenom);
-        formData.append("race", animal.race);
-        formData.append("habitat", animal.habitat);
-        formData.append("description", animal.description);
-        formData.append("image", animal.image);
+        formData.append("nom", service.nom);
+        formData.append("description", service.description);
+        formData.append("image", service.image);
 
         try {
-            await axios.put(`http://localhost:3002/animaux/modifier/${id}`, formData, { headers })
+            await axios.put(`http://localhost:3002/services/modifier/${id}`, formData, { headers })
         } catch (error) {
             console.log(error);
         }
@@ -85,11 +80,11 @@ const DetailsModificationAnimaux = () => {
         if (e.target.files && e.target.files[0]) {
             const img = e.target.files[0];
             console.log(img)
-            setAnimal({
-                ...animal,
+            setService({
+                ...service,
                 image: img
             });
-            console.log(animal)
+            console.log(service)
         };
     };
 
@@ -97,51 +92,27 @@ const DetailsModificationAnimaux = () => {
         <div>
             <Navigation />
             <div className="centrer">
-                <form className="formulaire">
-                    <legend>Modifier animaux</legend>
+                <form className="formulaire" onSubmit={modifierServices}>
+                    <legend>Modifier services</legend>
                     <input
                         type="text"
-                        name="prenom"
+                        name="nom"
                         className="champsFormulaire"
-                        id="prenom"
-                        placeholder="Prénom..."
-                        defaultValue={animal.prenom}
-                        value={animal.prenom}
+                        id="nom"
+                        placeholder="Nom du service..."
+                        defaultValue={service.nom}
+                        //value={service.nom}
                         onChange={inputChangement}
                     />
-                    <label htmlFor="prenom"></label>
-
-                    <input
-                        type="text"
-                        name="race"
-                        className="champsFormulaire"
-                        id="race"
-                        placeholder="Race..."
-                        defaultValue={animal.race}
-                        value={animal.race}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="race"></label>
-
-                    <input
-                        type="text"
-                        name="habitat"
-                        className="champsFormulaire"
-                        id="habitat"
-                        placeholder="Habitat..."
-                        defaultValue={animal.habitat}
-                        value={animal.habitat}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="habitat"></label>
+                    <label htmlFor="nom"></label>
 
                     <textarea
                         name="description"
                         className="champsFormulaire"
                         id="description"
                         placeholder="Description..."
-                        defaultValue={animal.description}
-                        value={animal.description}
+                        defaultValue={service.description}
+                        //value={service.description}
                         onChange={inputChangement}
                     />
                     <label htmlFor="description"></label>
@@ -157,7 +128,7 @@ const DetailsModificationAnimaux = () => {
                     <label htmlFor="image"></label>
 
                     <div className="centrer">
-                        <button type="submit" className="bouton_zoo" onClick={modifierAnimaux}>Confirmer</button>
+                        <button type="submit" className="bouton_zoo">Confirmer</button>
                         <button className="bouton_zoo" >Annuler</button>
                     </div>
                 </form>
@@ -166,4 +137,4 @@ const DetailsModificationAnimaux = () => {
     );
 };
 
-export default DetailsModificationAnimaux;
+export default DetailsModificationServices;

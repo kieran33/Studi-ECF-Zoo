@@ -4,6 +4,9 @@ import CreationPersonnels from '../composants/CreationPersonnels';
 import AjoutAnimaux from '../composants/AjoutAnimaux';
 import SupprimerAnimaux from '../composants/SupprimerAnimaux';
 import ModificationAnimaux from '../composants/ModificationAnimaux';
+import AjoutServices from '../composants/AjoutServices';
+import SupprimerServices from '../composants/SupprimerServices';
+import ModificationServices from '../composants/ModificationServices';
 
 const DashboardAdmin = () => {
     return (
@@ -14,6 +17,9 @@ const DashboardAdmin = () => {
             <AjoutAnimaux />
             <SupprimerAnimaux />
             <ModificationAnimaux />
+            <AjoutServices />
+            <SupprimerServices />
+            <ModificationServices />
         </div>
     );
 };
