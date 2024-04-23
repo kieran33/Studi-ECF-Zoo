@@ -1,24 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import Lion from "../image/lion-savane.jpg";
 
-const AjoutAnimaux = () => {
+const AjoutHabitats = () => {
 
-    const [nouvelAnimal, setNouvelAnimal] = useState({
+    const [nouvelHabitat, setNouvelHabitat] = useState({
         id: "",
-        prenom: "",
-        habitat: "",
+        nom: "",
         description: "",
         image: ""
     });
+
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
 
         const nouvelleValeur = value;
 
-        setNouvelAnimal({
-            ...nouvelAnimal,
+        setNouvelHabitat({
+            ...nouvelHabitat,
             [name]: nouvelleValeur,
         });
     };
@@ -26,14 +27,14 @@ const AjoutAnimaux = () => {
     const imageChangement = (e) => {
         if (e.target.files && e.target.files[0]) {
             const img = e.target.files[0];
-            setNouvelAnimal({
-                ...nouvelAnimal,
+            setNouvelHabitat({
+                ...nouvelHabitat,
                 image: img
             });
         };
     };
 
-    const ajouterAnimaux = (e) => {
+    const ajouterHabitats = (e) => {
         e.preventDefault();
 
         const headers = {
@@ -42,19 +43,11 @@ const AjoutAnimaux = () => {
 
         const formData = new FormData();
 
-        formData.append("prenom", nouvelAnimal.prenom);
-        formData.append("race", nouvelAnimal.race);
-        formData.append("habitat", nouvelAnimal.habitat);
-        formData.append("description", nouvelAnimal.description);
-        formData.append("image", nouvelAnimal.image);
+        formData.append("nom", nouvelHabitat.nom);
+        formData.append("description", nouvelHabitat.description);
+        formData.append("image", nouvelHabitat.image);
 
-        console.log('prenom animaux', nouvelAnimal.prenom);
-        console.log('race animaux', nouvelAnimal.race);
-        console.log('habitat animaux', nouvelAnimal.habitat);
-        console.log('description animaux', nouvelAnimal.description);
-        console.log('nom image', nouvelAnimal.image);
-
-        axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
+        axios.post("http://localhost:3002/ajout-habitats", formData, { headers })
             .then(response => {
                 console.log(response.data);
             })
@@ -66,42 +59,20 @@ const AjoutAnimaux = () => {
 
     return (
         <div>
-            <h1>Ajout animaux</h1>
+            <h1>Ajout habitats</h1>
 
-            <form className="formulaire" onSubmit={ajouterAnimaux} >
-                <legend>Ajout animaux</legend>
+            <form className="formulaire" onSubmit={ajouterHabitats} >
+                <legend>Ajout habitats</legend>
                 <input
                     type="text"
-                    name="prenom"
+                    name="nom"
                     className="champsFormulaire"
-                    id="prenom"
-                    placeholder="Prénom..."
+                    id="nom"
+                    placeholder="Nom..."
                     onChange={inputChangement}
                     required
                 />
-                <label htmlFor="prenom"></label>
-
-                <input
-                    type="text"
-                    name="race"
-                    className="champsFormulaire"
-                    id="race"
-                    placeholder="Race..."
-                    onChange={inputChangement}
-                    required
-                />
-                <label htmlFor="race"></label>
-
-                <input
-                    type="text"
-                    name="habitat"
-                    className="champsFormulaire"
-                    id="habitat"
-                    placeholder="Habitat..."
-                    onChange={inputChangement}
-                    required
-                />
-                <label htmlFor="habitat"></label>
+                <label htmlFor="nom"></label>
 
                 <textarea
                     name="description"
@@ -133,4 +104,4 @@ const AjoutAnimaux = () => {
     );
 };
 
-export default AjoutAnimaux;
+export default AjoutHabitats;

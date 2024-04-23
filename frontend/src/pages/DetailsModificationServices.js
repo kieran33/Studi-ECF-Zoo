@@ -30,7 +30,8 @@ const DetailsModificationServices = () => {
     const [service, setService] = useState({
         id: "",
         nom: "",
-        description: ""
+        description: "",
+        image: ""
     });
 
     useEffect(() => {

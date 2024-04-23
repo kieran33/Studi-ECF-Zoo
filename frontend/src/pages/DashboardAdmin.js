@@ -7,6 +7,9 @@ import ModificationAnimaux from '../composants/ModificationAnimaux';
 import AjoutServices from '../composants/AjoutServices';
 import SupprimerServices from '../composants/SupprimerServices';
 import ModificationServices from '../composants/ModificationServices';
+import AjoutHabitats from '../composants/AjoutHabitats';
+import SupprimerHabitats from '../composants/SupprimerHabitats';
+import ModificationHabitats from '../composants/ModificationHabitats';
 
 const DashboardAdmin = () => {
     return (
@@ -20,6 +23,9 @@ const DashboardAdmin = () => {
             <AjoutServices />
             <SupprimerServices />
             <ModificationServices />
+            <AjoutHabitats />
+            <SupprimerHabitats />
+            <ModificationHabitats />
         </div>
     );
 };

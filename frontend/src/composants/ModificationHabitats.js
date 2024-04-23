@@ -1,10 +1,9 @@
-import React from 'react';
-import Navigation from '../composants/Navigation';
-import Footer from '../composants/Footer';
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const Habitats = () => {
+const ModificationHabitats = () => {
 
     const [data, setData] = useState([]);
 
@@ -17,28 +16,27 @@ const Habitats = () => {
         loadData();
     }, []);
 
-    console.log(data)
-
     return (
         <div>
-            <Navigation />
-            <h1 className="centrer">Les habitats</h1>
+            <h1 className="centrer">Liste des services</h1>
             <div className="centrer">
                 {data.map((habitat, index) => (
-                    <div className="habitat" key={index}>
-                        <div className="div_zoo" style={{ width: '500px', height: '300px' }}>
-                            <img className="image_zoo" style={{ width: '500px', height: '300px' }}
+                    <div className="animal" key={index}>
+                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
                                 src={`http://localhost:3002/image/${habitat.image}`}
                                 alt={habitat.nom}>
                             </img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>
                         </div>
+                        <Link to={`/dashboard-admin/modifier-habitats/${habitat.id}`}>
+                            <button className="bouton_zoo">Modifier</button>
+                        </Link>
                     </div>
                 ))}
             </div>
-            <Footer />
-        </div>
+        </div >
     );
 };
 
-export default Habitats;
+export default ModificationHabitats;

@@ -246,6 +246,23 @@ app.post("/ajout-services", exporter.single("image"), (req, res) => {
         });
 });
 
+app.post("/ajout-habitats", exporter.single("image"), (req, res) => {
+    const { nom, description } = req.body;
+    const nom_image = req.file ? req.file.filename : null;
+
+    db.query("INSERT INTO habitats (nom, description, image) VALUES (?, ?, ?)",
+        [nom, description, nom_image], (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send("Erreur lors de l'ajout de l'habitat");
+            }
+            else {
+                console.log(result);
+                res.status(201).send("Habitat ajouté avec succès");
+            }
+        });
+});
+
 app.delete("/animaux/supprimer/:id", (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM animaux WHERE id = ?";
@@ -260,6 +277,17 @@ app.delete("/animaux/supprimer/:id", (req, res) => {
 app.delete("/services/supprimer/:id", (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM services WHERE id = ?";
+
+    db.query(request, id, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+});
+
+app.delete("/habitats/supprimer/:id", (req, res) => {
+    const { id } = req.params;
+    const request = "DELETE FROM habitats WHERE id = ?";
 
     db.query(request, id, (error, result) => {
         if (error) {
@@ -314,6 +342,34 @@ app.put("/services/modifier/:id", exporter.single("image"), (req, res) => {
     }
     else {
         const request = "UPDATE services SET `nom`=?, `image`=?, `description`=? WHERE id=?";
+        db.query(request, [req.body.nom, nom_image, req.body.description, id], (error, result) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log(result);
+            }
+        });
+    }
+});
+
+app.put("/habitats/modifier/:id", exporter.single("image"), (req, res) => {
+    const { id } = req.params;
+    const nom_image = req.file ? req.file.filename : null;
+
+    if (nom_image === null) {
+        const request = "UPDATE habitats SET `nom`=?, `description`=? WHERE id=?";
+        db.query(request, [req.body.nom, req.body.description, id], (error, result) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log(result);
+            }
+        });
+    }
+    else {
+        const request = "UPDATE habitats SET `nom`=?, `image`=?, `description`=? WHERE id=?";
         db.query(request, [req.body.nom, nom_image, req.body.description, id], (error, result) => {
             if (error) {
                 console.log(error);
