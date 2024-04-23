@@ -5,7 +5,7 @@ import Lion from "../image/lion-savane.jpg";
 
 const AjoutAnimaux = () => {
 
-    const [nouvelAnimal, setNouvelAnimal] = useState(animalParDefaut);
+    const [nouvelAnimal, setNouvelAnimal] = useState(animalParDefaut());
 
     function animalParDefaut() {
         return {

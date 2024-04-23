@@ -186,27 +186,6 @@ app.post("/connexion", (req, res) => {
                 }
             })
         }
-
-
-        //const utilisateur = results[0];
-
-        //console.log('utilisateur nom_utilisateur', utilisateur.nom_utilisateur)
-        //console.log('utilisateur mot de passe', utilisateur.mot_de_passe)
-
-        /*bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe).then(function (result) {
-            console.log('result autre bcrypt', result)
-        });*/
-
-        /*bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe, (err, result) => {
-            console.log('je suis dans bcrypt', bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe))
-            if (result) {
-                res.status(200).json({ success: true, message: "connexion réussis" });
-            } else {
-                console.log(result)
-                console.log('erreur bcrypt else', err)
-                res.status(401).json({ success: false, message: "Mot de passe incorrect" });
-            }
-        });*/
     });
 });
 
@@ -238,12 +217,6 @@ app.post("/ajout-animaux", exporter.single("image"), (req, res) => {
     const { prenom, race, habitat, description } = req.body;
     const nom_image = req.file ? req.file.filename : null;
 
-    console.log('prenom animaux', prenom);
-    console.log('race animaux', race);
-    console.log('habitat animaux', habitat);
-    console.log('description animaux', description);
-    console.log('nom image', nom_image);
-
     db.query("INSERT INTO animaux (prenom, race, habitat, image, description) VALUES (?, ?, ?, ?, ?)",
         [prenom, race, habitat, nom_image, description], (error, result) => {
             if (error) {
@@ -265,6 +238,34 @@ app.delete("/animaux/supprimer/:id", (req, res) => {
             console.log(error);
         }
     });
+});
+
+app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
+    const { id } = req.params;
+    const nom_image = req.file ? req.file.filename : null;
+
+    if (nom_image === null) {
+        const request = "UPDATE animaux SET `prenom`=?, `race`=?, `habitat`=?, `description`=? WHERE id=?";
+        db.query(request, [req.body.prenom, req.body.race, req.body.habitat, req.body.description, id], (error, result) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log(result);
+            }
+        });
+    }
+    else {
+        const request = "UPDATE animaux SET `prenom`=?, `race`=?, `habitat`=?, `image`=?, `description`=? WHERE id=?";
+        db.query(request, [req.body.prenom, req.body.race, req.body.habitat, nom_image, req.body.description, id], (error, result) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log(result);
+            }
+        });
+    }
 });
 
 app.listen(port, () => {

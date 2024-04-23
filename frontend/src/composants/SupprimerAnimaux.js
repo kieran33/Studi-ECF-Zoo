@@ -34,7 +34,7 @@ const SupprimerAnimaux = () => {
                                 alt={animal.prenom}></img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                         </div>
-                        <button onClick={() => supprimerAnimaux(animal.id)}>Supprimer</button>
+                        <button className="bouton_zoo" onClick={() => supprimerAnimaux(animal.id)}>Supprimer</button>
                     </div>
                 ))}
             </div>

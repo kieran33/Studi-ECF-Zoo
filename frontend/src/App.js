@@ -10,6 +10,7 @@ import Erreur from './pages/Erreur';
 import DashboardAdmin from './pages/DashboardAdmin';
 import DashboardEmploye from './pages/DashboardEmploye';
 import DashboardVeterinaire from './pages/DashboardVeterinaire';
+import DetailsModificationAnimaux from './pages/DetailsModificationAnimaux';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+          <Route path="/dashboard-admin/modifier-animaux/:id" element={<DetailsModificationAnimaux />} />
           <Route path="/dashboard-employe" element={<DashboardEmploye />} />
           <Route path="/dashboard-veterinaire" element={<DashboardVeterinaire />} />
           <Route path="*" element={<Erreur />} />
