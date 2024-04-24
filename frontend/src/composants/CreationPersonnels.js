@@ -4,15 +4,12 @@ import axios from 'axios';
 
 const CreationPersonnels = () => {
 
-    const [nouveauxPersonnels, setNouveauxPersonnels] = useState(personnelParDefaut());
-
-    function personnelParDefaut() {
-        return {
-            nom_utilisateur: "personnel_zoo",
-            mot_de_passe: "personnel123",
-            role: "employé"
-        }
-    };
+    const [nouveauxPersonnels, setNouveauxPersonnels] = useState({
+        id: "",
+        nom_utilisateur: "",
+        mot_de_passe: "",
+        role: ""
+    });
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -40,7 +37,6 @@ const CreationPersonnels = () => {
                     },
                 });
                 console.log("succès: ", reponse.data);
-                setNouveauxPersonnels(personnelParDefaut());
             } catch (error) {
                 console.error("Erreur :", error.reponse ? error.reponse.data : error.message);
             }
@@ -49,7 +45,6 @@ const CreationPersonnels = () => {
             alert("Veuillez choisir un mot de passe contenant des lettres et des chiffres");
         }
     }
-
 
     return (
         <div>

@@ -54,6 +54,7 @@ const DetailsAnimaux = () => {
                     </img>
                     <p>{dataAnimal.prenom}</p>
                     <p className="paragraphe">{dataAnimal.description}</p>
+                    <h1>ESPACE POUR AVIS VETERINAIRE</h1>
                     <div className="centrer">
                         <div className="service" style={{ marginRight: "75px" }}>
                             <img src={Famille}></img>
