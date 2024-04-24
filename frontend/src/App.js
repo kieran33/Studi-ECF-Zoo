@@ -10,8 +10,12 @@ import Erreur from './pages/Erreur';
 import DashboardAdmin from './pages/DashboardAdmin';
 import DashboardEmploye from './pages/DashboardEmploye';
 import DashboardVeterinaire from './pages/DashboardVeterinaire';
-import ModificationPersonnels from './composants/ModificationPersonnels';
 import DetailsModificationPersonnels from './pages/DetailsModificationPersonnels';
+import DetailsAnimaux from './pages/DetailsAnimaux';
+import DetailsHabitats from './pages/DetailsHabitats';
+import DetailsModificationAnimaux from './pages/DetailsModificationAnimaux';
+import DetailsModificationServices from './pages/DetailsModificationServices';
+import DetailsModificationHabitats from './pages/DetailsModificationHabitats';
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+          <Route path="/dashboard-admin/modifier-animaux/:id" element={<DetailsModificationAnimaux />} />
+          <Route path="/dashboard-admin/modifier-services/:id" element={<DetailsModificationServices />} />
+          <Route path="/dashboard-admin/modifier-habitats/:id" element={<DetailsModificationHabitats />} />
+          <Route path="/dashboard-admin/modifier-personnels/:id" element={<DetailsModificationPersonnels />} />
           <Route path="/dashboard-employe" element={<DashboardEmploye />} />
           <Route path="/dashboard-veterinaire" element={<DashboardVeterinaire />} />
           <Route path="*" element={<Erreur />} />
