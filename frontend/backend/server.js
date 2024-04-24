@@ -155,27 +155,6 @@ app.post("/connexion", (req, res) => {
                 }
             })
         }
-
-
-        //const utilisateur = results[0];
-
-        //console.log('utilisateur nom_utilisateur', utilisateur.nom_utilisateur)
-        //console.log('utilisateur mot de passe', utilisateur.mot_de_passe)
-
-        /*bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe).then(function (result) {
-            console.log('result autre bcrypt', result)
-        });*/
-
-        /*bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe, (err, result) => {
-            console.log('je suis dans bcrypt', bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe))
-            if (result) {
-                res.status(200).json({ success: true, message: "connexion réussis" });
-            } else {
-                console.log(result)
-                console.log('erreur bcrypt else', err)
-                res.status(401).json({ success: false, message: "Mot de passe incorrect" });
-            }
-        });*/
     });
 });
 
@@ -200,6 +179,31 @@ app.post("/creer-personnels", (req, res) => {
                 }
             });
         });
+    });
+});
+
+app.delete("/personnels/supprimer/:id", (req, res) => {
+    const { id } = req.params;
+    const request = "DELETE FROM personnels WHERE id = ?";
+
+    db.query(request, id, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+});
+
+app.put("/personnels/modifier/:id", (req, res) => {
+    const { id } = req.params;
+
+    const request = "UPDATE personnels SET `nom_utilisateur`=?, `mot_de_passe`=?, `role`=? WHERE id=?";
+    db.query(request, [req.body.nom_utilisateur, req.body.mot_de_passe, req.body.role, id], (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log(result);
+        }
     });
 });
 

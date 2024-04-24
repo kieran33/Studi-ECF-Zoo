@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
 import CreationPersonnels from '../composants/CreationPersonnels';
+import SuppressionPersonnels from '../composants/SuppressionPersonnels';
+import ModificationPersonnels from '../composants/ModificationPersonnels';
 
 const DashboardAdmin = () => {
     return (
@@ -8,6 +10,8 @@ const DashboardAdmin = () => {
             <Navigation />
             <h1>Admin</h1>
             <CreationPersonnels />
+            <SuppressionPersonnels />
+            <ModificationPersonnels />
         </div>
     );
 };

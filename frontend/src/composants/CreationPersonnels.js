@@ -4,15 +4,14 @@ import axios from 'axios';
 
 const CreationPersonnels = () => {
 
-    const [nouveauxPersonnels, setNouveauxPersonnels] = useState(personnelParDefaut());
+    const [nouveauxPersonnels, setNouveauxPersonnels] = useState({
+        id: "",
+        nom_utilisateur: "",
+        mot_de_passe: "",
+        role: ""
+    });
 
-    function personnelParDefaut() {
-        return {
-            nom_utilisateur: "personnel_zoo",
-            mot_de_passe: "personnel123",
-            role: "employé"
-        }
-    };
+
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -40,7 +39,6 @@ const CreationPersonnels = () => {
                     },
                 });
                 console.log("succès: ", reponse.data);
-                setNouveauxPersonnels(personnelParDefaut());
             } catch (error) {
                 console.error("Erreur :", error.reponse ? error.reponse.data : error.message);
             }
