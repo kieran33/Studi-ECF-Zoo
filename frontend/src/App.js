@@ -13,6 +13,8 @@ import DashboardVeterinaire from './pages/DashboardVeterinaire';
 import DetailsModificationAnimaux from './pages/DetailsModificationAnimaux';
 import DetailsModificationServices from './pages/DetailsModificationServices';
 import DetailsModificationHabitats from './pages/DetailsModificationHabitats';
+import DetailsAnimaux from './pages/DetailsAnimaux';
+import DetailsHabitats from './pages/DetailsHabitats';
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/animaux" element={<Animaux />} />
+          <Route path="/animaux/:id" element={<DetailsAnimaux />} />
           <Route path="/habitats" element={<Habitats />} />
+          <Route path="/habitats/:id" element={<DetailsHabitats />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />

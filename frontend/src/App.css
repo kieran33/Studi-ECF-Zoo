@@ -68,6 +68,13 @@ a {
   transition: 0.1s all ease-in-out;
 }
 
+.image_zoo_details {
+  width: auto;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 .image_zoo:hover {
   cursor: pointer;
   transform: scale(1.05);
