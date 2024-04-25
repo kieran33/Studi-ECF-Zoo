@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SuppressionPersonnels = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -22,6 +25,10 @@ const SuppressionPersonnels = () => {
         };
     };
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin");
+    }
+
     return (
         <div>
             <h1 className="centrer">Liste du personnel</h1>
@@ -34,6 +41,7 @@ const SuppressionPersonnels = () => {
                     </div>
                 ))}
             </div>
+            <button className="bouton_zoo" onClick={retourDashboardAdmin}>Fermer</button>
         </div>
     );
 };

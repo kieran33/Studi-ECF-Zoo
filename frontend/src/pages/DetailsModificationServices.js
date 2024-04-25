@@ -3,8 +3,13 @@ import Navigation from '../composants/Navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
+import Footer from '../composants/Footer';
 
 const DetailsModificationServices = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -89,51 +94,63 @@ const DetailsModificationServices = () => {
         };
     };
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin");
+    }
+
     return (
         <div>
-            <Navigation />
-            <div className="centrer">
-                <form className="formulaire" onSubmit={modifierServices}>
-                    <legend>Modifier services</legend>
-                    <input
-                        type="text"
-                        name="nom"
-                        className="champsFormulaire"
-                        id="nom"
-                        placeholder="Nom du service..."
-                        defaultValue={service.nom}
-                        //value={service.nom}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="nom"></label>
-
-                    <textarea
-                        name="description"
-                        className="champsFormulaire"
-                        id="description"
-                        placeholder="Description..."
-                        defaultValue={service.description}
-                        //value={service.description}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="description"></label>
-
-                    <input
-                        type="file"
-                        name="image"
-                        className="champsFormulaire"
-                        id="image"
-                        style={{ width: "250px" }}
-                        onChange={imageChangement}
-                    />
-                    <label htmlFor="image"></label>
-
+            <div className="dashboard">
+                <div>
+                    <BarreDashboardAdmin />
+                </div>
+                <div>
+                    <Navigation />
                     <div className="centrer">
-                        <button type="submit" className="bouton_zoo">Confirmer</button>
-                        <button className="bouton_zoo" >Annuler</button>
+                        <form className="formulaire" onSubmit={modifierServices}>
+                            <legend>Modifier services</legend>
+                            <input
+                                type="text"
+                                name="nom"
+                                className="champsFormulaire"
+                                id="nom"
+                                placeholder="Nom du service..."
+                                defaultValue={service.nom}
+                                //value={service.nom}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="nom"></label>
+
+                            <textarea
+                                name="description"
+                                className="champsFormulaire"
+                                id="description"
+                                placeholder="Description..."
+                                defaultValue={service.description}
+                                //value={service.description}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="description"></label>
+
+                            <input
+                                type="file"
+                                name="image"
+                                className="champsFormulaire"
+                                id="image"
+                                style={{ width: "250px" }}
+                                onChange={imageChangement}
+                            />
+                            <label htmlFor="image"></label>
+
+                            <div className="centrer">
+                                <button type="submit" className="bouton_zoo">Confirmer</button>
+                                <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
+            <Footer />
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreationPersonnels = () => {
 
@@ -11,7 +12,7 @@ const CreationPersonnels = () => {
         role: ""
     });
 
-
+    const navigate = useNavigate();
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -48,10 +49,14 @@ const CreationPersonnels = () => {
         }
     }
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin");
+    }
+
     return (
         <div>
             <form className="formulaire" onSubmit={creerPersonnels}>
-                <legend>Création compte personnels</legend>
+                <legend>Création compte personnel du zoo</legend>
                 <input
                     type="text"
                     name="nom_utilisateur"
@@ -84,7 +89,6 @@ const CreationPersonnels = () => {
                     onChange={inputChangement}
                     required
                 />
-
                 <label htmlFor="role">Employé</label>
 
                 <input
@@ -96,18 +100,13 @@ const CreationPersonnels = () => {
                     onChange={inputChangement}
                     required
                 />
-                {console.log(nouveauxPersonnels.role)}
-                {console.log(nouveauxPersonnels.nom_utilisateur)}
-                {console.log(nouveauxPersonnels.mot_de_passe)}
-
                 <label htmlFor="role">Vétérinaire</label>
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Créer</button>
-                    <button className="bouton_zoo" /*onClick={retourAccueil}*/>Annuler</button>
+                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
                 </div>
             </form>
-
         </div>
     );
 };

@@ -16,6 +16,16 @@ import DetailsHabitats from './pages/DetailsHabitats';
 import DetailsModificationAnimaux from './pages/DetailsModificationAnimaux';
 import DetailsModificationServices from './pages/DetailsModificationServices';
 import DetailsModificationHabitats from './pages/DetailsModificationHabitats';
+import CreationComptePersonnels from './pages/CreationComptePersonnels';
+import ModificationComptePersonnels from './pages/ModificationComptePersonnels';
+import SuppressionComptePersonnels from './pages/SuppressionComptePersonnels';
+import AjouterAnimaux from './pages/AjouterAnimaux';
+import ModifierAnimaux from './pages/ModifierAnimaux';
+import SuppressionAnimaux from './pages/SuppressionAnimaux';
+import AfficherAnimaux from './pages/AfficherAnimaux';
+import AjouterServices from './pages/AjouterServices';
+import ModifierServices from './pages/ModifierServices';
+import SuppressionServices from './pages/SuppressionServices';
 
 function App() {
   return (
@@ -31,6 +41,17 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+          <Route path="/dashboard-admin/creation-personnels" element={<CreationComptePersonnels />} />
+          <Route path="/dashboard-admin/modification-personnels" element={<ModificationComptePersonnels />} />
+          <Route path="/dashboard-admin/suppression-personnels" element={<SuppressionComptePersonnels />} />
+          <Route path="/dashboard-admin/liste-animaux" element={<AfficherAnimaux />} />
+          <Route path="/dashboard-admin/ajout-animaux" element={<AjouterAnimaux />} />
+          <Route path="/dashboard-admin/modification-animaux" element={<ModifierAnimaux />} />
+          <Route path="/dashboard-admin/suppression-animaux" element={<SuppressionAnimaux />} />
+          <Route path="/dashboard-admin/ajout-services" element={<AjouterServices />} />
+          <Route path="/dashboard-admin/modification-services" element={<ModifierServices />} />
+          <Route path="/dashboard-admin/suppression-services" element={<SuppressionServices />} />
+
           <Route path="/dashboard-admin/modifier-animaux/:id" element={<DetailsModificationAnimaux />} />
           <Route path="/dashboard-admin/modifier-services/:id" element={<DetailsModificationServices />} />
           <Route path="/dashboard-admin/modifier-habitats/:id" element={<DetailsModificationHabitats />} />

@@ -3,8 +3,13 @@ import Navigation from '../composants/Navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
+import Footer from '../composants/Footer';
 
 const DetailsModificationAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -93,75 +98,87 @@ const DetailsModificationAnimaux = () => {
         };
     };
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin");
+    }
+
     return (
         <div>
-            <Navigation />
-            <div className="centrer">
-                <form className="formulaire">
-                    <legend>Modifier animaux</legend>
-                    <input
-                        type="text"
-                        name="prenom"
-                        className="champsFormulaire"
-                        id="prenom"
-                        placeholder="Prénom..."
-                        defaultValue={animal.prenom}
-                        //value={animal.prenom}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="prenom"></label>
-
-                    <input
-                        type="text"
-                        name="race"
-                        className="champsFormulaire"
-                        id="race"
-                        placeholder="Race..."
-                        defaultValue={animal.race}
-                        //value={animal.race}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="race"></label>
-
-                    <input
-                        type="text"
-                        name="habitat"
-                        className="champsFormulaire"
-                        id="habitat"
-                        placeholder="Habitat..."
-                        defaultValue={animal.habitat}
-                        //value={animal.habitat}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="habitat"></label>
-
-                    <textarea
-                        name="description"
-                        className="champsFormulaire"
-                        id="description"
-                        placeholder="Description..."
-                        defaultValue={animal.description}
-                        //value={animal.description}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="description"></label>
-
-                    <input
-                        type="file"
-                        name="image"
-                        className="champsFormulaire"
-                        id="image"
-                        style={{ width: "250px" }}
-                        onChange={imageChangement}
-                    />
-                    <label htmlFor="image"></label>
-
+            <div className="dashboard">
+                <div>
+                    <BarreDashboardAdmin />
+                </div>
+                <div>
+                    <Navigation />
                     <div className="centrer">
-                        <button type="submit" className="bouton_zoo" onClick={modifierAnimaux}>Confirmer</button>
-                        <button className="bouton_zoo" >Annuler</button>
+                        <form className="formulaire">
+                            <legend>Modifier animaux</legend>
+                            <input
+                                type="text"
+                                name="prenom"
+                                className="champsFormulaire"
+                                id="prenom"
+                                placeholder="Prénom..."
+                                defaultValue={animal.prenom}
+                                //value={animal.prenom}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="prenom"></label>
+
+                            <input
+                                type="text"
+                                name="race"
+                                className="champsFormulaire"
+                                id="race"
+                                placeholder="Race..."
+                                defaultValue={animal.race}
+                                //value={animal.race}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="race"></label>
+
+                            <input
+                                type="text"
+                                name="habitat"
+                                className="champsFormulaire"
+                                id="habitat"
+                                placeholder="Habitat..."
+                                defaultValue={animal.habitat}
+                                //value={animal.habitat}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="habitat"></label>
+
+                            <textarea
+                                name="description"
+                                className="champsFormulaire"
+                                id="description"
+                                placeholder="Description..."
+                                defaultValue={animal.description}
+                                //value={animal.description}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="description"></label>
+
+                            <input
+                                type="file"
+                                name="image"
+                                className="champsFormulaire"
+                                id="image"
+                                style={{ width: "250px" }}
+                                onChange={imageChangement}
+                            />
+                            <label htmlFor="image"></label>
+
+                            <div className="centrer">
+                                <button type="submit" className="bouton_zoo" onClick={modifierAnimaux}>Confirmer</button>
+                                <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
+            <Footer />
         </div>
     );
 };

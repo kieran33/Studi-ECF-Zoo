@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AjoutAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [nouvelAnimal, setNouvelAnimal] = useState({
         id: "",
@@ -63,6 +66,9 @@ const AjoutAnimaux = () => {
             });
     };
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin");
+    }
 
     return (
         <div>
@@ -126,7 +132,7 @@ const AjoutAnimaux = () => {
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Créer</button>
-                    <button className="bouton_zoo" /*onClick={retourAccueil}*/>Annuler</button>
+                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
                 </div>
             </form>
         </div >

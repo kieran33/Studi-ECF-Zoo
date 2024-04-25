@@ -2,9 +2,13 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Footer from '../composants/Footer';
+import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 
 const DetailsModificationPersonnels = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -59,59 +63,71 @@ const DetailsModificationPersonnels = () => {
         }
     };
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin");
+    }
+
     return (
         <div>
-            <Navigation />
-            <div className="centrer">
-                <form className="formulaire" onSubmit={modifierPersonnels}>
-                    <legend>Modifier personnels</legend>
-                    <input
-                        type="text"
-                        name="nom_utilisateur"
-                        className="champsFormulaire"
-                        id="nom_utilisateur"
-                        placeholder="Nom utilisateur..."
-                        defaultValue={personnel.nom_utilisateur}
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="nom_utilisateur"></label>
-
-                    <input
-                        type="password"
-                        name="mot_de_passe"
-                        className="champsFormulaire"
-                        id="mot_de_passe"
-                        placeholder="Mot de passe..."
-                        defaultValue={personnel.mot_de_passe}
-                        onChange={inputChangement}
-                    />
-
-                    <input
-                        type="radio"
-                        name="role"
-                        className="champsFormulaire"
-                        id="role"
-                        value="employé"
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="role">Employé</label>
-
-                    <input
-                        type="radio"
-                        name="role"
-                        className="champsFormulaire"
-                        id="role"
-                        value="vétérinaire"
-                        onChange={inputChangement}
-                    />
-                    <label htmlFor="role">Vétérinaire</label>
-
+            <div className="dashboard">
+                <div>
+                    <BarreDashboardAdmin />
+                </div>
+                <div>
+                    <Navigation />
                     <div className="centrer">
-                        <button type="submit" className="bouton_zoo">Confirmer</button>
-                        <button className="bouton_zoo" >Annuler</button>
+                        <form className="formulaire" onSubmit={modifierPersonnels}>
+                            <legend>Modifier personnels</legend>
+                            <input
+                                type="text"
+                                name="nom_utilisateur"
+                                className="champsFormulaire"
+                                id="nom_utilisateur"
+                                placeholder="Nom utilisateur..."
+                                defaultValue={personnel.nom_utilisateur}
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="nom_utilisateur"></label>
+
+                            <input
+                                type="password"
+                                name="mot_de_passe"
+                                className="champsFormulaire"
+                                id="mot_de_passe"
+                                placeholder="Mot de passe..."
+                                defaultValue={personnel.mot_de_passe}
+                                onChange={inputChangement}
+                            />
+
+                            <input
+                                type="radio"
+                                name="role"
+                                className="champsFormulaire"
+                                id="role"
+                                value="employé"
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="role">Employé</label>
+
+                            <input
+                                type="radio"
+                                name="role"
+                                className="champsFormulaire"
+                                id="role"
+                                value="vétérinaire"
+                                onChange={inputChangement}
+                            />
+                            <label htmlFor="role">Vétérinaire</label>
+
+                            <div className="centrer">
+                                <button type="submit" className="bouton_zoo">Confirmer</button>
+                                <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
+            <Footer />
         </div>
     );
 };
