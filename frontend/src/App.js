@@ -16,16 +16,26 @@ import DetailsHabitats from './pages/DetailsHabitats';
 import DetailsModificationAnimaux from './pages/DetailsModificationAnimaux';
 import DetailsModificationServices from './pages/DetailsModificationServices';
 import DetailsModificationHabitats from './pages/DetailsModificationHabitats';
-import CreationComptePersonnels from './pages/CreationComptePersonnels';
-import ModificationComptePersonnels from './pages/ModificationComptePersonnels';
-import SuppressionComptePersonnels from './pages/SuppressionComptePersonnels';
-import AjouterAnimaux from './pages/AjouterAnimaux';
-import ModifierAnimaux from './pages/ModifierAnimaux';
-import SuppressionAnimaux from './pages/SuppressionAnimaux';
-import AfficherAnimaux from './pages/AfficherAnimaux';
-import AjouterServices from './pages/AjouterServices';
-import ModifierServices from './pages/ModifierServices';
-import SuppressionServices from './pages/SuppressionServices';
+import PageCreationComptePersonnels from './pages/PageCreationComptePersonnels';
+import PageModificationComptePersonnels from './pages/PageModificationComptePersonnels';
+import PageSuppressionComptePersonnels from './pages/PageSuppressionComptePersonnels';
+import PageAjouterAnimaux from './pages/PageAjouterAnimaux';
+import PageModifierAnimaux from './pages/PageModifierAnimaux';
+import PageSupprimerAnimaux from './pages/PageSupprimerAnimaux';
+import PageAfficherAnimaux from './pages/PageAfficherAnimaux';
+import PageAjouterServices from './pages/PageAjouterServices';
+import PageModifierServices from './pages/PageModifierServices';
+import PageSupprimerServices from './pages/PageSupprimerServices';
+import PageAfficherHabitats from './pages/PageAfficherHabitats';
+import PageAjouterHabitats from './pages/PageAjouterHabitats';
+import PageModifierHabitats from './pages/PageModifierHabitats';
+import PageSupprimerHabitats from './pages/PageSupprimerHabitats';
+import PageAjouterServicesEmploye from './pages/PageAjouterServicesEmploye';
+import PageModifierServicesEmploye from './pages/PageModifierServicesEmploye';
+import DetailsModificationServicesEmploye from './pages/DetailsModificationServicesEmploye';
+import PageSupprimerServicesEmploye from './pages/PageSupprimerServicesEmploye';
+import PageNourrirAnimauxEmploye from './pages/PageNourrirAnimauxEmploye';
+import DetailsAjoutNourritureAnimaux from './pages/DetailsAjoutNourritureAnimaux';
 
 function App() {
   return (
@@ -41,16 +51,28 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-          <Route path="/dashboard-admin/creation-personnels" element={<CreationComptePersonnels />} />
-          <Route path="/dashboard-admin/modification-personnels" element={<ModificationComptePersonnels />} />
-          <Route path="/dashboard-admin/suppression-personnels" element={<SuppressionComptePersonnels />} />
-          <Route path="/dashboard-admin/liste-animaux" element={<AfficherAnimaux />} />
-          <Route path="/dashboard-admin/ajout-animaux" element={<AjouterAnimaux />} />
-          <Route path="/dashboard-admin/modification-animaux" element={<ModifierAnimaux />} />
-          <Route path="/dashboard-admin/suppression-animaux" element={<SuppressionAnimaux />} />
-          <Route path="/dashboard-admin/ajout-services" element={<AjouterServices />} />
-          <Route path="/dashboard-admin/modification-services" element={<ModifierServices />} />
-          <Route path="/dashboard-admin/suppression-services" element={<SuppressionServices />} />
+          <Route path="/dashboard-admin/creation-personnels" element={<PageCreationComptePersonnels />} />
+          <Route path="/dashboard-admin/modification-personnels" element={<PageModificationComptePersonnels />} />
+          <Route path="/dashboard-admin/suppression-personnels" element={<PageSuppressionComptePersonnels />} />
+          <Route path="/dashboard-admin/liste-animaux" element={<PageAfficherAnimaux />} />
+          <Route path="/dashboard-admin/ajout-animaux" element={<PageAjouterAnimaux />} />
+          <Route path="/dashboard-admin/modification-animaux" element={<PageModifierAnimaux />} />
+          <Route path="/dashboard-admin/suppression-animaux" element={<PageSupprimerAnimaux />} />
+          <Route path="/dashboard-admin/ajout-services" element={<PageAjouterServices />} />
+          <Route path="/dashboard-admin/modification-services" element={<PageModifierServices />} />
+          <Route path="/dashboard-admin/suppression-services" element={<PageSupprimerServices />} />
+          <Route path="/dashboard-admin/liste-habitats" element={<PageAfficherHabitats />} />
+          <Route path="/dashboard-admin/ajout-habitats" element={<PageAjouterHabitats />} />
+          <Route path="/dashboard-admin/modification-habitats" element={<PageModifierHabitats />} />
+          <Route path="/dashboard-admin/suppression-habitats" element={<PageSupprimerHabitats />} />
+
+          <Route path="/dashboard-employe/ajout-services" element={<PageAjouterServicesEmploye />} />
+          <Route path="/dashboard-employe/modification-services" element={<PageModifierServicesEmploye />} />
+          <Route path="/dashboard-employe/modifier-services/:id" element={<DetailsModificationServicesEmploye />} />
+          <Route path="/dashboard-employe/suppression-services" element={<PageSupprimerServicesEmploye />} />
+          <Route path="/dashboard-employe/ajout-nourriture" element={<PageNourrirAnimauxEmploye />} />
+          <Route path="/dashboard-employe/ajout-nourriture/:id" element={<DetailsAjoutNourritureAnimaux />} />
+
 
           <Route path="/dashboard-admin/modifier-animaux/:id" element={<DetailsModificationAnimaux />} />
           <Route path="/dashboard-admin/modifier-services/:id" element={<DetailsModificationServices />} />

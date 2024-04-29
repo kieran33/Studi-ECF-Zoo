@@ -2,18 +2,18 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
-import AjoutServices from '../composants/AjoutServices';
+import SupprimerServices from '../composants/SupprimerServices';
 
-const AjouterServices = () => {
+const PageSupprimerServices = () => {
     return (
         <div>
             <div className="dashboard">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
-                <div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <AjoutServices />
+                    <SupprimerServices />
                 </div >
             </div>
             <Footer />
@@ -21,4 +21,4 @@ const AjouterServices = () => {
     );
 };
 
-export default AjouterServices;
+export default PageSupprimerServices;

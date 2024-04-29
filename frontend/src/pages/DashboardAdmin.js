@@ -1,23 +1,6 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
-import CreationPersonnels from '../composants/CreationPersonnels';
-import AjoutAnimaux from '../composants/AjoutAnimaux';
-import SupprimerAnimaux from '../composants/SupprimerAnimaux';
-import ModificationAnimaux from '../composants/ModificationAnimaux';
-import AjoutServices from '../composants/AjoutServices';
-import SupprimerServices from '../composants/SupprimerServices';
-import ModificationServices from '../composants/ModificationServices';
-import AjoutHabitats from '../composants/AjoutHabitats';
-import SupprimerHabitats from '../composants/SupprimerHabitats';
-import ModificationHabitats from '../composants/ModificationHabitats';
-import ModificationPersonnels from '../composants/ModificationPersonnels';
-import SuppressionPersonnels from '../composants/SuppressionPersonnels';
 import Footer from '../composants/Footer';
-import DashboardAdminPersonnels from '../composants/DashboardAdminPersonnels';
-import DashboardAdminAnimaux from '../composants/DashboardAdminAnimaux';
-import DashboardAdminHabitats from '../composants/DashboardAdminHabitats';
-import DashboardAdminServices from '../composants/DashboardAdminServices';
-import { useState } from 'react';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 
 const DashboardAdmin = () => {
@@ -28,7 +11,7 @@ const DashboardAdmin = () => {
                 <div>
                     <BarreDashboardAdmin />
                 </div>
-                <div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h1>Dashboard admin</h1>
                 </div>

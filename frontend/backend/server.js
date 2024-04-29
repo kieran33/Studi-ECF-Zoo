@@ -59,8 +59,16 @@ db.connect(err => {
         prenom VARCHAR(255) NOT NULL,
         race VARCHAR(255) NOT NULL,
         habitat VARCHAR(255) NOT NULL,
-        image VARCHAR(255) NOT NULL
+        image VARCHAR(255) NOT NULL,
+        nourriture VARCHAR(255) NOT NULL,
+        quantite_nourriture VARCHAR(255) NOT NULL,
+        etat VARCHAR(255) NOT NULL,
     )`;
+
+    /*nourriture VARCHAR(255) NOT NULL,
+    quantite_nourriture VARCHAR(255),
+    etat VARCHAR(255),
+    date_nourriture DATETIME*/
 
     const creerTableHabitats = `
     CREATE TABLE IF NOT EXISTS habitats(
@@ -335,10 +343,32 @@ app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
     }
 });
 
+app.put("/ajout-nourriture/:id", exporter.single("image"), (req, res) => {
+    const { id } = req.params;
+    console.log('id', id)
+    console.log('nourriture animal', req.body.nourriture)
+    console.log('quantité nourriture animal', req.body.quantite_nourriture)
+    console.log('etat animal', req.body.etat)
+    console.log('date nourriture animal', req.body.date_nourriture)
+
+    const request = "UPDATE animaux SET `nourriture`=?, `quantite_nourriture`=?, `etat`=?, `date_nourriture`=? WHERE id=?";
+
+    db.query(request, [req.body.nourriture, req.body.quantite_nourriture, req.body.etat, req.body.date_nourriture, id], (error, result) => {
+        if (error) {
+            console.log(error);
+            console.log('ok ça marche pas')
+        }
+        else {
+            console.log(result);
+            console.log('ok ça marche')
+        }
+    });
+});
+
 app.put("/services/modifier/:id", exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
-    console.log(req.body.nom)
+    console.log('nom services', req.body.nom)
 
     if (nom_image === null) {
         const request = "UPDATE services SET `nom`=?, `description`=? WHERE id=?";

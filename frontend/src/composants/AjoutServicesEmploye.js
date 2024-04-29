@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AjoutServices = () => {
+const AjoutServicesEmploye = () => {
 
     const navigate = useNavigate();
 
@@ -57,8 +57,8 @@ const AjoutServices = () => {
             });
     };
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+    const retourDashboardEmploye = () => {
+        navigate("/dashboard-employe");
     }
 
     return (
@@ -99,11 +99,11 @@ const AjoutServices = () => {
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Créer</button>
-                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                    <button className="bouton_zoo" onClick={retourDashboardEmploye}>Annuler</button>
                 </div>
             </form>
         </div >
     );
 };
 
-export default AjoutServices;
+export default AjoutServicesEmploye;

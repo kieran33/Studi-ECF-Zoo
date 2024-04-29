@@ -47,7 +47,19 @@ const Accueil = () => {
                     <img src={services} className="image_zoo" width="50" alt="services zoo" />
                     <div className="text_zoo">Découvrez nos services</div>
                 </div>
+
+                <div class="wrapper">
+                    <div class="image_wrapper">
+                        <img className="image_wrapper_animaux" src={animaux} style={{ width: "500px", height: "auto" }} />
+                        <div class="content">
+                            <h1>ANIMAUX</h1>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+
             <Footer />
         </div >
     );

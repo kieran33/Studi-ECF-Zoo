@@ -5,6 +5,10 @@ const DashboardAdminHabitats = () => {
 
     const navigate = useNavigate();
 
+    const pageAfficherHabitats = () => {
+        navigate("/dashboard-admin/liste-habitats");
+    };
+
     const pageAjoutHabitats = () => {
         navigate("/dashboard-admin/ajout-habitats");
     };
@@ -20,7 +24,7 @@ const DashboardAdminHabitats = () => {
     return (
         <div>
             <h3 className="dashboard_text" style={{ cursor: "auto" }}> Habitats </h3>
-            <p className="dashboard_text">Etat habitats</p>
+            <p className="dashboard_text" onClick={pageAfficherHabitats}>Etat habitats</p>
             <p className="dashboard_text" onClick={pageAjoutHabitats}>Ajouter</p>
             <p className="dashboard_text" onClick={pageModificationHabitats}>Modifier</p>
             <p className="dashboard_text" onClick={pageSuppressionHabitats}>Supprimer</p>

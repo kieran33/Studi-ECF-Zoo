@@ -65,6 +65,22 @@ const DetailsAnimaux = () => {
                             <p>{dataAnimal.habitat}</p>
                         </div>
                     </div>
+                    <h1>Habitat {dataAnimal.prenom}</h1>
+                    <div className="centrer">
+                        {dataHabitat.filter(habitat => habitat.nom === dataAnimal.habitat).map(habitat => (
+                            <div className="animal">
+                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                    <Link to={`/habitats/${habitat.id}`} onClick={recharger} style={{ opacity: "1" }}>
+                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                            src={`http://localhost:3002/image/${habitat.image}`}
+                                            alt={habitat.nom}>
+                                        </img>
+                                    </Link>
+                                    <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                     <h3>Liste des autres animaux qui vivent dans l'habitat {dataAnimal.habitat}</h3>
                     <div className="centrer">
                         {data.filter(animal => (animal.habitat === dataAnimal.habitat) && (animal.prenom !== dataAnimal.prenom)).map(animal => (

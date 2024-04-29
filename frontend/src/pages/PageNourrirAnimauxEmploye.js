@@ -1,10 +1,10 @@
 import React from 'react';
-import Navigation from '../composants/Navigation';
-import Footer from '../composants/Footer';
 import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
+import Navigation from '../composants/Navigation';
+import AjoutNourritureAnimaux from '../composants/AjoutNourritureAnimaux';
+import Footer from '../composants/Footer';
 
-
-const DashboardEmploye = () => {
+const PageNourrirAnimauxEmploye = () => {
     return (
         <div>
             <div className="dashboard">
@@ -13,12 +13,12 @@ const DashboardEmploye = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1>Dashboard employé</h1>
-                </div>
-            </div >
+                    <AjoutNourritureAnimaux />
+                </div >
+            </div>
             <Footer />
         </div>
     );
 };
 
-export default DashboardEmploye;
+export default PageNourrirAnimauxEmploye;

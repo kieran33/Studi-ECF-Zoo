@@ -2,16 +2,18 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
-import ModificationPersonnels from '../composants/ModificationPersonnels';
+import ModificationServices from '../composants/ModificationServices';
 
-const ModificationComptePersonnels = () => {
+const PageModifierServices = () => {
     return (
         <div>
             <div className="dashboard">
-                <BarreDashboardAdmin />
                 <div>
+                    <BarreDashboardAdmin />
+                </div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <ModificationPersonnels />
+                    <ModificationServices />
                 </div >
             </div>
             <Footer />
@@ -19,4 +21,4 @@ const ModificationComptePersonnels = () => {
     );
 };
 
-export default ModificationComptePersonnels;
+export default PageModifierServices;

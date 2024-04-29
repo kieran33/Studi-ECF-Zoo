@@ -2,9 +2,9 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
+import ModificationServicesEmploye from '../composants/ModificationServicesEmploye';
 
-
-const DashboardEmploye = () => {
+const PageModifierServicesEmploye = () => {
     return (
         <div>
             <div className="dashboard">
@@ -13,12 +13,12 @@ const DashboardEmploye = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1>Dashboard employé</h1>
-                </div>
-            </div >
+                    <ModificationServicesEmploye />
+                </div >
+            </div>
             <Footer />
         </div>
     );
 };
 
-export default DashboardEmploye;
+export default PageModifierServicesEmploye;

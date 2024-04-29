@@ -1,24 +1,24 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
-import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
+import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
+import ListeHabitats from '../composants/ListeHabitats';
 
-
-const DashboardEmploye = () => {
+const PageAfficherHabitats = () => {
     return (
         <div>
             <div className="dashboard">
                 <div>
-                    <BarreDashboardEmploye />
+                    <BarreDashboardAdmin />
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1>Dashboard employé</h1>
-                </div>
-            </div >
+                    <ListeHabitats />
+                </div >
+            </div>
             <Footer />
         </div>
     );
 };
 
-export default DashboardEmploye;
+export default PageAfficherHabitats;

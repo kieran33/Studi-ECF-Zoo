@@ -2,18 +2,18 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
-import AjoutAnimaux from '../composants/AjoutAnimaux';
+import SupprimerAnimaux from '../composants/SupprimerAnimaux';
 
-const AjouterAnimaux = () => {
+const PageSupprimerAnimaux = () => {
     return (
         <div>
             <div className="dashboard">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
-                <div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <AjoutAnimaux />
+                    <SupprimerAnimaux />
                 </div >
             </div>
             <Footer />
@@ -21,4 +21,4 @@ const AjouterAnimaux = () => {
     );
 };
 
-export default AjouterAnimaux;
+export default PageSupprimerAnimaux;
