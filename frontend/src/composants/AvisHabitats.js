@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const ModificationHabitats = () => {
+const AvisHabitats = () => {
 
     const [data, setData] = useState([]);
 
@@ -27,7 +27,7 @@ const ModificationHabitats = () => {
                         </img>
                         <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>
                     </div>
-                    <Link to={`/dashboard-admin/modifier-habitats/${habitat.id}`}>
+                    <Link to={`/dashboard-veterinaire/aivs-habitats/${habitat.id}`}>
                         <button className="bouton_zoo">Modifier</button>
                     </Link>
                 </div>
@@ -36,4 +36,4 @@ const ModificationHabitats = () => {
     );
 };
 
-export default ModificationHabitats;
+export default AvisHabitats;

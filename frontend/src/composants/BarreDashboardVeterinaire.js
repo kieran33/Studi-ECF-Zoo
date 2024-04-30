@@ -1,0 +1,27 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const BarreDashboardVeterinaire = () => {
+
+    const navigate = useNavigate();
+
+    const compteRenduAnimaux = () => {
+        navigate("/dashboard-veterinaire/compte-rendu-animaux");
+    };
+
+    const avisHabitats = () => {
+        navigate("/dashboard-veterinaire/avis-habitats");
+    };
+
+    return (
+        <div className="barre_dashboard_global">
+            <div className="barre_dashboard">
+                <h1>Dashboard vétérinaire</h1>
+                <h3 className="dashboard_text" onClick={compteRenduAnimaux}>Compte rendu animaux</h3>
+                <h3 className="dashboard_text" onClick={avisHabitats}>Etat habitats</h3>
+            </div>
+        </div>
+    );
+};
+
+export default BarreDashboardVeterinaire;

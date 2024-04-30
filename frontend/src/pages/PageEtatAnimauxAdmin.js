@@ -1,22 +1,24 @@
 import React from 'react';
+import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 import Navigation from '../composants/Navigation';
-import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
 import Footer from '../composants/Footer';
+import EtatAnimaux from '../composants/EtatAnimaux';
 
-const DashboardVeterinaire = () => {
+const PageEtatAnimauxAdmin = () => {
     return (
         <div>
             <div className="dashboard">
                 <div>
-                    <BarreDashboardVeterinaire />
+                    <BarreDashboardAdmin />
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                </div>
+                    <EtatAnimaux />
+                </div >
             </div>
             <Footer />
         </div>
     );
 };
 
-export default DashboardVeterinaire;
+export default PageEtatAnimauxAdmin;

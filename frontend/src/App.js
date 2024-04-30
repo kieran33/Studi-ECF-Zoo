@@ -36,6 +36,11 @@ import DetailsModificationServicesEmploye from './pages/DetailsModificationServi
 import PageSupprimerServicesEmploye from './pages/PageSupprimerServicesEmploye';
 import PageNourrirAnimauxEmploye from './pages/PageNourrirAnimauxEmploye';
 import DetailsAjoutNourritureAnimaux from './pages/DetailsAjoutNourritureAnimaux';
+import CompteRenduAnimaux from './pages/CompteRenduAnimaux';
+import DetailsCompteRenduAnimaux from './pages/DetailsCompteRenduAnimaux';
+import PageAvisHabitats from './pages/PageAvisHabitats';
+import DetailsAvisHabitats from './pages/DetailsAvisHabitats';
+import PageEtatAnimauxAdmin from './pages/PageEtatAnimauxAdmin';
 
 function App() {
   return (
@@ -65,6 +70,7 @@ function App() {
           <Route path="/dashboard-admin/ajout-habitats" element={<PageAjouterHabitats />} />
           <Route path="/dashboard-admin/modification-habitats" element={<PageModifierHabitats />} />
           <Route path="/dashboard-admin/suppression-habitats" element={<PageSupprimerHabitats />} />
+          <Route path="/dashboard-admin/etat-animaux" element={<PageEtatAnimauxAdmin />} />
 
           <Route path="/dashboard-employe/ajout-services" element={<PageAjouterServicesEmploye />} />
           <Route path="/dashboard-employe/modification-services" element={<PageModifierServicesEmploye />} />
@@ -72,6 +78,11 @@ function App() {
           <Route path="/dashboard-employe/suppression-services" element={<PageSupprimerServicesEmploye />} />
           <Route path="/dashboard-employe/ajout-nourriture" element={<PageNourrirAnimauxEmploye />} />
           <Route path="/dashboard-employe/ajout-nourriture/:id" element={<DetailsAjoutNourritureAnimaux />} />
+
+          <Route path="/dashboard-veterinaire/compte-rendu-animaux" element={<CompteRenduAnimaux />} />
+          <Route path="/dashboard-veterinaire/compte-rendu-animaux/:id" element={<DetailsCompteRenduAnimaux />} />
+          <Route path="/dashboard-veterinaire/avis-habitats" element={<PageAvisHabitats />} />
+          <Route path="/dashboard-veterinaire/aivs-habitats/:id" element={<DetailsAvisHabitats />} />
 
 
           <Route path="/dashboard-admin/modifier-animaux/:id" element={<DetailsModificationAnimaux />} />

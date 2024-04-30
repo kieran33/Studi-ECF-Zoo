@@ -1,9 +1,11 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
-import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
 import Footer from '../composants/Footer';
+import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
+import AvisHabitats from '../composants/AvisHabitats';
 
-const DashboardVeterinaire = () => {
+
+const PageAvisHabitats = () => {
     return (
         <div>
             <div className="dashboard">
@@ -12,11 +14,12 @@ const DashboardVeterinaire = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                </div>
+                    <AvisHabitats />
+                </div >
             </div>
             <Footer />
         </div>
     );
 };
 
-export default DashboardVeterinaire;
+export default PageAvisHabitats;

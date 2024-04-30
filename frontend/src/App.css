@@ -283,3 +283,10 @@ a {
 .text_zoo2:hover {
   opacity: 1;
 }
+
+.div_zoo_etat {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -343,24 +343,56 @@ app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
     }
 });
 
-app.put("/ajout-nourriture/:id", exporter.single("image"), (req, res) => {
+app.put("/ajout-nourriture/:id", exporter.single(), (req, res) => {
     const { id } = req.params;
     console.log('id', id)
     console.log('nourriture animal', req.body.nourriture)
     console.log('quantité nourriture animal', req.body.quantite_nourriture)
-    console.log('etat animal', req.body.etat)
     console.log('date nourriture animal', req.body.date_nourriture)
 
-    const request = "UPDATE animaux SET `nourriture`=?, `quantite_nourriture`=?, `etat`=?, `date_nourriture`=? WHERE id=?";
+    const request = "UPDATE animaux SET `nourriture`=?, `quantite_nourriture`=?, `date_nourriture`=? WHERE id=?";
 
-    db.query(request, [req.body.nourriture, req.body.quantite_nourriture, req.body.etat, req.body.date_nourriture, id], (error, result) => {
+    db.query(request, [req.body.nourriture, req.body.quantite_nourriture, req.body.date_nourriture, id], (error, result) => {
         if (error) {
             console.log(error);
-            console.log('ok ça marche pas')
         }
         else {
             console.log(result);
-            console.log('ok ça marche')
+        }
+    });
+});
+
+app.put("/compte-rendu-animaux/:id", exporter.single(), (req, res) => {
+    const { id } = req.params;
+    console.log('id', id)
+    console.log('etat', req.body.etat)
+    console.log('date soins', req.body.date_soins)
+
+    const request = "UPDATE animaux SET `etat`=?, `date_soins`=? WHERE id=?";
+
+    db.query(request, [req.body.etat, req.body.date_soins, id], (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log(result);
+        }
+    });
+});
+
+app.put("/avis-habitats/:id", exporter.single(), (req, res) => {
+    const { id } = req.params;
+    console.log('id', id)
+    console.log('etat', req.body.etat)
+
+    const request = "UPDATE habitats SET `etat`=? WHERE id=?";
+
+    db.query(request, [req.body.etat, id], (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log(result);
         }
     });
 });

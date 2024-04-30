@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
 
-const DetailsAjoutNourritureAnimaux = () => {
+const DetailsCompteRenduAnimaux = () => {
 
     const navigate = useNavigate();
 
@@ -32,9 +32,8 @@ const DetailsAjoutNourritureAnimaux = () => {
     }, [data]);
 
     const [animal, setAnimal] = useState({
-        nourriture: "",
-        quantite_nourriture: "",
-        date_nourriture: ""
+        etat: "",
+        date_soins: ""
     });
 
     useEffect(() => {
@@ -52,25 +51,23 @@ const DetailsAjoutNourritureAnimaux = () => {
         });
     };
 
-    const AjouterNourritureAnimaux = async (e) => {
+    const AjouterCompteRenduAnimaux = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
 
-        formData.append("nourriture", animal.nourriture);
-        formData.append("quantite_nourriture", animal.quantite_nourriture);
-        //formData.append("etat", animal.etat);
-        formData.append("date_nourriture", animal.date_nourriture);
+        formData.append("etat", animal.etat);
+        formData.append("date_soins", animal.date_soins)
 
         try {
-            await axios.put(`http://localhost:3002/ajout-nourriture/${id}`, formData)
+            await axios.put(`http://localhost:3002/compte-rendu-animaux/${id}`, formData)
         } catch (error) {
             console.log(error);
         }
     };
 
-    const retourDashboardEmploye = () => {
-        navigate("/dashboard-employe");
+    const retourDashboardVeterinaire = () => {
+        navigate("/dashboard-veterinaire");
     }
 
     const dateDuJour = Date.now()
@@ -81,40 +78,15 @@ const DetailsAjoutNourritureAnimaux = () => {
         <div>
             <div className="dashboard" >
                 <div>
-                    <BarreDashboardEmploye />
+                    <BarreDashboardVeterinaire />
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <div className="centrer">
                         <form className="formulaire">
-                            <legend>Ajouter nourriture {animal.prenom}</legend>
-                            <input
-                                type="text"
-                                name="nourriture"
-                                className="champsFormulaire"
-                                id="nourriture"
-                                placeholder="Nourriture animal..."
-                                style={{ width: "200px" }}
-                                //defaultValue={animal.nourriture}
-                                value={animal.nourriture}
-                                onChange={inputChangement}
-                            />
-                            <label htmlFor="nourriture"></label>
+                            <legend>Etat {animal.prenom}</legend>
 
-                            <input
-                                type="text"
-                                name="quantite_nourriture"
-                                className="champsFormulaire"
-                                id="quantite_nourriture"
-                                placeholder="Quantitée nourriture..."
-                                style={{ width: "200px" }}
-                                //defaultValue={animal.race}
-                                value={animal.quantite_nourriture}
-                                onChange={inputChangement}
-                            />
-                            <label htmlFor="quantite_nourriture"></label>
-
-                            {/*<textarea
+                            <textarea
                                 name="etat"
                                 className="champsFormulaire"
                                 id="etat"
@@ -124,24 +96,24 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 value={animal.etat}
                                 onChange={inputChangement}
                             />
-    <label htmlFor="etat"></label>*/}
+                            <label htmlFor="etat"></label>
 
                             <input
                                 type="datetime-local"
-                                name="date_nourriture"
+                                name="date_soins"
                                 className="champsFormulaire"
-                                id="date_nourriture"
+                                id="date_soins"
                                 placeholder="Date et heure"
                                 style={{ width: "200px" }}
                                 //defaultValue={dateDuJour}
-                                value={animal.date_nourriture}
+                                value={animal.date_soins}
                                 onChange={inputChangement}
                             />
-                            <label htmlFor="date_nourriture"></label>
+                            <label htmlFor="date_soins"></label>
 
                             <div className="centrer">
-                                <button type="submit" className="bouton_zoo" onClick={AjouterNourritureAnimaux}>Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardEmploye}>Annuler</button>
+                                <button type="submit" className="bouton_zoo" onClick={AjouterCompteRenduAnimaux}>Confirmer</button>
+                                <button className="bouton_zoo" onClick={retourDashboardVeterinaire}>Annuler</button>
                             </div>
                         </form>
                     </div>
@@ -152,4 +124,4 @@ const DetailsAjoutNourritureAnimaux = () => {
     );
 };
 
-export default DetailsAjoutNourritureAnimaux;
+export default DetailsCompteRenduAnimaux;

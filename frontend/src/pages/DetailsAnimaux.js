@@ -54,7 +54,6 @@ const DetailsAnimaux = () => {
                     </img>
                     <p>{dataAnimal.prenom}</p>
                     <p className="paragraphe">{dataAnimal.description}</p>
-                    <h1>ESPACE POUR AVIS VETERINAIRE</h1>
                     <div className="centrer">
                         <div className="service" style={{ marginRight: "75px" }}>
                             <img src={Famille}></img>
@@ -64,6 +63,10 @@ const DetailsAnimaux = () => {
                             <img src={Habitat} style={{ width: "50px", height: "50px" }}></img>
                             <p>{dataAnimal.habitat}</p>
                         </div>
+                    </div>
+                    <div>
+                        <h3>L'avis du vétérinaire</h3>
+                        <p style={{ textAlign: "center" }}>{dataAnimal.etat}</p>
                     </div>
                     <h1>Habitat {dataAnimal.prenom}</h1>
                     <div className="centrer">
