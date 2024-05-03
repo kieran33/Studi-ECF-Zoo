@@ -2,9 +2,9 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
-import ListeAnimaux from '../composants/ListeAnimaux';
+import ModificationHoraires from '../composants/ModificationHoraires';
 
-const PageAfficherAnimaux = () => {
+const PageModifierHoraires = () => {
     return (
         <div>
             <div className="dashboard">
@@ -13,7 +13,7 @@ const PageAfficherAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <ListeAnimaux />
+                    <ModificationHoraires />
                 </div >
             </div>
             <Footer />
@@ -21,4 +21,4 @@ const PageAfficherAnimaux = () => {
     );
 };
 
-export default PageAfficherAnimaux;
+export default PageModifierHoraires;

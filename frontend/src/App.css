@@ -6,12 +6,15 @@
 
 html {
   height: 100%;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  box-sizing: inherit;
+  position: relative;
 }
 
 .barre_navigation_global {
@@ -111,9 +114,8 @@ a {
 
   bottom: 0%;
   width: 100%;
-  height: 75px;
+  height: 100%;
   background-color: #E4D1B0;
-  /*margin-top: 50px;*/
 }
 
 .formulaire,
@@ -124,7 +126,8 @@ a {
   margin: 50px;
 }
 
-.formulaire textarea {
+.formulaire textarea,
+.ajout_avis textarea {
   width: 400px;
   height: 200px;
   resize: none;
@@ -172,18 +175,13 @@ a {
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 10px;
+  gap: 10px;
 }
 
 .barre_dashboard_global {
   display: flex;
   height: 100%;
 }
-
-/*.dashboard_composants {
-  display: flex;
-  flex-direction: column;
-}*/
 
 .dashboard_text {
   cursor: pointer;
@@ -289,4 +287,75 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.avis_visiteur {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+  flex-wrap: wrap;
+  border: solid 1px lightgray;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 5px;
+  width: 500px;
+}
+
+.conteneurAvis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*.horaires {
+  display: flex;
+  margin-top: 5px;
+  gap: 20px;
+  align-items: center;
+  width: 600px;
+  justify-content: space-between;
+}*/
+
+.horaires_details {
+  width: 100px;
+}
+
+.footer {
+  /*border: red solid 2px;*/
+  /*width: 100%;
+  height: auto;
+  position: fixed;
+  bottom: 0;*/
+
+  bottom: 0%;
+  width: 100%;
+  height: auto;
+  background-color: #E4D1B0;
+  box-sizing: border-box;
+}
+
+.footer_fixe {
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #E4D1B0;
+  position: fixed;
+}
+
+.horaires {
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.conteneurHoraires {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 20px;
 }

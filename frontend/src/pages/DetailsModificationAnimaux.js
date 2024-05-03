@@ -45,14 +45,6 @@ const DetailsModificationAnimaux = () => {
         setAnimal(dataAnimal)
     }, [dataAnimal]);
 
-    /*console.log('data animal', dataAnimal.prenom)
-    console.log('animal id useSTATE', animal.id)
-    console.log('animal prenom useSTATE', animal.prenom)
-    console.log('animal race useSTATE', animal.race)
-    console.log('animal habitat useSTATE', animal.habitat)
-    console.log('animal image useSTATE', animal.image)
-    console.log('animal description useSTATE', animal.description)*/
-
     const inputChangement = (e) => {
         const { name, value } = e.target;
 
@@ -108,7 +100,7 @@ const DetailsModificationAnimaux = () => {
                 <div>
                     <BarreDashboardAdmin />
                 </div>
-                <div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
                     <div className="centrer">
                         <form className="formulaire">

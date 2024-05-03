@@ -63,12 +63,9 @@ db.connect(err => {
         nourriture VARCHAR(255) NOT NULL,
         quantite_nourriture VARCHAR(255) NOT NULL,
         etat VARCHAR(255) NOT NULL,
+        date_nourriture VARCHAR(255) NOT NULL,
+        date_soins VARCHAR(255) NOT NULL
     )`;
-
-    /*nourriture VARCHAR(255) NOT NULL,
-    quantite_nourriture VARCHAR(255),
-    etat VARCHAR(255),
-    date_nourriture DATETIME*/
 
     const creerTableHabitats = `
     CREATE TABLE IF NOT EXISTS habitats(
@@ -108,11 +105,18 @@ db.connect(err => {
         message VARCHAR(255) NOT NULL
     )`;
 
+    const creerTableHoraires = `
+    CREATE TABLE IF NOT EXISTS horaires(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        jour VARCHAR(255) NOT NULL,
+        heure VARCHAR(255) NOT NULL
+    )`;
+
     db.query((creerTableAnimaux, creerTableHabitats,
         creerTablePersonnels, creerTableServices,
-        creerTableAvisNonVerif, creerTableAvisVerif), err => {
+        creerTableAvisNonVerif, creerTableAvisVerif, creerTableHoraires), err => {
             if (err) throw err;
-            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif' et 'avis_verif' sont prêtes");
+            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif' et 'horaires' sont prêtes");
         });
 });
 
@@ -139,6 +143,27 @@ app.get("/services", (req, res) => {
 
 app.get("/personnels", (req, res) => {
     const request = "SELECT * FROM personnels"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/avis-non-verif", (req, res) => {
+    const request = "SELECT * FROM avis_non_verif"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/avis-verif", (req, res) => {
+    const request = "SELECT * FROM avis_verif"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/horaires", (req, res) => {
+    const request = "SELECT * FROM horaires"
     db.query(request, (error, result) => {
         res.send(result);
     });
@@ -271,6 +296,36 @@ app.post("/ajout-habitats", exporter.single("image"), (req, res) => {
         });
 });
 
+app.post('/ajout-avis-non-verif', (req, res) => {
+    const { pseudo, message } = req.body;
+
+    db.query("INSERT INTO avis_non_verif (pseudo, message) VALUE (?, ?)", [pseudo, message], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Erreur lors de l\'ajout de l\'avis');
+        }
+        else {
+            console.log(result);
+            res.status(201).send('Avis ajouté avec succès');
+        }
+    });
+});
+
+app.post('/ajout-avis-verif', (req, res) => {
+    const { pseudo, message } = req.body;
+
+    db.query("INSERT INTO avis_verif (pseudo, message) VALUE (?, ?)", [pseudo, message], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Erreur lors de l\'ajout de l\'avis');
+        }
+        else {
+            console.log(result);
+            res.status(201).send('Avis ajouté avec succès');
+        }
+    });
+});
+
 app.delete("/animaux/supprimer/:id", (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM animaux WHERE id = ?";
@@ -309,6 +364,26 @@ app.delete("/personnels/supprimer/:id", (req, res) => {
     const request = "DELETE FROM personnels WHERE id = ?";
 
     db.query(request, id, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+});
+
+app.delete("/supprimer/avis-non-verif/:id", (req, res) => {
+    const { id } = req.params;
+    const request = "DELETE FROM avis_non_verif WHERE id = ?";
+
+    db.query(request, id, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+});
+
+app.delete('/supprimer/avis-verif', (req, res) => {
+    const request = "DELETE FROM avis_verif";
+    db.query(request, (error, result) => {
         if (error) {
             console.log(error);
         }
@@ -457,6 +532,8 @@ app.put("/habitats/modifier/:id", exporter.single("image"), (req, res) => {
 app.put("/personnels/modifier/:id", (req, res) => {
     const { id } = req.params;
 
+    console.log('nom user', req.body.nom_utilisateur)
+
     const request = "UPDATE personnels SET `nom_utilisateur`=?, `mot_de_passe`=?, `role`=? WHERE id=?";
     db.query(request, [req.body.nom_utilisateur, req.body.mot_de_passe, req.body.role, id], (error, result) => {
         if (error) {
@@ -464,6 +541,26 @@ app.put("/personnels/modifier/:id", (req, res) => {
         }
         else {
             console.log(result);
+        }
+    });
+});
+
+app.put("/horaires/modifier/:id", (req, res) => {
+    const { id } = req.params;
+    console.log("id", id)
+    console.log('heure ouverture', req.body.heure_ouverture);
+    console.log('heure fermeture', req.body.heure_fermeture);
+    console.log('ouvert ou fermer ?', req.body.ouvert_fermer)
+
+    const request = "UPDATE horaires SET `heure_ouverture`=?, `heure_fermeture`=?, `ouvert_fermer`=? WHERE id=?";
+    db.query(request, [req.body.heure_ouverture, req.body.heure_fermeture, req.body.ouvert_fermer, id], (error, result) => {
+        if (error) {
+            console.log(error);
+            console.log('aie aie erreur')
+        }
+        else {
+            console.log(result);
+            console.log('nice c\'est ok')
         }
     });
 });

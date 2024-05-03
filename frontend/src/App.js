@@ -22,11 +22,9 @@ import PageSuppressionComptePersonnels from './pages/PageSuppressionComptePerson
 import PageAjouterAnimaux from './pages/PageAjouterAnimaux';
 import PageModifierAnimaux from './pages/PageModifierAnimaux';
 import PageSupprimerAnimaux from './pages/PageSupprimerAnimaux';
-import PageAfficherAnimaux from './pages/PageAfficherAnimaux';
 import PageAjouterServices from './pages/PageAjouterServices';
 import PageModifierServices from './pages/PageModifierServices';
 import PageSupprimerServices from './pages/PageSupprimerServices';
-import PageAfficherHabitats from './pages/PageAfficherHabitats';
 import PageAjouterHabitats from './pages/PageAjouterHabitats';
 import PageModifierHabitats from './pages/PageModifierHabitats';
 import PageSupprimerHabitats from './pages/PageSupprimerHabitats';
@@ -41,6 +39,9 @@ import DetailsCompteRenduAnimaux from './pages/DetailsCompteRenduAnimaux';
 import PageAvisHabitats from './pages/PageAvisHabitats';
 import DetailsAvisHabitats from './pages/DetailsAvisHabitats';
 import PageEtatAnimauxAdmin from './pages/PageEtatAnimauxAdmin';
+import AvisModerationEmploye from './composants/AvisModerationEmploye';
+import PageModifierHoraires from './pages/PageModifierHoraires';
+import DetailsModificationHoraires from './pages/DetailsModificationHoraires';
 
 function App() {
   return (
@@ -59,18 +60,17 @@ function App() {
           <Route path="/dashboard-admin/creation-personnels" element={<PageCreationComptePersonnels />} />
           <Route path="/dashboard-admin/modification-personnels" element={<PageModificationComptePersonnels />} />
           <Route path="/dashboard-admin/suppression-personnels" element={<PageSuppressionComptePersonnels />} />
-          <Route path="/dashboard-admin/liste-animaux" element={<PageAfficherAnimaux />} />
           <Route path="/dashboard-admin/ajout-animaux" element={<PageAjouterAnimaux />} />
           <Route path="/dashboard-admin/modification-animaux" element={<PageModifierAnimaux />} />
           <Route path="/dashboard-admin/suppression-animaux" element={<PageSupprimerAnimaux />} />
           <Route path="/dashboard-admin/ajout-services" element={<PageAjouterServices />} />
           <Route path="/dashboard-admin/modification-services" element={<PageModifierServices />} />
           <Route path="/dashboard-admin/suppression-services" element={<PageSupprimerServices />} />
-          <Route path="/dashboard-admin/liste-habitats" element={<PageAfficherHabitats />} />
           <Route path="/dashboard-admin/ajout-habitats" element={<PageAjouterHabitats />} />
           <Route path="/dashboard-admin/modification-habitats" element={<PageModifierHabitats />} />
           <Route path="/dashboard-admin/suppression-habitats" element={<PageSupprimerHabitats />} />
           <Route path="/dashboard-admin/etat-animaux" element={<PageEtatAnimauxAdmin />} />
+          <Route path="/dashboard-admin/modifier-horaires" element={<PageModifierHoraires />} />
 
           <Route path="/dashboard-employe/ajout-services" element={<PageAjouterServicesEmploye />} />
           <Route path="/dashboard-employe/modification-services" element={<PageModifierServicesEmploye />} />
@@ -78,6 +78,7 @@ function App() {
           <Route path="/dashboard-employe/suppression-services" element={<PageSupprimerServicesEmploye />} />
           <Route path="/dashboard-employe/ajout-nourriture" element={<PageNourrirAnimauxEmploye />} />
           <Route path="/dashboard-employe/ajout-nourriture/:id" element={<DetailsAjoutNourritureAnimaux />} />
+          <Route path="/dashboard-employe/moderer-avis" element={<AvisModerationEmploye />} />
 
           <Route path="/dashboard-veterinaire/compte-rendu-animaux" element={<CompteRenduAnimaux />} />
           <Route path="/dashboard-veterinaire/compte-rendu-animaux/:id" element={<DetailsCompteRenduAnimaux />} />
@@ -89,6 +90,7 @@ function App() {
           <Route path="/dashboard-admin/modifier-services/:id" element={<DetailsModificationServices />} />
           <Route path="/dashboard-admin/modifier-habitats/:id" element={<DetailsModificationHabitats />} />
           <Route path="/dashboard-admin/modifier-personnels/:id" element={<DetailsModificationPersonnels />} />
+          <Route path="/dashboard-admin/modifier-horaires/:id" element={<DetailsModificationHoraires />} />
           <Route path="/dashboard-employe" element={<DashboardEmploye />} />
           <Route path="/dashboard-veterinaire" element={<DashboardVeterinaire />} />
           <Route path="*" element={<Erreur />} />

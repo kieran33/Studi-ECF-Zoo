@@ -93,7 +93,7 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 name="nourriture"
                                 className="champsFormulaire"
                                 id="nourriture"
-                                placeholder="Nourriture animal..."
+                                placeholder="Nourriture de l'animal..."
                                 style={{ width: "200px" }}
                                 //defaultValue={animal.nourriture}
                                 value={animal.nourriture}
@@ -114,24 +114,11 @@ const DetailsAjoutNourritureAnimaux = () => {
                             />
                             <label htmlFor="quantite_nourriture"></label>
 
-                            {/*<textarea
-                                name="etat"
-                                className="champsFormulaire"
-                                id="etat"
-                                placeholder="Etat animal..."
-                                style={{ width: "300px" }}
-                                //defaultValue={animal.habitat}
-                                value={animal.etat}
-                                onChange={inputChangement}
-                            />
-    <label htmlFor="etat"></label>*/}
-
                             <input
-                                type="datetime-local"
+                                type="date"
                                 name="date_nourriture"
                                 className="champsFormulaire"
                                 id="date_nourriture"
-                                placeholder="Date et heure"
                                 style={{ width: "200px" }}
                                 //defaultValue={dateDuJour}
                                 value={animal.date_nourriture}

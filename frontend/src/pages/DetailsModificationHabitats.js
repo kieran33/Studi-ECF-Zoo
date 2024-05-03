@@ -96,7 +96,7 @@ const DetailsModificationHabitats = () => {
                 <div>
                     <BarreDashboardAdmin />
                 </div>
-                <div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierHabitats}>

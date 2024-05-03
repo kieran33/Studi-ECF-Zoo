@@ -17,6 +17,10 @@ const BarreDashboardAdmin = () => {
         navigate("/dashboard-admin/etat-habitats");
     };
 
+    const modifierHoraires = () => {
+        navigate("/dashboard-admin/modifier-horaires");
+    };
+
     return (
         <div className="barre_dashboard_global">
             <div className="barre_dashboard">
@@ -27,7 +31,7 @@ const BarreDashboardAdmin = () => {
                 <DashboardAdminServices />
                 <div>
                     <h3 className="dashboard_text"> Horaires </h3>
-                    <p className="dashboard_text">Modifier</p>
+                    <p className="dashboard_text" onClick={modifierHoraires}>Modifier</p>
                 </div>
                 <div>
                     <h3 className="dashboard_text">Compte-rendu vétérinaire</h3>

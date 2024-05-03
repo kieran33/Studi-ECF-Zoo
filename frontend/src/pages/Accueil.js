@@ -6,6 +6,7 @@ import services from '../image/services-zoo.jpg';
 import habitats from '../image/paysage-jungle.jpg';
 import animaux from '../image/groupe-animaux.jpg';
 import { useNavigate } from 'react-router-dom';
+import AvisVisiteur from '../composants/AvisVisiteur';
 
 const Accueil = () => {
 
@@ -48,6 +49,7 @@ const Accueil = () => {
                     <div className="text_zoo">Découvrez nos services</div>
                 </div>
 
+                {/*
                 <div class="wrapper">
                     <div class="image_wrapper">
                         <img className="image_wrapper_animaux" src={animaux} style={{ width: "500px", height: "auto" }} />
@@ -55,9 +57,10 @@ const Accueil = () => {
                             <h1>ANIMAUX</h1>
                         </div>
                     </div>
-                </div>
+    </div>*/}
 
             </div>
+            <AvisVisiteur />
 
 
             <Footer />

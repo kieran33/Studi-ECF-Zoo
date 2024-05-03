@@ -16,6 +16,11 @@ const Contact = () => {
 
                 <input type="email" name="email" className="champsFormulaire" id="email" placeholder="Votre email..." required></input>
                 <label htmlFor="titre"></label>
+
+                <div className="centrer">
+                    <button type="submit" value="Envoyer" className="bouton_zoo">Envoyer</button>
+                    <button type="submit" value="Envoyer" className="bouton_zoo">Annuler</button>
+                </div>
             </form>
             <Footer />
         </div>
