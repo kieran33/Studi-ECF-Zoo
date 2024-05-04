@@ -24,17 +24,18 @@ const SupprimerServices = () => {
 
     return (
         <div>
-            <h1 className="centrer">Liste des services</h1>
+            <h1 className="centrer">Supprimer services</h1>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                        <div className="div_zoo" style={{ width: '250px', height: '250px', marginBottom: "40px" }}>
                             <img className="image_zoo" style={{ width: '250px', height: '250px' }}
                                 src={`http://localhost:3002/image/${service.image}`}
-                                alt={service.prenom}></img>
-                            <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{service.prenom}</div>
+                                alt={service.nom}>
+                            </img>
+                            <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{service.nom}</div>
                         </div>
-                        <button className="bouton_zoo" onClick={() => supprimerServices(service.id)}>Supprimer</button>
+                        <button className="bouton_zoo" onClick={() => supprimerServices(service.id)} >Supprimer</button>
                     </div>
                 ))}
             </div>

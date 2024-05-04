@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../composants/Footer';
 
 const DetailsAvisHabitats = () => {
 
@@ -65,7 +66,7 @@ const DetailsAvisHabitats = () => {
     };
 
     const retourDashboardVeterinaire = () => {
-        navigate("/dashboard-veterinaire");
+        navigate("/dashboard-veterinaire/avis-habitats");
     }
 
     return (
@@ -76,17 +77,15 @@ const DetailsAvisHabitats = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Ecrire compte rendu pour l'habitat {habitat.nom} </h1>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={avisHabitats}>
-                            <legend>Etat habitat {habitat.nom}</legend>
-
                             <textarea
                                 name="etat"
                                 className="champsFormulaire"
                                 id="etat"
                                 placeholder="Etat de l'habitat..."
                                 defaultValue={habitat.etat}
-                                //value={service.description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="etat"></label>
@@ -99,6 +98,7 @@ const DetailsAvisHabitats = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

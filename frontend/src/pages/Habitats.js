@@ -18,8 +18,6 @@ const Habitats = () => {
         loadData();
     }, []);
 
-    console.log(data)
-
     return (
         <div>
             <Navigation />

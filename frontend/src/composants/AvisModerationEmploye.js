@@ -43,12 +43,10 @@ const AvisModerationEmploye = () => {
                 },
             });
             console.log('Succès:', response.data);
-            console.log('name, message, note', pseudo, message)
             alert('Avis approuvé avec succès')
             if (response.data) {
                 axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`);
                 setTimeout(() => loadData(), 500);
-                console.log('avis supprimer de la liste non vérifié');
             }
         } catch (error) {
             console.error('Erreur:', error.response ? error.response.data : error.message);
@@ -64,9 +62,11 @@ const AvisModerationEmploye = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h1 className="titre_service">Espace modération des avis</h1>
-                    <button className="bouton_zoo" onClick={() => supprimerTousLesAvis()}>
-                        Supprimer tous les avis verif
-                    </button>
+                    <div style={{ width: "100%", display: "flex" }}>
+                        <button className="bouton_zoo" style={{ margin: "auto" }} onClick={() => supprimerTousLesAvis()}>
+                            Supprimer tous les avis vérifiés
+                        </button>
+                    </div>
                     <div className="conteneurAvis">
                         {data.map((avis, index) => (
                             <div className="avis_visiteur" index={index}>

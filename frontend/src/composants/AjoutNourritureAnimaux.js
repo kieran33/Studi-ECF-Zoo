@@ -17,6 +17,7 @@ const AjoutNourritureAnimaux = () => {
 
     return (
         <div>
+            <h1 className="titre_service">Choisissez l'animal à nourrir</h1>
             <div className="centrer">
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>

@@ -67,12 +67,8 @@ const DetailsCompteRenduAnimaux = () => {
     };
 
     const retourDashboardVeterinaire = () => {
-        navigate("/dashboard-veterinaire");
+        navigate("/dashboard-veterinaire/compte-rendu-animaux");
     }
-
-    const dateDuJour = Date.now()
-
-    console.log(dateDuJour)
 
     return (
         <div>
@@ -82,30 +78,27 @@ const DetailsCompteRenduAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Ecrire compte rendu pour l'animal {animal.prenom}</h1>
                     <div className="centrer">
                         <form className="formulaire">
-                            <legend>Etat {animal.prenom}</legend>
-
                             <textarea
                                 name="etat"
                                 className="champsFormulaire"
                                 id="etat"
                                 placeholder="Etat animal..."
                                 style={{ width: "300px" }}
-                                //defaultValue={animal.habitat}
                                 value={animal.etat}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="etat"></label>
 
                             <input
-                                type="datetime-local"
+                                type="date"
                                 name="date_soins"
                                 className="champsFormulaire"
                                 id="date_soins"
                                 placeholder="Date et heure"
-                                style={{ width: "200px" }}
-                                //defaultValue={dateDuJour}
+                                style={{ width: "125px" }}
                                 value={animal.date_soins}
                                 onChange={inputChangement}
                             />

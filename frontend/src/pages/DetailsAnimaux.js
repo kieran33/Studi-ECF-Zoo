@@ -16,7 +16,6 @@ const DetailsAnimaux = () => {
     const { id } = useParams();
 
     const idNombre = Number(id);
-    console.log('id', id)
 
     const loadData = async () => {
         const response = await axios.get('http://localhost:3002/animaux')
@@ -65,7 +64,7 @@ const DetailsAnimaux = () => {
                         </div>
                     </div>
                     <div>
-                        <h3>L'avis du vétérinaire</h3>
+                        <h3>L'avis du vétérinaire sur l'état de l'animal</h3>
                         <p style={{ textAlign: "center" }}>{dataAnimal.etat}</p>
                     </div>
                     <h1>Habitat {dataAnimal.prenom}</h1>
@@ -87,40 +86,32 @@ const DetailsAnimaux = () => {
                     <h3>Liste des autres animaux qui vivent dans l'habitat {dataAnimal.habitat}</h3>
                     <div className="centrer">
                         {data.filter(animal => (animal.habitat === dataAnimal.habitat) && (animal.prenom !== dataAnimal.prenom)).map(animal => (
-                            <div>
-                                {
-                                    <div className="animal">
-                                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                                            <Link to={`/animaux/${animal.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                                    src={`http://localhost:3002/image/${animal.image}`}
-                                                    alt={animal.prenom}>
-                                                </img>
-                                            </Link>
-                                            <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
-                                        </div>
-                                    </div>
-                                }
+                            <div className="animal">
+                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                    <Link to={`/animaux/${animal.id}`} onClick={recharger} style={{ opacity: "1" }}>
+                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                            src={`http://localhost:3002/image/${animal.image}`}
+                                            alt={animal.prenom}>
+                                        </img>
+                                    </Link>
+                                    <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
+                                </div>
                             </div>
                         ))}
                     </div>
                     <h3>Liste des autres habitats</h3>
                     <div className="centrer">
                         {dataHabitat.filter(habitat => habitat.nom !== dataAnimal.habitat).map(habitat => (
-                            <div>
-                                {
-                                    <div className="animal">
-                                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                                            <Link to={`/habitats/${habitat.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                                    src={`http://localhost:3002/image/${habitat.image}`}
-                                                    alt={habitat.nom}>
-                                                </img>
-                                            </Link>
-                                            <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>
-                                        </div>
-                                    </div>
-                                }
+                            <div className="animal">
+                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                    <Link to={`/habitats/${habitat.id}`} onClick={recharger} style={{ opacity: "1" }}>
+                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                            src={`http://localhost:3002/image/${habitat.image}`}
+                                            alt={habitat.nom}>
+                                        </img>
+                                    </Link>
+                                    <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>
+                                </div>
                             </div>
                         ))}
                     </div>

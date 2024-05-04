@@ -2,10 +2,12 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 
 const DetailsModificationHabitats = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -38,14 +40,6 @@ const DetailsModificationHabitats = () => {
     useEffect(() => {
         setHabitat(dataHabitat)
     }, [dataHabitat]);
-
-    /*console.log('data animal', dataAnimal.prenom)
-    console.log('animal id useSTATE', animal.id)
-    console.log('animal prenom useSTATE', animal.prenom)
-    console.log('animal race useSTATE', animal.race)
-    console.log('animal habitat useSTATE', animal.habitat)
-    console.log('animal image useSTATE', animal.image)
-    console.log('animal description useSTATE', animal.description)*/
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -90,6 +84,10 @@ const DetailsModificationHabitats = () => {
         };
     };
 
+    const retourDashboardAdmin = () => {
+        navigate("/dashboard-admin/modification-habitats");
+    }
+
     return (
         <div>
             <div className="dashboard">
@@ -98,9 +96,9 @@ const DetailsModificationHabitats = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Modifier l'habitat {habitat.nom}</h1>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierHabitats}>
-                            <legend>Modifier habitats</legend>
                             <input
                                 type="text"
                                 name="nom"
@@ -108,7 +106,6 @@ const DetailsModificationHabitats = () => {
                                 id="nom"
                                 placeholder="Nom..."
                                 defaultValue={habitat.nom}
-                                //value={service.nom}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="nom"></label>
@@ -119,7 +116,6 @@ const DetailsModificationHabitats = () => {
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={habitat.description}
-                                //value={service.description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="description"></label>
@@ -136,7 +132,7 @@ const DetailsModificationHabitats = () => {
 
                             <div className="centrer">
                                 <button type="submit" className="bouton_zoo">Confirmer</button>
-                                <button className="bouton_zoo" >Annuler</button>
+                                <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
                             </div>
                         </form>
                     </div>

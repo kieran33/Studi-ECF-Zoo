@@ -87,7 +87,7 @@ const DetailsModificationServicesEmploye = () => {
     };
 
     const retourDashboardEmploye = () => {
-        navigate("/dashboard-employe");
+        navigate("/dashboard-employe/modification-services");
     }
 
     return (
@@ -100,7 +100,7 @@ const DetailsModificationServicesEmploye = () => {
                     <Navigation />
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierServices}>
-                            <legend>Modifier services</legend>
+                            <legend>Modifier le service "{service.nom}"</legend>
                             <input
                                 type="text"
                                 name="nom"
@@ -108,7 +108,6 @@ const DetailsModificationServicesEmploye = () => {
                                 id="nom"
                                 placeholder="Nom du service..."
                                 defaultValue={service.nom}
-                                //value={service.nom}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="nom"></label>
@@ -119,7 +118,6 @@ const DetailsModificationServicesEmploye = () => {
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={service.description}
-                                //value={service.description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="description"></label>

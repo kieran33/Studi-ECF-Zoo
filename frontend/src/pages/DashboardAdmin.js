@@ -13,7 +13,7 @@ const DashboardAdmin = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1>Dashboard admin</h1>
+                    <h1 className="titre_service">Dashboard admin</h1>
                 </div>
             </div >
             <Footer />

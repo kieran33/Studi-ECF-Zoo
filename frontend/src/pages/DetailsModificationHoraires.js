@@ -90,31 +90,37 @@ const DetailsModificationHoraires = () => {
                                 :
                                 <p>Horaire : {horaire.heure_ouverture} - {horaire.heure_fermeture}</p>
                             }
-                            <div>
-                                <input
-                                    type="time"
-                                    name="heure_ouverture"
-                                    className="champsFormulaire"
-                                    id="heure_ouverture"
-                                    min="00:00"
-                                    max="12:00"
-                                    style={{ width: "auto" }}
-                                    onChange={inputChangement}
-                                />
-                                <label htmlFor="heure_ouverture"></label>
+                            {horaire.ouvert_fermer === "Fermer" ?
+                                <div>
+                                    <p>Le zoo est actuellement fermé, réouvrez le pour changer les horaires</p>
+                                </div>
+                                :
+                                <div>
+                                    <input
+                                        type="time"
+                                        name="heure_ouverture"
+                                        className="champsFormulaire"
+                                        id="heure_ouverture"
+                                        min="00:00"
+                                        max="12:00"
+                                        style={{ width: "auto" }}
+                                        onChange={inputChangement}
+                                    />
+                                    <label htmlFor="heure_ouverture"></label>
 
-                                <input
-                                    type="time"
-                                    name="heure_fermeture"
-                                    className="champsFormulaire"
-                                    id="heure_fermeture"
-                                    min="00:00"
-                                    max="12:00"
-                                    style={{ width: "auto" }}
-                                    onChange={inputChangement}
-                                />
-                                <label htmlFor="heure_fermeture"></label>
-                            </div>
+                                    <input
+                                        type="time"
+                                        name="heure_fermeture"
+                                        className="champsFormulaire"
+                                        id="heure_fermeture"
+                                        min="00:00"
+                                        max="12:00"
+                                        style={{ width: "auto" }}
+                                        onChange={inputChangement}
+                                    />
+                                    <label htmlFor="heure_fermeture"></label>
+                                </div>
+                            }
 
                             {horaire.ouvert_fermer === "Fermer" ?
                                 <>

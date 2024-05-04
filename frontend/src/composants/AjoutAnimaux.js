@@ -51,12 +51,6 @@ const AjoutAnimaux = () => {
         formData.append("description", nouvelAnimal.description);
         formData.append("image", nouvelAnimal.image);
 
-        console.log('prenom animaux', nouvelAnimal.prenom);
-        console.log('race animaux', nouvelAnimal.race);
-        console.log('habitat animaux', nouvelAnimal.habitat);
-        console.log('description animaux', nouvelAnimal.description);
-        console.log('nom image', nouvelAnimal.image);
-
         axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
             .then(response => {
                 console.log(response.data);
@@ -72,10 +66,8 @@ const AjoutAnimaux = () => {
 
     return (
         <div>
-            <h1>Ajout animaux</h1>
-
+            <h1 className="titre_service">Ajouter animaux</h1>
             <form className="formulaire" onSubmit={ajouterAnimaux} >
-                <legend>Ajout animaux</legend>
                 <input
                     type="text"
                     name="prenom"
@@ -131,7 +123,7 @@ const AjoutAnimaux = () => {
                 <label htmlFor="image"></label>
 
                 <div className="centrer">
-                    <button type="submit" className="bouton_zoo">Créer</button>
+                    <button type="submit" className="bouton_zoo">Ajouter</button>
                     <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
                 </div>
             </form>

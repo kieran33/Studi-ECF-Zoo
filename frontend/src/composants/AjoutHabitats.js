@@ -64,10 +64,8 @@ const AjoutHabitats = () => {
 
     return (
         <div>
-            <h1>Ajout habitats</h1>
-
+            <h1 className="titre_service">Ajouter habitats</h1>
             <form className="formulaire" onSubmit={ajouterHabitats} >
-                <legend>Ajout habitats</legend>
                 <input
                     type="text"
                     name="nom"
@@ -101,7 +99,7 @@ const AjoutHabitats = () => {
                 <label htmlFor="image"></label>
 
                 <div className="centrer">
-                    <button type="submit" className="bouton_zoo">Créer</button>
+                    <button type="submit" className="bouton_zoo">Ajouter</button>
                     <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
                 </div>
             </form>

@@ -52,6 +52,10 @@ const DetailsHabitats = () => {
                     </img>
                     <p>{dataHabitat.nom}</p>
                     <p className="paragraphe">{dataHabitat.description}</p>
+                    <div>
+                        <h3>L'avis du vétérinaire sur l'état de l'habitat</h3>
+                        <p style={{ textAlign: "center" }}>{dataHabitat.etat}</p>
+                    </div>
                     <h3>Liste des animaux qui vivent dans cet habitat</h3>
                     <div className="centrer">
                         {dataAnimaux.filter(animal => (animal.habitat === dataHabitat.nom)).map(animal => (

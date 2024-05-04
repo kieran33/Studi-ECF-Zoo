@@ -109,14 +109,25 @@ db.connect(err => {
     CREATE TABLE IF NOT EXISTS horaires(
         id INT AUTO_INCREMENT PRIMARY KEY,
         jour VARCHAR(255) NOT NULL,
-        heure VARCHAR(255) NOT NULL
+        heure_ouverture VARCHAR(255) NOT NULL,
+        heure_fermeture VARCHAR(255) NOT NULL,
+        ouvert_fermer VARCHAR(255) NOT NULL
     )`;
+
+    const creerTableQuestions = `
+    CREATE TABLE IF NOT EXISTS questions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        titre VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL
+        )`;
 
     db.query((creerTableAnimaux, creerTableHabitats,
         creerTablePersonnels, creerTableServices,
-        creerTableAvisNonVerif, creerTableAvisVerif, creerTableHoraires), err => {
+        creerTableAvisNonVerif, creerTableAvisVerif, creerTableHoraires,
+        creerTableQuestions), err => {
             if (err) throw err;
-            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif' et 'horaires' sont prêtes");
+            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif', 'horaires' et 'questions' sont prêtes");
         });
 });
 
@@ -164,6 +175,13 @@ app.get("/avis-verif", (req, res) => {
 
 app.get("/horaires", (req, res) => {
     const request = "SELECT * FROM horaires"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/questions", (req, res) => {
+    const request = "SELECT * FROM questions"
     db.query(request, (error, result) => {
         res.send(result);
     });
@@ -322,6 +340,21 @@ app.post('/ajout-avis-verif', (req, res) => {
         else {
             console.log(result);
             res.status(201).send('Avis ajouté avec succès');
+        }
+    });
+});
+
+app.post('/envoyer-questions', (req, res) => {
+    const { titre, description, email } = req.body;
+
+    db.query("INSERT INTO questions (titre, description, email) VALUE (?, ?, ?)", [titre, description, email], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Erreur lors de l\'envoie de la question');
+        }
+        else {
+            console.log(result);
+            res.status(201).send('Question envoyé avec succès');
         }
     });
 });

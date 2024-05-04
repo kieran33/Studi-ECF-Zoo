@@ -43,14 +43,6 @@ const DetailsModificationServices = () => {
         setService(dataService)
     }, [dataService]);
 
-    /*console.log('data animal', dataAnimal.prenom)
-    console.log('animal id useSTATE', animal.id)
-    console.log('animal prenom useSTATE', animal.prenom)
-    console.log('animal race useSTATE', animal.race)
-    console.log('animal habitat useSTATE', animal.habitat)
-    console.log('animal image useSTATE', animal.image)
-    console.log('animal description useSTATE', animal.description)*/
-
     const inputChangement = (e) => {
         const { name, value } = e.target;
 
@@ -85,17 +77,15 @@ const DetailsModificationServices = () => {
     const imageChangement = (e) => {
         if (e.target.files && e.target.files[0]) {
             const img = e.target.files[0];
-            console.log(img)
             setService({
                 ...service,
                 image: img
             });
-            console.log(service)
         };
     };
 
     const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+        navigate("/dashboard-admin/modification-services");
     }
 
     return (
@@ -106,9 +96,9 @@ const DetailsModificationServices = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Modifier le service {service.nom}</h1>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierServices}>
-                            <legend>Modifier services</legend>
                             <input
                                 type="text"
                                 name="nom"
@@ -116,7 +106,6 @@ const DetailsModificationServices = () => {
                                 id="nom"
                                 placeholder="Nom du service..."
                                 defaultValue={service.nom}
-                                //value={service.nom}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="nom"></label>
@@ -127,7 +116,6 @@ const DetailsModificationServices = () => {
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={service.description}
-                                //value={service.description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="description"></label>

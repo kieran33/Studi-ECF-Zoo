@@ -64,7 +64,7 @@ const DetailsModificationPersonnels = () => {
     };
 
     const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+        navigate("/dashboard-admin/modification-personnels");
     }
 
     return (
@@ -73,11 +73,11 @@ const DetailsModificationPersonnels = () => {
                 <div>
                     <BarreDashboardAdmin />
                 </div>
-                <div>
+                <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Modifier personnels {personnel.nom_utilisateur}</h1>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierPersonnels}>
-                            <legend>Modifier personnels</legend>
                             <input
                                 type="text"
                                 name="nom_utilisateur"

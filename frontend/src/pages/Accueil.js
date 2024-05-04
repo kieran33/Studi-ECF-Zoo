@@ -61,8 +61,6 @@ const Accueil = () => {
 
             </div>
             <AvisVisiteur />
-
-
             <Footer />
         </div >
     );

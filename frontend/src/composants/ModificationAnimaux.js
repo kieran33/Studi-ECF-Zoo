@@ -18,20 +18,19 @@ const ModificationAnimaux = () => {
 
     return (
         <div>
-            <h1 className="centrer">Liste des animaux</h1>
+            <h1 className="centrer">Choisissez l'animal à modifier</h1>
             <div className="centrer">
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                src={`http://localhost:3002/image/${animal.image}`}
-                                alt={animal.prenom}>
-                            </img>
-                            <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
+                            <Link to={`/dashboard-admin/modifier-animaux/${animal.id}`} style={{ opacity: "1" }}>
+                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                    src={`http://localhost:3002/image/${animal.image}`}
+                                    alt={animal.prenom}>
+                                </img>
+                            </Link>
+                            <div className="text_zoo" style={{ textTransform: 'capitalize' }}>Modifier "{animal.prenom}"</div>
                         </div>
-                        <Link to={`/dashboard-admin/modifier-animaux/${animal.id}`}>
-                            <button className="bouton_zoo">Modifier</button>
-                        </Link>
                     </div>
                 ))}
             </div>

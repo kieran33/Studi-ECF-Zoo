@@ -14,6 +14,10 @@ const BarreDashboardEmploye = () => {
         navigate("/dashboard-employe/moderer-avis")
     };
 
+    const voirQuestionVisiteurs = () => {
+        navigate("/dashboard-employe/questions-visiteurs")
+    };
+
     return (
         <div className="barre_dashboard_global">
             <div className="barre_dashboard">
@@ -21,6 +25,7 @@ const BarreDashboardEmploye = () => {
                 <DashboardEmployeServices />
                 <h3 className="dashboard_text" onClick={nourrirAnimaux}>Nourrir animaux</h3>
                 <h3 className="dashboard_text" onClick={modererAvis}>Avis visiteurs</h3>
+                <h3 className="dashboard_text" onClick={voirQuestionVisiteurs}>Questions visiteurs</h3>
             </div>
         </div>
     );

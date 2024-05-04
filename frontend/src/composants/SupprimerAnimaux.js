@@ -28,7 +28,7 @@ const SupprimerAnimaux = () => {
             <div className="centrer">
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                        <div className="div_zoo" style={{ width: '250px', height: '250px', marginBottom: "40px" }}>
                             <img className="image_zoo" style={{ width: '250px', height: '250px' }}
                                 src={`http://localhost:3002/image/${animal.image}`}
                                 alt={animal.prenom}></img>

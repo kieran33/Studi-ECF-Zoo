@@ -185,8 +185,10 @@ a {
 
 .dashboard_text {
   cursor: pointer;
-  background-color: #E4D1B0;
-  color: black;
+  /*background-color: #E4D1B0;
+  color: black;*/
+  background-color: white;
+  color: #00752F;
   border-radius: 5px;
   margin: 10px;
 }
@@ -358,4 +360,12 @@ a {
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 20px;
+}
+
+.footer_horaires {
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+  width: 200px;
+  justify-content: space-between;
 }

@@ -32,10 +32,10 @@ const DonnerAvis = () => {
                 },
             });
             console.log('Succès:', response.data);
-            console.log('newAvis', nouvelAvis)
+            console.log('nouvelAvis', nouvelAvis)
             //setNouvelAvis(getDefaultAvis());
             setDonnerAvis(false);
-            alert('Avis ajouté avec succès, il sera traiter prochainement')
+            alert('Merci d\'avoir laissé votre avis, il sera traiter prochainement')
         } catch (error) {
             console.error('Erreur:', error.response ? error.response.data : error.message);
         }
@@ -48,7 +48,6 @@ const DonnerAvis = () => {
                 :
                 <div>
                     <form className="formulaire" onSubmit={AjouterAvis}>
-
                         <input
                             type="text"
                             name="pseudo"

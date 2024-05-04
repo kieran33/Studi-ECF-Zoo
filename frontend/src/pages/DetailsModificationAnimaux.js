@@ -91,7 +91,7 @@ const DetailsModificationAnimaux = () => {
     };
 
     const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+        navigate("/dashboard-admin/modification-animaux");
     }
 
     return (
@@ -102,9 +102,9 @@ const DetailsModificationAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Modifier l'animal {animal.prenom}</h1>
                     <div className="centrer">
                         <form className="formulaire">
-                            <legend>Modifier animaux</legend>
                             <input
                                 type="text"
                                 name="prenom"
@@ -112,7 +112,6 @@ const DetailsModificationAnimaux = () => {
                                 id="prenom"
                                 placeholder="Prénom..."
                                 defaultValue={animal.prenom}
-                                //value={animal.prenom}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="prenom"></label>
@@ -124,7 +123,6 @@ const DetailsModificationAnimaux = () => {
                                 id="race"
                                 placeholder="Race..."
                                 defaultValue={animal.race}
-                                //value={animal.race}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="race"></label>
@@ -136,7 +134,6 @@ const DetailsModificationAnimaux = () => {
                                 id="habitat"
                                 placeholder="Habitat..."
                                 defaultValue={animal.habitat}
-                                //value={animal.habitat}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="habitat"></label>
@@ -147,7 +144,6 @@ const DetailsModificationAnimaux = () => {
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={animal.description}
-                                //value={animal.description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="description"></label>

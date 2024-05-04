@@ -59,7 +59,6 @@ const DetailsAjoutNourritureAnimaux = () => {
 
         formData.append("nourriture", animal.nourriture);
         formData.append("quantite_nourriture", animal.quantite_nourriture);
-        //formData.append("etat", animal.etat);
         formData.append("date_nourriture", animal.date_nourriture);
 
         try {
@@ -70,12 +69,8 @@ const DetailsAjoutNourritureAnimaux = () => {
     };
 
     const retourDashboardEmploye = () => {
-        navigate("/dashboard-employe");
+        navigate("/dashboard-employe/ajout-nourriture");
     }
-
-    const dateDuJour = Date.now()
-
-    console.log(dateDuJour)
 
     return (
         <div>
@@ -85,9 +80,9 @@ const DetailsAjoutNourritureAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Ajouter nourriture {animal.prenom}</h1>
                     <div className="centrer">
-                        <form className="formulaire">
-                            <legend>Ajouter nourriture {animal.prenom}</legend>
+                        <form className="formulaire" onSubmit={AjouterNourritureAnimaux}>
                             <input
                                 type="text"
                                 name="nourriture"
@@ -95,7 +90,6 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 id="nourriture"
                                 placeholder="Nourriture de l'animal..."
                                 style={{ width: "200px" }}
-                                //defaultValue={animal.nourriture}
                                 value={animal.nourriture}
                                 onChange={inputChangement}
                             />
@@ -108,7 +102,6 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 id="quantite_nourriture"
                                 placeholder="Quantitée nourriture..."
                                 style={{ width: "200px" }}
-                                //defaultValue={animal.race}
                                 value={animal.quantite_nourriture}
                                 onChange={inputChangement}
                             />
@@ -120,14 +113,13 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 className="champsFormulaire"
                                 id="date_nourriture"
                                 style={{ width: "200px" }}
-                                //defaultValue={dateDuJour}
                                 value={animal.date_nourriture}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="date_nourriture"></label>
 
                             <div className="centrer">
-                                <button type="submit" className="bouton_zoo" onClick={AjouterNourritureAnimaux}>Confirmer</button>
+                                <button type="submit" className="bouton_zoo">Confirmer</button>
                                 <button className="bouton_zoo" onClick={retourDashboardEmploye}>Annuler</button>
                             </div>
                         </form>

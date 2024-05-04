@@ -26,6 +26,7 @@ const CompteRenduAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Liste des animaux et ce qu'ils ont consommé</h1>
                     <div className="centrer">
                         {data.map((animal, index) => (
                             <div className="animal" key={index} style={{ marginBottom: "150px" }}>

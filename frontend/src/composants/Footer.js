@@ -20,7 +20,7 @@ const Footer = () => {
             <div className="conteneurHoraires">
                 <h3>Horaire d'ouverture du zoo</h3>
                 {data.map((horaire, index) => (
-                    <div key={index} className="horaires">
+                    <div key={index} className="footer_horaires">
                         <div>{horaire.jour}</div>
                         {horaire.ouvert_fermer === "Fermer" ?
                             < div > {horaire.ouvert_fermer} </div>

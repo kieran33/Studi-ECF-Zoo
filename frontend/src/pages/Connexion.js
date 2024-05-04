@@ -2,23 +2,10 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const Connexion = () => {
-
-    /*const [data, setData] = useState([]);
-
-    const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/personnels")
-        setData(response.data)
-    };
-
-    useEffect(() => {
-        loadData();
-    }, []);
-
-    console.log(data)*/
 
     const [nom_utilisateur, setNom_utilisateur] = useState('');
     const [mot_de_passe, setMot_de_passe] = useState('');
@@ -50,14 +37,11 @@ const Connexion = () => {
         navigate("/");
     };
 
-    console.log("nom utilisateur", nom_utilisateur)
-    console.log('mot de passe', mot_de_passe)
-
     return (
         <div>
             <Navigation />
+            <h1 className="titre_service">Connexion</h1>
             <form className="formulaire" onSubmit={seConnecter}>
-                <legend>Connexion</legend>
                 <input
                     type="text"
                     name="nom_utilisateur"

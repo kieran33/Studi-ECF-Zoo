@@ -30,13 +30,13 @@ const BarreDashboardAdmin = () => {
                 <DashboardAdminHabitats />
                 <DashboardAdminServices />
                 <div>
-                    <h3 className="dashboard_text"> Horaires </h3>
+                    <h3 className="dashboard_text" style={{ cursor: "auto" }}> Horaires </h3>
                     <p className="dashboard_text" onClick={modifierHoraires}>Modifier</p>
                 </div>
                 <div>
-                    <h3 className="dashboard_text">Compte-rendu vétérinaire</h3>
+                    <h3 className="dashboard_text" style={{ cursor: "auto" }}>Compte rendu vétérinaire</h3>
                     <p className="dashboard_text" onClick={etatAnimaux}>Etat animaux</p>
-                    <p className="dashboard_text" onClick={etatHabitats}>Etat Habitats</p>
+                    <p className="dashboard_text" onClick={etatHabitats}>Etat habitats</p>
                 </div>
             </div>
         </div>

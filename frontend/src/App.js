@@ -42,6 +42,8 @@ import PageEtatAnimauxAdmin from './pages/PageEtatAnimauxAdmin';
 import AvisModerationEmploye from './composants/AvisModerationEmploye';
 import PageModifierHoraires from './pages/PageModifierHoraires';
 import DetailsModificationHoraires from './pages/DetailsModificationHoraires';
+import QuestionsVisiteurs from './composants/QuestionsVisiteurs';
+import PageEtatHabitatsAdmin from './pages/PageEtatHabitatsAdmin';
 
 function App() {
   return (
@@ -71,6 +73,7 @@ function App() {
           <Route path="/dashboard-admin/suppression-habitats" element={<PageSupprimerHabitats />} />
           <Route path="/dashboard-admin/etat-animaux" element={<PageEtatAnimauxAdmin />} />
           <Route path="/dashboard-admin/modifier-horaires" element={<PageModifierHoraires />} />
+          <Route path="/dashboard-admin/etat-habitats" element={<PageEtatHabitatsAdmin />} />
 
           <Route path="/dashboard-employe/ajout-services" element={<PageAjouterServicesEmploye />} />
           <Route path="/dashboard-employe/modification-services" element={<PageModifierServicesEmploye />} />
@@ -79,6 +82,7 @@ function App() {
           <Route path="/dashboard-employe/ajout-nourriture" element={<PageNourrirAnimauxEmploye />} />
           <Route path="/dashboard-employe/ajout-nourriture/:id" element={<DetailsAjoutNourritureAnimaux />} />
           <Route path="/dashboard-employe/moderer-avis" element={<AvisModerationEmploye />} />
+          <Route path="//dashboard-employe/questions-visiteurs" element={<QuestionsVisiteurs />} />
 
           <Route path="/dashboard-veterinaire/compte-rendu-animaux" element={<CompteRenduAnimaux />} />
           <Route path="/dashboard-veterinaire/compte-rendu-animaux/:id" element={<DetailsCompteRenduAnimaux />} />

@@ -63,8 +63,8 @@ const AjoutServicesEmploye = () => {
 
     return (
         <div>
+            <h1 className="titre_service">Ajouter un service</h1>
             <form className="formulaire" onSubmit={ajouterServices} >
-                <legend>Ajout services</legend>
                 <input
                     type="text"
                     name="nom"
@@ -98,7 +98,7 @@ const AjoutServicesEmploye = () => {
                 <label htmlFor="image"></label>
 
                 <div className="centrer">
-                    <button type="submit" className="bouton_zoo">Créer</button>
+                    <button type="submit" className="bouton_zoo">Ajouter</button>
                     <button className="bouton_zoo" onClick={retourDashboardEmploye}>Annuler</button>
                 </div>
             </form>
