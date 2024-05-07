@@ -21,6 +21,10 @@ const BarreDashboardAdmin = () => {
         navigate("/dashboard-admin/modifier-horaires");
     };
 
+    const animauxPopulaires = () => {
+        navigate("/dashboard-admin/animaux-populaires");
+    };
+
     return (
         <div className="barre_dashboard_global">
             <div className="barre_dashboard">
@@ -38,6 +42,7 @@ const BarreDashboardAdmin = () => {
                     <p className="dashboard_text" onClick={etatAnimaux}>Etat animaux</p>
                     <p className="dashboard_text" onClick={etatHabitats}>Etat habitats</p>
                 </div>
+                <p className="dashboard_text" onClick={animauxPopulaires}>Animaux populaires</p>
             </div>
         </div>
     );

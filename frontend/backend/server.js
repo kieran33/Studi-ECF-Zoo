@@ -6,12 +6,163 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const multer = require("multer");
 
-const app = express();
+const mongoose = require("mongoose");
+require("dotenv").config();
+const AnimalModel = require("./models/Animaux");
 
+mongoose.connect(process.env.MONGO_URL);
+
+const app = express();
 const port = 3002;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/vues-animaux", (req, res) => {
+    AnimalModel.find()
+        .then(animals => res.json(animals))
+        .catch(animals => res.json(animals))
+});
+
+app.put("/augmenter-vues-animal", (req, res) => {
+    const { prenom } = req.body;
+    console.log(prenom)
+
+    AnimalModel.findOneAndUpdate(
+        { prenom: prenom },
+        { $inc: { nombreVues: 1 } })
+        .then(animals => res.json(animals))
+        .catch(animals => res.json(animals))
+});
+
+app.post("/ajout-animaux-vues", (req, res) => {
+    const { prenom } = req.body;
+    console.log(prenom)
+
+    AnimalModel.insertMany(
+        { prenom: prenom },
+        { nombreVues: 0 })
+        .then(animals => res.json(animals))
+        .catch(animals => res.json(animals))
+});
+
+app.delete("/supprimer-animaux-vues/:prenom", (req, res) => {
+    const { prenom } = req.params;
+    console.log(prenom);
+
+    AnimalModel.findOneAndDelete({ prenom: prenom })
+        .then(animals => res.json(animals))
+        .catch(animals => res.json(animals))
+})
+
+/*require("dotenv").config();
+const { MongoClient } = require("mongodb");
+const client = new MongoClient(process.env.MONGO_URL);
+
+
+const main = async () => {
+    await client.connect();
+    console.log("Connection ok");
+
+    const db_zoo = client.db("Zoo");
+    const collection = db_zoo.collection("animaux_populaires");*/
+
+//CREATE
+
+/* try {
+     //Créer plusieurs éléments
+ 
+     const insertData = await collection.insertMany([
+         {
+             prenom: "Lion",
+             nombreVues: ""
+         },
+         {
+             prenom: "Crocodile",
+             nombreVues: ""
+         },
+         {
+             prenom: "gorille",
+             nombreVues: ""
+         },
+         {
+             prenom: "Loup",
+             nombreVues: ""
+         },
+     ]);
+ 
+     console.log('Documents insérés', insertData);
+ 
+ } catch (e) {
+     throw e;
+ }*/
+
+//READ
+
+/* try {
+     // Trouver un seul élément
+ 
+     const findData = await collection.findOne({ prenom: "Lion" });
+     console.log('Document trouvé', findData);
+ 
+     // Trouver plusieurs éléments
+ 
+     const findMultipleData = await collection.find({ nombreVues: "" });
+     console.log(await findMultipleData.toArray());
+ } catch (e) {
+     throw e;
+ }*/
+
+//UPDATE
+
+/*try {
+    //Modifier un seul élément
+ 
+    const updateLion = await collection.updateOne({ prenom: "Lion" }, {
+        $set: { nombreVues: 50 }
+    });
+ 
+    console.log(updateLion)
+ 
+    //Modifier plusieurs éléments
+ 
+    const updateNombreVues = await collection.updateMany({ nombreVues: "" }, {
+        $set: { nombreVues: 100 }
+    });
+ 
+    console.log(updateNombreVues)
+ 
+} catch (e) {
+    throw e;
+}*/
+
+//DELETE
+
+/*try {
+    //Supprimer un seul élément
+ 
+    const deleteLoup = await collection.deleteOne({ prenom: "Loup" });
+    console.log(deleteLoup);
+ 
+    //Supprimer plusieurs éléments
+ 
+    const deleteAll = await collection.deleteMany({ nombreVues: 100 });
+    console.log(deleteAll);
+ 
+} catch (e) {
+    throw e;
+}*/
+/*return "ok";
+};
+
+main()
+    .then(console.log)
+    .catch(console.error)
+    .finally(() => client.close());*/
+
+
+
 
 app.use("/image", express.static(path.join(__dirname, "image")));
 
@@ -120,7 +271,7 @@ db.connect(err => {
         titre VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL
-        )`;
+    )`;
 
     db.query((creerTableAnimaux, creerTableHabitats,
         creerTablePersonnels, creerTableServices,
@@ -600,4 +751,4 @@ app.put("/horaires/modifier/:id", (req, res) => {
 
 app.listen(port, () => {
     console.log('Serveur connecté au port ' + port);
-});
+}); 

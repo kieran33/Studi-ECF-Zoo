@@ -7,6 +7,8 @@ const AjoutAnimaux = () => {
 
     const navigate = useNavigate();
 
+    const [prenom, setPrenom] = useState("");
+
     const [nouvelAnimal, setNouvelAnimal] = useState({
         id: "",
         prenom: "",
@@ -58,6 +60,12 @@ const AjoutAnimaux = () => {
             .catch(error => {
                 console.error(error);
             });
+
+        try {
+            axios.post("http://localhost:3002/ajout-animaux-vues", { prenom })
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const retourDashboardAdmin = () => {
@@ -74,7 +82,10 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire"
                     id="prenom"
                     placeholder="Prénom..."
-                    onChange={inputChangement}
+                    onChange={(e) => {
+                        setPrenom(e.target.value)
+                        inputChangement(e)
+                    }}
                     required
                 />
                 <label htmlFor="prenom"></label>

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Animaux = () => {
 
+    const navigate = useNavigate();
+
     const [data, setData] = useState([]);
     const [dataTrier, setDataTrier] = useState([])
+    const [prenom, setPrenom] = useState("")
+    const [id, setId] = useState("");
 
     const loadData = async () => {
         const response = await axios.get("http://localhost:3002/animaux");
@@ -34,6 +38,24 @@ const Animaux = () => {
         }
     }, [data]);
 
+    const augmenterVue = () => {
+
+        try {
+            axios.put(`http://localhost:3002/augmenter-vues-animal`, { prenom })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const detailsAnimaux = () => {
+        navigate(`/animaux/${id}/${prenom}`)
+    }
+
+    useEffect(() => {
+        augmenterVue()
+        detailsAnimaux()
+    }, [prenom])
+
     return (
         <div>
             <Navigation />
@@ -42,12 +64,17 @@ const Animaux = () => {
                 {dataTrier.map((animal, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                            <Link to={`/animaux/${animal.id}`} style={{ opacity: "1" }}>
-                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                    src={`http://localhost:3002/image/${animal.image}`}
-                                    alt={animal.prenom}>
-                                </img>
-                            </Link>
+                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                src={`http://localhost:3002/image/${animal.image}`}
+                                alt={animal.prenom}
+                                onClick={() => {
+                                    setPrenom(animal.prenom)
+                                    setId(animal.id)
+                                    augmenterVue()
+                                    detailsAnimaux()
+                                }}
+                            >
+                            </img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                         </div>
                     </div>

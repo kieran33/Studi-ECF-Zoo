@@ -44,6 +44,7 @@ import PageModifierHoraires from './pages/PageModifierHoraires';
 import DetailsModificationHoraires from './pages/DetailsModificationHoraires';
 import QuestionsVisiteurs from './composants/QuestionsVisiteurs';
 import PageEtatHabitatsAdmin from './pages/PageEtatHabitatsAdmin';
+import AnimauxPopulaires from './composants/AnimauxPopulaires';
 
 function App() {
   return (
@@ -52,7 +53,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/animaux" element={<Animaux />} />
-          <Route path="/animaux/:id" element={<DetailsAnimaux />} />
+          <Route path="/animaux/:id/:prenom" element={<DetailsAnimaux />} />
           <Route path="/habitats" element={<Habitats />} />
           <Route path="/habitats/:id" element={<DetailsHabitats />} />
           <Route path="/services" element={<Services />} />
@@ -74,6 +75,7 @@ function App() {
           <Route path="/dashboard-admin/etat-animaux" element={<PageEtatAnimauxAdmin />} />
           <Route path="/dashboard-admin/modifier-horaires" element={<PageModifierHoraires />} />
           <Route path="/dashboard-admin/etat-habitats" element={<PageEtatHabitatsAdmin />} />
+          <Route path="/dashboard-admin/animaux-populaires" element={<AnimauxPopulaires />} />
 
           <Route path="/dashboard-employe/ajout-services" element={<PageAjouterServicesEmploye />} />
           <Route path="/dashboard-employe/modification-services" element={<PageModifierServicesEmploye />} />

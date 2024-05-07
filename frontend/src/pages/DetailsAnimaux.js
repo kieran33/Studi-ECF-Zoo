@@ -14,6 +14,7 @@ const DetailsAnimaux = () => {
     const [dataAnimal, setDataAnimal] = useState([]);
     const [dataHabitat, setDataHabitat] = useState([]);
     const { id } = useParams();
+    const { prenom } = useParams();
 
     const idNombre = Number(id);
 
@@ -41,6 +42,31 @@ const DetailsAnimaux = () => {
     const recharger = () => {
         window.reload();
     };
+
+
+
+    /*const [animals, setAnimals] = useState([]);
+    //const [prenom, setPrenom] = useState([])
+
+    useEffect(() => {
+        axios.get('http://localhost:3002/vues-animaux')
+            .then(animals => setAnimals(animals.data))
+            .catch(err => console.log(err))
+    }, []);
+
+    const augmenterVue = async (e) => {
+        e.preventDefault();
+
+        console.log('je suis dans augmenterVue')
+        console.log('frontend', prenom)
+        console.log('type de variable prenom', typeof (prenom))
+
+        try {
+            await axios.put(`http://localhost:3002/augmenter-vues-animal/${prenom}`)
+        } catch (error) {
+            console.log(error);
+        }
+    };*/
 
     return (
         <div>
@@ -115,6 +141,16 @@ const DetailsAnimaux = () => {
                             </div>
                         ))}
                     </div>
+                    {/*<h1 className="titre_service">Animaux populaires</h1>
+                    <button onClick={augmenterVue}>augmenter vue animaux</button>
+                    <input
+                        type="text"
+                        name="prenom"
+                        id="prenom"
+                        value={prenom}
+                    //onChange={(e) => setPrenom(e.target.value)}
+                    />
+                    <label htmlFor="prenom"></label>*/}
                 </div>
             </div>
             <Footer />
