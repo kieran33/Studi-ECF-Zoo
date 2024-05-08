@@ -22,7 +22,7 @@ const AjoutNourritureAnimaux = () => {
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                            <Link to={`/dashboard-employe/ajout-nourriture/${animal.id}`} style={{ opacity: "1" }}>
+                            <Link to={`/dashboard-employe/ajout-nourriture/${animal.id}/${animal.prenom}`} style={{ opacity: "1" }}>
                                 <img className="image_zoo" style={{ width: '250px', height: '250px' }}
                                     src={`http://localhost:3002/image/${animal.image}`}
                                     alt={animal.prenom}>

@@ -5,7 +5,6 @@ import axios from 'axios';
 const SupprimerAnimaux = () => {
 
     const [data, setData] = useState([]);
-    //const [prenom, setPrenom] = useState([]);
 
     const loadData = async () => {
         const response = await axios.get("http://localhost:3002/animaux");
@@ -14,15 +13,16 @@ const SupprimerAnimaux = () => {
 
     useEffect(() => {
         loadData();
-        /*if (prenom.length > 0) {
-            supprimerAnimaux();
-        }*/
-    }, [/*prenom*/]);
+    }, []);
 
     const supprimerAnimaux = async (id, prenom) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet animal ?")) {
 
             axios.delete(`http://localhost:3002/animaux/supprimer/${id}`);
+
+            axios.delete(`http://localhost:3002/animaux-nourriture/supprimer/${prenom}`);
+
+            axios.delete(`http://localhost:3002/animaux-soins/supprimer/${prenom}`);
 
             try {
                 await axios.delete(`http://localhost:3002/supprimer-animaux-vues/${prenom}`);
@@ -47,10 +47,7 @@ const SupprimerAnimaux = () => {
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                         </div>
                         <button className="bouton_zoo"
-                            onClick={() => {
-                                //setPrenom(animal.prenom)
-                                supprimerAnimaux(animal.id, animal.prenom)
-                            }}
+                            onClick={() => supprimerAnimaux(animal.id, animal.prenom)}
                         >
                             Supprimer
                         </button>

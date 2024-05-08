@@ -14,6 +14,10 @@ const DetailsModificationAnimaux = () => {
     const [data, setData] = useState([]);
     const { id } = useParams();
     const [dataAnimal, setDataAnimal] = useState([]);
+    const { prenom } = useParams();
+    const [nouveauPrenom, setNouveauPrenom] = useState("")
+
+    console.log('prenom params', prenom)
 
     const idNombre = Number(id);
 
@@ -71,8 +75,14 @@ const DetailsModificationAnimaux = () => {
         formData.append("description", animal.description);
         formData.append("image", animal.image);
 
+        axios.put(`http://localhost:3002/animaux/modifier/${id}`, formData, { headers })
+
+        axios.put(`http://localhost:3002/animaux-nourriture/modifier/${prenom}`, { nouveauPrenom })
+
+        axios.put(`http://localhost:3002/animaux-soins/modifier/${prenom}`, { nouveauPrenom })
+
         try {
-            await axios.put(`http://localhost:3002/animaux/modifier/${id}`, formData, { headers })
+            await axios.put(`http://localhost:3002/modifier-animaux-vues/${prenom}`, { nouveauPrenom })
         } catch (error) {
             console.log(error);
         }
@@ -112,7 +122,10 @@ const DetailsModificationAnimaux = () => {
                                 id="prenom"
                                 placeholder="Prénom..."
                                 defaultValue={animal.prenom}
-                                onChange={inputChangement}
+                                onChange={(e) => {
+                                    setNouveauPrenom(e.target.value)
+                                    inputChangement(e)
+                                }}
                             />
                             <label htmlFor="prenom"></label>
 

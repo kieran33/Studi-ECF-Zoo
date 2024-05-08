@@ -54,115 +54,23 @@ app.delete("/supprimer-animaux-vues/:prenom", (req, res) => {
     AnimalModel.findOneAndDelete({ prenom: prenom })
         .then(animals => res.json(animals))
         .catch(animals => res.json(animals))
-})
+});
 
-/*require("dotenv").config();
-const { MongoClient } = require("mongodb");
-const client = new MongoClient(process.env.MONGO_URL);
+app.put("/modifier-animaux-vues/:prenom", (req, res) => {
+    const { prenom } = req.params;
+    console.log('JE SUIS DANS MODIFIER ANIMAUX VUES MONGODB')
+    console.log(prenom)
 
+    const { nouveauPrenom } = req.body;
+    console.log("nouveau prenom", nouveauPrenom)
 
-const main = async () => {
-    await client.connect();
-    console.log("Connection ok");
-
-    const db_zoo = client.db("Zoo");
-    const collection = db_zoo.collection("animaux_populaires");*/
-
-//CREATE
-
-/* try {
-     //Créer plusieurs éléments
- 
-     const insertData = await collection.insertMany([
-         {
-             prenom: "Lion",
-             nombreVues: ""
-         },
-         {
-             prenom: "Crocodile",
-             nombreVues: ""
-         },
-         {
-             prenom: "gorille",
-             nombreVues: ""
-         },
-         {
-             prenom: "Loup",
-             nombreVues: ""
-         },
-     ]);
- 
-     console.log('Documents insérés', insertData);
- 
- } catch (e) {
-     throw e;
- }*/
-
-//READ
-
-/* try {
-     // Trouver un seul élément
- 
-     const findData = await collection.findOne({ prenom: "Lion" });
-     console.log('Document trouvé', findData);
- 
-     // Trouver plusieurs éléments
- 
-     const findMultipleData = await collection.find({ nombreVues: "" });
-     console.log(await findMultipleData.toArray());
- } catch (e) {
-     throw e;
- }*/
-
-//UPDATE
-
-/*try {
-    //Modifier un seul élément
- 
-    const updateLion = await collection.updateOne({ prenom: "Lion" }, {
-        $set: { nombreVues: 50 }
-    });
- 
-    console.log(updateLion)
- 
-    //Modifier plusieurs éléments
- 
-    const updateNombreVues = await collection.updateMany({ nombreVues: "" }, {
-        $set: { nombreVues: 100 }
-    });
- 
-    console.log(updateNombreVues)
- 
-} catch (e) {
-    throw e;
-}*/
-
-//DELETE
-
-/*try {
-    //Supprimer un seul élément
- 
-    const deleteLoup = await collection.deleteOne({ prenom: "Loup" });
-    console.log(deleteLoup);
- 
-    //Supprimer plusieurs éléments
- 
-    const deleteAll = await collection.deleteMany({ nombreVues: 100 });
-    console.log(deleteAll);
- 
-} catch (e) {
-    throw e;
-}*/
-/*return "ok";
-};
-
-main()
-    .then(console.log)
-    .catch(console.error)
-    .finally(() => client.close());*/
-
-
-
+    AnimalModel.findOneAndUpdate(
+        { prenom: prenom },
+        { $set: { prenom: nouveauPrenom } })
+        .then(animals => res.json(animals))
+        .catch(animals => res.json(animals))
+    console.log('apres le model ')
+});
 
 app.use("/image", express.static(path.join(__dirname, "image")));
 
@@ -273,12 +181,29 @@ db.connect(err => {
         email VARCHAR(255) NOT NULL
     )`;
 
+    const creerTableNourrirAnimaux = `
+    CREATE TABLE IF NOT EXISTS nourrir_animaux (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        prenom VARCHAR(255) NOT NULL,
+        nourriture VARCHAR(255) NOT NULL,
+        quantite_nourriture VARCHAR(255) NOT NULL,
+        date_nourriture VARCHAR(255) NOT NULL
+    )`;
+
+    const creerTableSoins = `
+    CREATE TABLE IF NOT EXISTS soins (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        prenom VARCHAR(255) NOT NULL,
+        etat VARCHAR(255) NOT NULL,
+        date_soins VARCHAR(255) NOT NULL
+    )`;
+
     db.query((creerTableAnimaux, creerTableHabitats,
         creerTablePersonnels, creerTableServices,
         creerTableAvisNonVerif, creerTableAvisVerif, creerTableHoraires,
-        creerTableQuestions), err => {
+        creerTableQuestions, creerTableNourrirAnimaux, creerTableSoins), err => {
             if (err) throw err;
-            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif', 'horaires' et 'questions' sont prêtes");
+            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif', 'horaires', 'questions', 'nourrir_animaux' et 'soins sont prêtes");
         });
 });
 
@@ -333,6 +258,20 @@ app.get("/horaires", (req, res) => {
 
 app.get("/questions", (req, res) => {
     const request = "SELECT * FROM questions"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/nourriture-animaux", (req, res) => {
+    const request = "SELECT * FROM nourrir_animaux"
+    db.query(request, (error, result) => {
+        res.send(result);
+    });
+});
+
+app.get("/soins-animaux", (req, res) => {
+    const request = "SELECT * FROM soins"
     db.query(request, (error, result) => {
         res.send(result);
     });
@@ -431,6 +370,22 @@ app.post("/ajout-animaux", exporter.single("image"), (req, res) => {
         });
 });
 
+/*app.post("/ajout-nourrir-animaux", exporter.single("image"), (req, res) => {
+    const { prenom } = req.body;
+    console.log('nourrir animaux prenom', prenom)
+
+    db.query("INSERT INTO nourrir_animaux (prenom) VALUES (?)",
+        [prenom], (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send("Erreur lors de l'ajout de l'animal");
+            }
+            else {
+                res.status(201).send("Animal ajouté avec succès");
+            }
+        });
+});*/
+
 app.post("/ajout-services", exporter.single("image"), (req, res) => {
     const { nom, description } = req.body;
     const nom_image = req.file ? req.file.filename : null;
@@ -510,11 +465,73 @@ app.post('/envoyer-questions', (req, res) => {
     });
 });
 
+app.post("/ajout-soins/:prenom", exporter.single("image"), (req, res) => {
+    const { prenom } = req.params;
+    const { etat, date_soins } = req.body;
+
+    db.query("INSERT INTO soins (prenom, etat, date_soins) VALUES (?, ?, ?)",
+        [prenom, etat, date_soins], (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send("Erreur lors de l'ajout des soins de l'animal");
+            }
+            else {
+                res.status(201).send("Soins de l'animal ajouté avec succès");
+            }
+        });
+});
+
+
+/*app.put("/compte-rendu-animaux/:id", exporter.single(), (req, res) => {
+    const { id } = req.params;
+    console.log('id', id)
+    console.log('etat', req.body.etat)
+    console.log('date soins', req.body.date_soins)
+
+    const request = "UPDATE animaux SET `etat`=?, `date_soins`=? WHERE id=?";
+
+    db.query(request, [req.body.etat, req.body.date_soins, id], (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log(result);
+        }
+    });
+});*/
+
+
+
+
 app.delete("/animaux/supprimer/:id", (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM animaux WHERE id = ?";
 
     db.query(request, id, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+});
+
+app.delete("/animaux-nourriture/supprimer/:prenom", (req, res) => {
+    const { prenom } = req.params;
+
+    const request = "DELETE FROM nourrir_animaux WHERE prenom = ?";
+
+    db.query(request, prenom, (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+});
+
+app.delete("/animaux-soins/supprimer/:prenom", (req, res) => {
+    const { prenom } = req.params;
+
+    const request = "DELETE FROM soins WHERE prenom = ?";
+
+    db.query(request, prenom, (error, result) => {
         if (error) {
             console.log(error);
         }
@@ -578,6 +595,8 @@ app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
 
+    console.log('JE SUIS DANS ANIMAUX MODIFIER ID')
+
     if (nom_image === null) {
         const request = "UPDATE animaux SET `prenom`=?, `race`=?, `habitat`=?, `description`=? WHERE id=?";
         db.query(request, [req.body.prenom, req.body.race, req.body.habitat, req.body.description, id], (error, result) => {
@@ -602,6 +621,43 @@ app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
     }
 });
 
+app.put("/animaux-nourriture/modifier/:prenom", exporter.single("image"), (req, res) => {
+    const { prenom } = req.params;
+    const { nouveauPrenom } = req.body;
+    console.log('JE SUIS DANS ANIMAUX NOURRITURE MODIFIER')
+    console.log('ancien prenom', prenom)
+    console.log("nouveau prenom nourriture modif", nouveauPrenom)
+
+    const request = "UPDATE nourrir_animaux SET `prenom`=? WHERE prenom=?";
+    db.query(request, [req.body.nouveauPrenom, prenom], (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log(result);
+        }
+    });
+});
+
+app.put("/animaux-soins/modifier/:prenom", exporter.single("image"), (req, res) => {
+    const { prenom } = req.params;
+    const { nouveauPrenom } = req.body;
+    console.log('JE SUIS DANS ANIMAUX NOURRITURE MODIFIER')
+    console.log('ancien prenom', prenom)
+    console.log("nouveau prenom nourriture modif", nouveauPrenom)
+
+    const request = "UPDATE soins SET `prenom`=? WHERE prenom=?";
+    db.query(request, [req.body.nouveauPrenom, prenom], (error, result) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log(result);
+        }
+    });
+});
+
+
 app.put("/ajout-nourriture/:id", exporter.single(), (req, res) => {
     const { id } = req.params;
     console.log('id', id)
@@ -621,6 +677,27 @@ app.put("/ajout-nourriture/:id", exporter.single(), (req, res) => {
     });
 });
 
+app.put("/ajout-nourriture2/:prenom", exporter.single(), (req, res) => {
+    const { prenom } = req.params;
+    const { nourriture, quantite_nourriture, date_nourriture } = req.body;
+    console.log('prenom', prenom)
+    console.log(nourriture)
+    console.log(quantite_nourriture)
+    console.log(date_nourriture)
+
+    db.query("INSERT INTO nourrir_animaux (prenom, nourriture, quantite_nourriture, date_nourriture) VALUES (?, ?, ?, ?)",
+        [prenom, nourriture, quantite_nourriture, date_nourriture], (error, result) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send("Erreur lors de l'ajout de la nourriture de l'animal");
+            }
+            else {
+                res.status(201).send("Nourriture de l'animal ajouté avec succès");
+            }
+        });
+});
+
+/*
 app.put("/compte-rendu-animaux/:id", exporter.single(), (req, res) => {
     const { id } = req.params;
     console.log('id', id)
@@ -637,7 +714,7 @@ app.put("/compte-rendu-animaux/:id", exporter.single(), (req, res) => {
             console.log(result);
         }
     });
-});
+});*/
 
 app.put("/avis-habitats/:id", exporter.single(), (req, res) => {
     const { id } = req.params;

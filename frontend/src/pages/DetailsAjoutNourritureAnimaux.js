@@ -13,6 +13,7 @@ const DetailsAjoutNourritureAnimaux = () => {
     const [data, setData] = useState([]);
     const { id } = useParams();
     const [dataAnimal, setDataAnimal] = useState([]);
+    const { prenom } = useParams();
 
     const idNombre = Number(id);
 
@@ -52,7 +53,7 @@ const DetailsAjoutNourritureAnimaux = () => {
         });
     };
 
-    const AjouterNourritureAnimaux = async (e) => {
+    /*const AjouterNourritureAnimaux = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -63,6 +64,22 @@ const DetailsAjoutNourritureAnimaux = () => {
 
         try {
             await axios.put(`http://localhost:3002/ajout-nourriture/${id}`, formData)
+        } catch (error) {
+            console.log(error);
+        }
+    };*/
+
+    const AjouterNourritureAnimaux = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("nourriture", animal.nourriture);
+        formData.append("quantite_nourriture", animal.quantite_nourriture);
+        formData.append("date_nourriture", animal.date_nourriture);
+
+        try {
+            await axios.put(`http://localhost:3002/ajout-nourriture2/${prenom}`, formData)
         } catch (error) {
             console.log(error);
         }

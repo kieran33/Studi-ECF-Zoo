@@ -13,16 +13,25 @@ const DetailsCompteRenduAnimaux = () => {
     const [data, setData] = useState([]);
     const { id } = useParams();
     const [dataAnimal, setDataAnimal] = useState([]);
+    const [dataNourriture, setDataNourriture] = useState([]);
+
+    const { prenom } = useParams();
 
     const idNombre = Number(id);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
+    };
+
+    const loadDataNourriture = async () => {
+        const reponse = await axios.get("http://localhost:3002/nourriture-animaux");
+        setDataNourriture(reponse.data);
     };
 
     useEffect(() => {
         loadData();
+        loadDataNourriture();
     }, []);
 
     useEffect(() => {
@@ -51,7 +60,7 @@ const DetailsCompteRenduAnimaux = () => {
         });
     };
 
-    const AjouterCompteRenduAnimaux = async (e) => {
+    /*const AjouterCompteRenduAnimaux = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -64,11 +73,28 @@ const DetailsCompteRenduAnimaux = () => {
         } catch (error) {
             console.log(error);
         }
+    };*/
+
+    const AjouterCompteRenduAnimaux = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("etat", animal.etat);
+        formData.append("date_soins", animal.date_soins)
+
+        try {
+            await axios.post(`http://localhost:3002/ajout-soins/${prenom}`, formData)
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const retourDashboardVeterinaire = () => {
         navigate("/dashboard-veterinaire/compte-rendu-animaux");
     }
+
+    const filtreAnimal = dataNourriture.filter(nourriture => nourriture.prenom === animal.prenom);
 
     return (
         <div>
@@ -78,6 +104,16 @@ const DetailsCompteRenduAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
+                    <h1 className="titre_service">Liste de ce que l'animal {animal.prenom} à consommé</h1>
+                    <div className='centrer' style={{ marginTop: "50px" }}>
+                        {filtreAnimal.map((animal, index) => (
+                            <div key={index} className="div_zoo" style={{ width: "250px", height: "150px" }}>
+                                <p className="titre_service">Type de nourriture : {animal.nourriture}</p>
+                                <p className="titre_service">Quantité : {animal.quantite_nourriture}</p>
+                                <p className="titre_service">Date : {animal.date_nourriture}</p>
+                            </div>
+                        ))}
+                    </div>
                     <h1 className="titre_service">Ecrire compte rendu pour l'animal {animal.prenom}</h1>
                     <div className="centrer">
                         <form className="formulaire">
@@ -87,7 +123,7 @@ const DetailsCompteRenduAnimaux = () => {
                                 id="etat"
                                 placeholder="Etat animal..."
                                 style={{ width: "300px" }}
-                                value={animal.etat}
+                                //value={animal.etat}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="etat"></label>
@@ -99,7 +135,7 @@ const DetailsCompteRenduAnimaux = () => {
                                 id="date_soins"
                                 placeholder="Date et heure"
                                 style={{ width: "125px" }}
-                                value={animal.date_soins}
+                                //value={animal.date_soins}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="date_soins"></label>

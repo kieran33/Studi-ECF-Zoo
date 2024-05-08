@@ -61,6 +61,14 @@ const AjoutAnimaux = () => {
                 console.error(error);
             });
 
+        /*axios.post("http://localhost:3002/ajout-nourrir-animaux", formData)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });*/
+
         try {
             axios.post("http://localhost:3002/ajout-animaux-vues", { prenom })
         } catch (error) {

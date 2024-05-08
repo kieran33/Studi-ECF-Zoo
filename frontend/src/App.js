@@ -82,17 +82,17 @@ function App() {
           <Route path="/dashboard-employe/modifier-services/:id" element={<DetailsModificationServicesEmploye />} />
           <Route path="/dashboard-employe/suppression-services" element={<PageSupprimerServicesEmploye />} />
           <Route path="/dashboard-employe/ajout-nourriture" element={<PageNourrirAnimauxEmploye />} />
-          <Route path="/dashboard-employe/ajout-nourriture/:id" element={<DetailsAjoutNourritureAnimaux />} />
+          <Route path="/dashboard-employe/ajout-nourriture/:id/:prenom" element={<DetailsAjoutNourritureAnimaux />} />
           <Route path="/dashboard-employe/moderer-avis" element={<AvisModerationEmploye />} />
           <Route path="//dashboard-employe/questions-visiteurs" element={<QuestionsVisiteurs />} />
 
           <Route path="/dashboard-veterinaire/compte-rendu-animaux" element={<CompteRenduAnimaux />} />
-          <Route path="/dashboard-veterinaire/compte-rendu-animaux/:id" element={<DetailsCompteRenduAnimaux />} />
+          <Route path="/dashboard-veterinaire/compte-rendu-animaux/:id/:prenom" element={<DetailsCompteRenduAnimaux />} />
           <Route path="/dashboard-veterinaire/avis-habitats" element={<PageAvisHabitats />} />
           <Route path="/dashboard-veterinaire/aivs-habitats/:id" element={<DetailsAvisHabitats />} />
 
 
-          <Route path="/dashboard-admin/modifier-animaux/:id" element={<DetailsModificationAnimaux />} />
+          <Route path="/dashboard-admin/modifier-animaux/:id/:prenom" element={<DetailsModificationAnimaux />} />
           <Route path="/dashboard-admin/modifier-services/:id" element={<DetailsModificationServices />} />
           <Route path="/dashboard-admin/modifier-habitats/:id" element={<DetailsModificationHabitats />} />
           <Route path="/dashboard-admin/modifier-personnels/:id" element={<DetailsModificationPersonnels />} />

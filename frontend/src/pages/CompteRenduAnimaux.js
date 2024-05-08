@@ -26,23 +26,18 @@ const CompteRenduAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Liste des animaux et ce qu'ils ont consommé</h1>
+                    <h1 className="titre_service">Choissez un animal pour voir ce qu'il a consommé</h1>
                     <div className="centrer">
                         {data.map((animal, index) => (
-                            <div className="animal" key={index} style={{ marginBottom: "150px" }}>
+                            <div className="animal" key={index}>
                                 <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                                    <Link to={`/dashboard-veterinaire/compte-rendu-animaux/${animal.id}`} style={{ opacity: "1" }}>
+                                    <Link to={`/dashboard-veterinaire/compte-rendu-animaux/${animal.id}/${animal.prenom}`} style={{ opacity: "1" }}>
                                         <img className="image_zoo" style={{ width: '250px', height: '250px' }}
                                             src={`http://localhost:3002/image/${animal.image}`}
                                             alt={animal.prenom}>
                                         </img>
                                     </Link>
-                                    <div style={{ textAlign: "center" }}>
-                                        <p>{animal.prenom}</p>
-                                        <p>Nourriture : {animal.nourriture}</p>
-                                        <p>Quantité : {animal.quantite_nourriture}</p>
-                                        <p>Date : {animal.date_nourriture}</p>
-                                    </div>
+                                    <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                                 </div>
                             </div>
                         ))}
