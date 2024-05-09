@@ -23,6 +23,8 @@ body {
   justify-content: space-evenly;
   margin-top: 10px;
   gap: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .barre_navigation_onglet {
