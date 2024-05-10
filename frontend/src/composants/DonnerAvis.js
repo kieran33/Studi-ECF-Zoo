@@ -62,9 +62,7 @@ const DonnerAvis = () => {
                         <textarea
                             name="message"
                             id="message"
-                            cols="75"
-                            rows="5"
-                            className="champsFormulaire"
+                            className="champsFormulaire_textarea"
                             placeholder="Votre message"
                             onChange={inputChangement}
                         />

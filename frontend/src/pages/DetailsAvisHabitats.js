@@ -77,12 +77,12 @@ const DetailsAvisHabitats = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Ecrire compte rendu pour l'habitat {habitat.nom} </h1>
+                    <h2 className="titre_service">Ecrire compte rendu pour l'habitat {habitat.nom} </h2>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={avisHabitats}>
                             <textarea
                                 name="etat"
-                                className="champsFormulaire"
+                                className="champsFormulaire_textarea"
                                 id="etat"
                                 placeholder="Etat de l'habitat..."
                                 defaultValue={habitat.etat}

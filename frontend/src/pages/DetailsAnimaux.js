@@ -43,31 +43,6 @@ const DetailsAnimaux = () => {
         window.reload();
     };
 
-
-
-    /*const [animals, setAnimals] = useState([]);
-    //const [prenom, setPrenom] = useState([])
-
-    useEffect(() => {
-        axios.get('http://localhost:3002/vues-animaux')
-            .then(animals => setAnimals(animals.data))
-            .catch(err => console.log(err))
-    }, []);
-
-    const augmenterVue = async (e) => {
-        e.preventDefault();
-
-        console.log('je suis dans augmenterVue')
-        console.log('frontend', prenom)
-        console.log('type de variable prenom', typeof (prenom))
-
-        try {
-            await axios.put(`http://localhost:3002/augmenter-vues-animal/${prenom}`)
-        } catch (error) {
-            console.log(error);
-        }
-    };*/
-
     return (
         <div>
             <Navigation />
@@ -80,26 +55,26 @@ const DetailsAnimaux = () => {
                     <p>{dataAnimal.prenom}</p>
                     <p className="paragraphe">{dataAnimal.description}</p>
                     <div className="centrer">
-                        <div className="service" style={{ marginRight: "75px" }}>
+                        <div className="service" style={{ margin: "25px" }}>
                             <img src={Famille}></img>
                             <p>{dataAnimal.race}</p>
                         </div>
-                        <div className="service" style={{ marginLeft: "75px" }}>
+                        <div className="service" style={{ margin: "25px" }}>
                             <img src={Habitat} style={{ width: "50px", height: "50px" }}></img>
                             <p>{dataAnimal.habitat}</p>
                         </div>
                     </div>
                     <div>
-                        <h3>L'avis du vétérinaire sur l'état de l'animal</h3>
+                        <h3 className="titre_service">L'avis du vétérinaire sur l'état de l'animal</h3>
                         <p style={{ textAlign: "center" }}>{dataAnimal.etat}</p>
                     </div>
-                    <h1>Habitat {dataAnimal.prenom}</h1>
+                    <h3 className="titre_service">Habitat {dataAnimal.prenom}</h3>
                     <div className="centrer">
                         {dataHabitat.filter(habitat => habitat.nom === dataAnimal.habitat).map(habitat => (
                             <div className="animal">
-                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                <div className="div_zoo_animaux" >
                                     <Link to={`/habitats/${habitat.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                        <img className="image_zoo_animaux"
                                             src={`http://localhost:3002/image/${habitat.image}`}
                                             alt={habitat.nom}>
                                         </img>
@@ -109,13 +84,13 @@ const DetailsAnimaux = () => {
                             </div>
                         ))}
                     </div>
-                    <h3>Liste des autres animaux qui vivent dans l'habitat {dataAnimal.habitat}</h3>
+                    <h3 className="titre_service">Liste des autres animaux qui vivent dans l'habitat {dataAnimal.habitat}</h3>
                     <div className="centrer">
                         {data.filter(animal => (animal.habitat === dataAnimal.habitat) && (animal.prenom !== dataAnimal.prenom)).map(animal => (
                             <div className="animal">
-                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                <div className="div_zoo_animaux">
                                     <Link to={`/animaux/${animal.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                        <img className="image_zoo_animaux"
                                             src={`http://localhost:3002/image/${animal.image}`}
                                             alt={animal.prenom}>
                                         </img>
@@ -125,13 +100,13 @@ const DetailsAnimaux = () => {
                             </div>
                         ))}
                     </div>
-                    <h3>Liste des autres habitats</h3>
+                    <h3 className="titre_service">Liste des autres habitats</h3>
                     <div className="centrer">
                         {dataHabitat.filter(habitat => habitat.nom !== dataAnimal.habitat).map(habitat => (
                             <div className="animal">
-                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                <div className="div_zoo_animaux" >
                                     <Link to={`/habitats/${habitat.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                        <img className="image_zoo_animaux"
                                             src={`http://localhost:3002/image/${habitat.image}`}
                                             alt={habitat.nom}>
                                         </img>
@@ -141,16 +116,6 @@ const DetailsAnimaux = () => {
                             </div>
                         ))}
                     </div>
-                    {/*<h1 className="titre_service">Animaux populaires</h1>
-                    <button onClick={augmenterVue}>augmenter vue animaux</button>
-                    <input
-                        type="text"
-                        name="prenom"
-                        id="prenom"
-                        value={prenom}
-                    //onChange={(e) => setPrenom(e.target.value)}
-                    />
-                    <label htmlFor="prenom"></label>*/}
                 </div>
             </div>
             <Footer />

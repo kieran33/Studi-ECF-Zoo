@@ -53,18 +53,18 @@ const DetailsHabitats = () => {
                     <p>{dataHabitat.nom}</p>
                     <p className="paragraphe">{dataHabitat.description}</p>
                     <div>
-                        <h3>L'avis du vétérinaire sur l'état de l'habitat</h3>
+                        <h3 className="titre_service">L'avis du vétérinaire sur l'état de l'habitat</h3>
                         <p style={{ textAlign: "center" }}>{dataHabitat.etat}</p>
                     </div>
-                    <h3>Liste des animaux qui vivent dans cet habitat</h3>
+                    <h3 className="titre_service">Liste des animaux qui vivent dans cet habitat</h3>
                     <div className="centrer">
                         {dataAnimaux.filter(animal => (animal.habitat === dataHabitat.nom)).map(animal => (
                             <div>
                                 {
                                     <div className="animal">
-                                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                        <div className="div_zoo_animaux" >
                                             <Link to={`/animaux/${animal.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                                <img className="image_zoo_animaux"
                                                     src={`http://localhost:3002/image/${animal.image}`}
                                                     alt={animal.prenom}>
                                                 </img>
@@ -76,15 +76,15 @@ const DetailsHabitats = () => {
                             </div>
                         ))}
                     </div>
-                    <h3>Les autres habitats</h3>
+                    <h3 className="titre_service">Les autres habitats</h3>
                     <div className="centrer">
                         {data.filter(habitat => (habitat.nom !== dataHabitat.nom)).map(habitat => (
                             <div>
                                 {
                                     <div className="animal">
-                                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                                        <div className="div_zoo_animaux" >
                                             <Link to={`/habitats/${habitat.id}`} onClick={recharger} style={{ opacity: "1" }}>
-                                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                                <img className="image_zoo_animaux"
                                                     src={`http://localhost:3002/image/${habitat.image}`}
                                                     alt={habitat.nom}>
                                                 </img>

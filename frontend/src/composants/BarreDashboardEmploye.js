@@ -21,7 +21,7 @@ const BarreDashboardEmploye = () => {
     return (
         <div className="barre_dashboard_global">
             <div className="barre_dashboard">
-                <h1>Dashboard employé</h1>
+                <h2 >Dashboard employé</h2>
                 <DashboardEmployeServices />
                 <h3 className="dashboard_text" onClick={nourrirAnimaux}>Nourrir animaux</h3>
                 <h3 className="dashboard_text" onClick={modererAvis}>Avis visiteurs</h3>

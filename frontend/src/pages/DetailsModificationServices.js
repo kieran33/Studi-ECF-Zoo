@@ -96,7 +96,7 @@ const DetailsModificationServices = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Modifier le service {service.nom}</h1>
+                    <h2 className="titre_service">Modifier le service {service.nom}</h2>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierServices}>
                             <input
@@ -112,7 +112,7 @@ const DetailsModificationServices = () => {
 
                             <textarea
                                 name="description"
-                                className="champsFormulaire"
+                                className="champsFormulaire_textarea"
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={service.description}
@@ -123,9 +123,8 @@ const DetailsModificationServices = () => {
                             <input
                                 type="file"
                                 name="image"
-                                className="champsFormulaire"
+                                className="champsFormulaire_image"
                                 id="image"
-                                style={{ width: "250px" }}
                                 onChange={imageChangement}
                             />
                             <label htmlFor="image"></label>

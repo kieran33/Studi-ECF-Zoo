@@ -24,12 +24,12 @@ const SupprimerHabitats = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Liste des habitats</h1>
+            <h2 className="titre_service">Liste des habitats</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px', marginBottom: "40px" }}>
-                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                        <div className="div_zoo_animaux" style={{ marginBottom: "40px" }}>
+                            <img className="image_zoo_animaux"
                                 src={`http://localhost:3002/image/${habitat.image}`}
                                 alt={habitat.nom}></img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>

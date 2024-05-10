@@ -24,14 +24,6 @@ const EtatAnimaux = () => {
         loadDataSoins();
     }, []);
 
-    /*const filtreAnimauxPrenom = data.filter(
-        (animal) => (animal.prenom === animalPrenom)
-    );
-
-    const filtreAnimauxDateSoins = data.filter(
-        (animal) => (animal.date_soins === dateSoins)
-    );*/
-
     const filtreAnimauxPrenom = dataSoins.filter(
         (animal) => (animal.prenom === animalPrenom)
     );
@@ -47,48 +39,50 @@ const EtatAnimaux = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Liste des compte-rendus du vétérinaire</h1>
-            <div style={{ marginLeft: "20px" }}>
-                <select
-                    name="animal"
-                    id="animal"
-                    value={animalPrenom}
-                    onClick={() => setDateSoins("")}
-                    onChange={(e) => setAnimalPrenom(e.target.value)}
-                >
-                    <option value="">Choisissez l'animal</option>
-                    {data.map((animal, index) => (
-                        <option key={index} value={animal.prenom}>
-                            {animal.prenom}
-                        </option>
-                    ))}
-                </select>
-                <input
-                    type="date"
-                    name="date_soins"
-                    className="champsFormulaire"
-                    id="date_soins"
-                    style={{ width: "125px" }}
-                    value={dateSoins}
-                    onClick={() => setAnimalPrenom("")}
-                    onChange={(e) => setDateSoins(e.target.value)}
-                />
-                <label htmlFor="date_nourriture"></label>
+            <h2 className="titre_service">Liste des compte-rendus du vétérinaire</h2>
+            <div className="barre_filtre" style={{ marginLeft: "20px", marginRight: "20px" }}>
+                <div className="barre_filtre_composant">
+                    <select
+                        name="animal"
+                        id="animal"
+                        value={animalPrenom}
+                        onClick={() => setDateSoins("")}
+                        onChange={(e) => setAnimalPrenom(e.target.value)}
+                    >
+                        <option value="">Choisissez l'animal</option>
+                        {data.map((animal, index) => (
+                            <option key={index} value={animal.prenom}>
+                                {animal.prenom}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type="date"
+                        name="date_soins"
+                        className="champsFormulaire"
+                        id="date_soins"
+                        style={{ width: "125px" }}
+                        value={dateSoins}
+                        onClick={() => setAnimalPrenom("")}
+                        onChange={(e) => setDateSoins(e.target.value)}
+                    />
+                    <label htmlFor="date_nourriture"></label>
 
-                <button className="bouton_zoo" onClick={reinitialiserFiltre}>Réinitialiser</button>
+                    <button className="bouton_zoo" onClick={reinitialiserFiltre}>Réinitialiser</button>
+                </div>
             </div>
 
             <div>
                 {animalPrenom !== "" ?
                     <div className="centrer">
                         {filtreAnimauxPrenom.map((animal_soins, index) => (
-                            <div key={index}>
+                            <div className="animal" key={index}>
                                 {data.map((animal, index) => (
                                     <>
                                         {
                                             animal_soins.prenom === animal.prenom ?
-                                                < div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                                                    <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                                < div className="div_zoo_etat">
+                                                    <img className="image_zoo_animaux"
                                                         src={`http://localhost:3002/image/${animal.image}`}
                                                         alt={animal.prenom}>
                                                     </img>
@@ -107,13 +101,13 @@ const EtatAnimaux = () => {
                     dateSoins !== "" ?
                         <div className="centrer">
                             {filtreAnimauxDateSoins.map((animal_soins, index) => (
-                                <div key={index}>
+                                <div className="animal" key={index}>
                                     {data.map((animal, index) => (
                                         <>
                                             {
                                                 animal_soins.prenom === animal.prenom ?
-                                                    < div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                                    < div className="div_zoo_etat" >
+                                                        <img className="image_zoo_animaux"
                                                             src={`http://localhost:3002/image/${animal.image}`}
                                                             alt={animal.prenom}>
                                                         </img>
@@ -131,13 +125,13 @@ const EtatAnimaux = () => {
                         :
                         <div className="centrer">
                             {dataSoins.map((animal_soins, index) => (
-                                <div key={index}>
+                                <div className="animal" key={index}>
                                     {data.map((animal, index) => (
                                         <>
                                             {
                                                 animal_soins.prenom === animal.prenom ?
-                                                    < div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                                    < div className="div_zoo_etat">
+                                                        <img className="image_zoo_animaux"
                                                             src={`http://localhost:3002/image/${animal.image}`}
                                                             alt={animal.prenom}>
                                                         </img>
@@ -154,53 +148,6 @@ const EtatAnimaux = () => {
                         </div>
                 }
             </div>
-
-            {/*<div>
-                {animalPrenom !== "" ?
-                    <div className="centrer">
-                        {filtreAnimauxPrenom.map((animal, index) => (
-                            <div key={index}>
-                                <div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                                    <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                        src={`http://localhost:3002/image/${animal.image}`}
-                                        alt={animal.prenom}>
-                                    </img>
-                                    <p style={{ textAlign: "center" }}>{animal.etat}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    :
-                    dateSoins !== "" ?
-                        <div className="centrer">
-                            {filtreAnimauxDateSoins.map((animal, index) => (
-                                <div key={index}>
-                                    <div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                            src={`http://localhost:3002/image/${animal.image}`}
-                                            alt={animal.prenom}>
-                                        </img>
-                                        <p style={{ textAlign: "center" }}>{animal.etat}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        :
-                        <div className="centrer">
-                            {data.map((animal, index) => (
-                                <div key={index}>
-                                    <div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                                        <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                            src={`http://localhost:3002/image/${animal.image}`}
-                                            alt={animal.prenom}>
-                                        </img>
-                                        <p style={{ textAlign: "center" }}>{animal.etat}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                }
-            </div>*/}
         </div >
     );
 };

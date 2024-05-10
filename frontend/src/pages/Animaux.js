@@ -59,12 +59,12 @@ const Animaux = () => {
     return (
         <div>
             <Navigation />
-            <h1 className="centrer">Nos animaux</h1>
+            <h2 className="titre_service">Nos animaux</h2>
             <div className="centrer">
                 {dataTrier.map((animal, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                        <div className="div_zoo_animaux" >
+                            <img className="image_zoo_animaux"
                                 src={`http://localhost:3002/image/${animal.image}`}
                                 alt={animal.prenom}
                                 onClick={() => {
@@ -72,8 +72,7 @@ const Animaux = () => {
                                     setId(animal.id)
                                     augmenterVue()
                                     detailsAnimaux()
-                                }}
-                            >
+                                }}>
                             </img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                         </div>

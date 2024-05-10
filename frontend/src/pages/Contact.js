@@ -37,7 +37,7 @@ const Contact = () => {
                 },
             });
             console.log('Succès:', response.data);
-            alert('Merci d\'avoir laissé votre questions, elle sera traiter prochainement')
+            alert('Merci d\'avoir laissé votre message, il sera traiter prochainement')
         } catch (error) {
             console.error('Erreur:', error.response ? error.response.data : error.message);
         }
@@ -52,8 +52,8 @@ const Contact = () => {
     return (
         <div>
             <Navigation />
+            <h2 className="titre_service"> Une question ? Contactez-nous</h2>
             <form className="formulaire" onSubmit={EnvoyerQuestion}>
-                <legend>Une question ? Contactez-nous</legend>
                 <input
                     type="text"
                     name="titre"
@@ -69,7 +69,7 @@ const Contact = () => {
 
                 <textarea
                     name="description"
-                    className="champsFormulaire"
+                    className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Votre message..."
                     ref={description}

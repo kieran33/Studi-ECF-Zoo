@@ -25,11 +25,9 @@ const Habitats = () => {
             <div className="centrer">
                 {data.map((habitat, index) => (
                     <div className="habitat" key={index}>
-                        <div className="div_zoo" style={{ width: '500px', height: '300px' }}>
+                        <div className="div_zoo_habitat">
                             <Link to={`/habitats/${habitat.id}`} style={{ opacity: "1" }}>
-                                <img className="image_zoo" style={{ width: '500px', height: '300px' }}
-                                    src={`http://localhost:3002/image/${habitat.image}`}
-                                    alt={habitat.nom}>
+                                <img className="image_zoo_habitat" src={`http://localhost:3002/image/${habitat.image}`} alt={habitat.nom}>
                                 </img>
                             </Link>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>

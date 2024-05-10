@@ -18,15 +18,16 @@ const EtatHabitats = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Liste des habitats et leur état</h1>
+            <h2 className="titre_service">Liste des habitats et leur état</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
-                    <div key={index}>
-                        <div className="div_zoo_etat" style={{ width: '350px', height: '350px' }}>
-                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                    <div className="animal" key={index}>
+                        <div className="div_zoo_etat" >
+                            <img className="image_zoo_animaux" /*style={{ transition: "none", cursor: "auto", transform: "none" }}*/
                                 src={`http://localhost:3002/image/${habitat.image}`}
                                 alt={habitat.nom}>
                             </img>
+                            <h4 className="titre_service">Habitat : {habitat.nom}</h4>
                             <p style={{ textAlign: "center" }}>{habitat.etat}</p>
                         </div>
                     </div>

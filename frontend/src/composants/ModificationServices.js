@@ -18,13 +18,13 @@ const ModificationServices = () => {
 
     return (
         <div>
-            <h1 className="centrer">Choisissez le service à modifier</h1>
+            <h2 className="titre_service">Choisissez le service à modifier</h2>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                        <div className="div_zoo_service">
                             <Link to={`/dashboard-admin/modifier-services/${service.id}`} style={{ opacity: "1" }}>
-                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                <img className="image_zoo_service"
                                     src={`http://localhost:3002/image/${service.image}`}
                                     alt={service.nom}>
                                 </img>

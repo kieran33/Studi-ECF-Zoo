@@ -55,7 +55,7 @@ const CreationPersonnels = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Création compte personnel du zoo</h1>
+            <h2 className="titre_service">Création compte personnel du zoo</h2>
             <form className="formulaire" onSubmit={creerPersonnels}>
                 <input
                     type="text"

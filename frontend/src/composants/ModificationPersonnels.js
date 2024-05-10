@@ -24,12 +24,12 @@ const ModificationPersonnels = () => {
 
     return (
         <div>
-            <h1 className="centrer">Liste du personnel</h1>
+            <h2 className="titre_service">Liste du personnel</h2>
             <div className="centrer">
                 {data.filter(personnel => personnel.role !== "admin").map((personnel, index) => (
                     <div className="animal" key={index}>
-                        <p>Nom d'utilisateur : {personnel.nom_utilisateur}</p>
-                        <p>role : {personnel.role}</p>
+                        <p className="titre_service">Nom d'utilisateur : {personnel.nom_utilisateur}</p>
+                        <p className="titre_service">role : {personnel.role}</p>
                         <button className="bouton_zoo" onClick={() => modifierPersonnels(personnel.id)}>Modifier</button>
                     </div>
                 ))}

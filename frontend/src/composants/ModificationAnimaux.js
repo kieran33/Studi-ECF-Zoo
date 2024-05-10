@@ -18,13 +18,13 @@ const ModificationAnimaux = () => {
 
     return (
         <div>
-            <h1 className="centrer">Choisissez l'animal à modifier</h1>
+            <h2 className="titre_service">Choisissez l'animal à modifier</h2>
             <div className="centrer">
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
+                        <div className="div_zoo_animaux">
                             <Link to={`/dashboard-admin/modifier-animaux/${animal.id}/${animal.prenom}`} style={{ opacity: "1" }}>
-                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                <img className="image_zoo_animaux"
                                     src={`http://localhost:3002/image/${animal.image}`}
                                     alt={animal.prenom}>
                                 </img>

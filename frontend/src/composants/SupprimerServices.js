@@ -24,12 +24,12 @@ const SupprimerServices = () => {
 
     return (
         <div>
-            <h1 className="centrer">Supprimer services</h1>
+            <h2 className="titre_service">Supprimer services</h2>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px', marginBottom: "40px" }}>
-                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                        <div className="div_zoo_service" style={{ marginBottom: "40px" }}>
+                            <img className="image_zoo_service"
                                 src={`http://localhost:3002/image/${service.image}`}
                                 alt={service.nom}>
                             </img>

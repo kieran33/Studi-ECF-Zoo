@@ -63,7 +63,7 @@ const AjoutServices = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Ajouter un service</h1>
+            <h2 className="titre_service">Ajouter un service</h2>
             <form className="formulaire" onSubmit={ajouterServices} >
                 <input
                     type="text"
@@ -78,7 +78,7 @@ const AjoutServices = () => {
 
                 <textarea
                     name="description"
-                    className="champsFormulaire"
+                    className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
                     onChange={inputChangement}
@@ -89,9 +89,8 @@ const AjoutServices = () => {
                 <input
                     type="file"
                     name="image"
-                    className="champsFormulaire"
+                    className="champsFormulaire_image"
                     id="image"
-                    style={{ width: "250px" }}
                     onChange={imageChangement}
                     required
                 />

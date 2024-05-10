@@ -28,7 +28,7 @@ const BarreDashboardAdmin = () => {
     return (
         <div className="barre_dashboard_global">
             <div className="barre_dashboard">
-                <h1>Dashboard admin</h1>
+                <h2>Dashboard admin</h2>
                 <DashboardAdminPersonnels />
                 <DashboardAdminAnimaux />
                 <DashboardAdminHabitats />

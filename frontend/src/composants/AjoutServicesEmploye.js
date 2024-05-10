@@ -78,7 +78,7 @@ const AjoutServicesEmploye = () => {
 
                 <textarea
                     name="description"
-                    className="champsFormulaire"
+                    className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
                     onChange={inputChangement}
@@ -89,9 +89,8 @@ const AjoutServicesEmploye = () => {
                 <input
                     type="file"
                     name="image"
-                    className="champsFormulaire"
+                    className="champsFormulaire_image"
                     id="image"
-                    style={{ width: "250px" }}
                     onChange={imageChangement}
                     required
                 />

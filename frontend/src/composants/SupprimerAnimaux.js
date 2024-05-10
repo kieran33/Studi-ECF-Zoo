@@ -36,12 +36,12 @@ const SupprimerAnimaux = () => {
 
     return (
         <div>
-            <h1 className="centrer">Liste des animaux</h1>
+            <h2 className="titre_service">Choisissez l'animal à supprimer</h2>
             <div className="centrer">
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>
-                        <div className="div_zoo" style={{ width: '250px', height: '250px', marginBottom: "40px" }}>
-                            <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                        <div className="div_zoo_animaux" style={{ marginBottom: "40px" }}>
+                            <img className="image_zoo_animaux"
                                 src={`http://localhost:3002/image/${animal.image}`}
                                 alt={animal.prenom}></img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>

@@ -61,14 +61,6 @@ const AjoutAnimaux = () => {
                 console.error(error);
             });
 
-        /*axios.post("http://localhost:3002/ajout-nourrir-animaux", formData)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });*/
-
         try {
             axios.post("http://localhost:3002/ajout-animaux-vues", { prenom })
         } catch (error) {
@@ -82,7 +74,7 @@ const AjoutAnimaux = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Ajouter animaux</h1>
+            <h2 className="titre_service">Ajouter animaux</h2>
             <form className="formulaire" onSubmit={ajouterAnimaux} >
                 <input
                     type="text"
@@ -122,7 +114,7 @@ const AjoutAnimaux = () => {
 
                 <textarea
                     name="description"
-                    className="champsFormulaire"
+                    className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
                     onChange={inputChangement}
@@ -133,9 +125,8 @@ const AjoutAnimaux = () => {
                 <input
                     type="file"
                     name="image"
-                    className="champsFormulaire"
+                    className="champsFormulaire_image"
                     id="image"
-                    style={{ width: "250px" }}
                     onChange={imageChangement}
                     required
                 />

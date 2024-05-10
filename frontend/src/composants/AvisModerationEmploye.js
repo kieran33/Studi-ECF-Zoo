@@ -28,7 +28,7 @@ const AvisModerationEmploye = () => {
     }
 
     const supprimerTousLesAvis = () => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement tout ces avis ?")) {
+        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement tous ces avis ?")) {
             axios.delete(`http://localhost:3002/supprimer/avis-verif`);
             setTimeout(() => loadData(), 500);
         }
@@ -63,7 +63,7 @@ const AvisModerationEmploye = () => {
                     <Navigation />
                     <h1 className="titre_service">Espace modération des avis</h1>
                     <div style={{ width: "100%", display: "flex" }}>
-                        <button className="bouton_zoo" style={{ margin: "auto" }} onClick={() => supprimerTousLesAvis()}>
+                        <button className="bouton_zoo" style={{ margin: "auto", marginBottom: "20px" }} onClick={() => supprimerTousLesAvis()}>
                             Supprimer tous les avis vérifiés
                         </button>
                     </div>

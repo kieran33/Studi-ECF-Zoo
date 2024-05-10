@@ -14,7 +14,6 @@ const AjoutHabitats = () => {
         image: ""
     });
 
-
     const inputChangement = (e) => {
         const { name, value } = e.target;
 
@@ -64,7 +63,7 @@ const AjoutHabitats = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Ajouter habitats</h1>
+            <h2 className="titre_service">Ajouter habitats</h2>
             <form className="formulaire" onSubmit={ajouterHabitats} >
                 <input
                     type="text"
@@ -79,7 +78,7 @@ const AjoutHabitats = () => {
 
                 <textarea
                     name="description"
-                    className="champsFormulaire"
+                    className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
                     onChange={inputChangement}
@@ -90,9 +89,8 @@ const AjoutHabitats = () => {
                 <input
                     type="file"
                     name="image"
-                    className="champsFormulaire"
+                    className="champsFormulaire_image"
                     id="image"
-                    style={{ width: "250px" }}
                     onChange={imageChangement}
                     required
                 />

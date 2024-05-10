@@ -17,8 +17,6 @@ const DetailsModificationAnimaux = () => {
     const { prenom } = useParams();
     const [nouveauPrenom, setNouveauPrenom] = useState("")
 
-    console.log('prenom params', prenom)
-
     const idNombre = Number(id);
 
     const loadData = async () => {
@@ -112,7 +110,7 @@ const DetailsModificationAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Modifier l'animal {animal.prenom}</h1>
+                    <h2 className="titre_service">Modifier l'animal {animal.prenom}</h2>
                     <div className="centrer">
                         <form className="formulaire">
                             <input
@@ -153,7 +151,7 @@ const DetailsModificationAnimaux = () => {
 
                             <textarea
                                 name="description"
-                                className="champsFormulaire"
+                                className="champsFormulaire_textarea"
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={animal.description}
@@ -164,9 +162,8 @@ const DetailsModificationAnimaux = () => {
                             <input
                                 type="file"
                                 name="image"
-                                className="champsFormulaire"
+                                className="champsFormulaire_image"
                                 id="image"
-                                style={{ width: "250px" }}
                                 onChange={imageChangement}
                             />
                             <label htmlFor="image"></label>

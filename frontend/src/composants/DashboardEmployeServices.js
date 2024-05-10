@@ -18,7 +18,7 @@ const DashboardEmployeServices = () => {
     };
 
     return (
-        <div>
+        <div className="dashboard_categorie">
             <h3 className="dashboard_text" style={{ cursor: "auto" }}> Services </h3>
             <p className="dashboard_text" onClick={pageAjoutServices}>Ajouter</p>
             <p className="dashboard_text" onClick={pageModificationServices}>Modifier</p>

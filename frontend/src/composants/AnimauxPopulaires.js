@@ -49,7 +49,7 @@ const AnimauxPopulaires = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Animaux populaires</h1>
+                    <h2 className="titre_service">Animaux populaires</h2>
                     <div className="centrer">
                         {dataAnimauxTrier.map((dataAnimal, index) => (
                             <div className="animal" key={index}>
@@ -60,7 +60,7 @@ const AnimauxPopulaires = () => {
                                     <div key={index}>
                                         {
                                             dataAnimal.prenom === animal.prenom ?
-                                                <img className="image_zoo" style={{ width: '250px', height: '250px' }}
+                                                <img className="image_zoo_animaux"
                                                     src={`http://localhost:3002/image/${animal.image}`}
                                                     alt={animal.prenom}
                                                 >
@@ -73,37 +73,6 @@ const AnimauxPopulaires = () => {
                             </div>
                         ))}
                     </div>
-
-
-
-
-
-
-
-                    {/*<div className="centrer">
-                        {data.map((dataAnimal, index) => (
-                            <div className="animal" key={index}>
-                                <div className="div_zoo" style={{ width: '250px', height: '250px' }}>
-                                    <img className="image_zoo" style={{ width: '250px', height: '250px' }}
-                                        src={`http://localhost:3002/image/${dataAnimal.image}`}
-                                        alt={dataAnimal.prenom}
-                                    >
-                                    </img>
-
-                                    {dataAnimaux.map(animal => (
-                                        <div>
-                                            {
-                                                dataAnimal.prenom === animal.prenom ?
-                                                    <p className="titre_service" style={{ marginBottom: "100px" }}>{animal.nombreVues} vues</p>
-                                                    :
-                                                    <></>
-                                            }
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>*/}
                 </div >
             </div>
             <Footer />

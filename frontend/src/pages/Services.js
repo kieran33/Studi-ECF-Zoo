@@ -20,7 +20,7 @@ const Services = () => {
     return (
         <div>
             <Navigation />
-            <h1 className="centrer">Nos services</h1>
+            <h1 className="titre_service">Nos services</h1>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="service" key={index}>

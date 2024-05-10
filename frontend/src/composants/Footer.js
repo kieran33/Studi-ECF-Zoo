@@ -30,7 +30,12 @@ const Footer = () => {
                     </div>
                 ))}
             </div>
-        </div>
+            <div className="tarif">
+                <p>Tarif Enfant (3 à 12 ans) : 13 €. </p>
+                <p>Plein Tarif (à partir de 13 ans) : 17,50 €. </p>
+                <p>Tarif Personne en Situation de Handicap : enfant 11,50 € et adulte 15 €.</p>
+            </div>
+        </div >
     );
 };
 

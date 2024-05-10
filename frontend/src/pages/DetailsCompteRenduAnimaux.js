@@ -60,21 +60,6 @@ const DetailsCompteRenduAnimaux = () => {
         });
     };
 
-    /*const AjouterCompteRenduAnimaux = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-
-        formData.append("etat", animal.etat);
-        formData.append("date_soins", animal.date_soins)
-
-        try {
-            await axios.put(`http://localhost:3002/compte-rendu-animaux/${id}`, formData)
-        } catch (error) {
-            console.log(error);
-        }
-    };*/
-
     const AjouterCompteRenduAnimaux = async (e) => {
         e.preventDefault();
 
@@ -104,26 +89,24 @@ const DetailsCompteRenduAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Liste de ce que l'animal {animal.prenom} à consommé</h1>
+                    <h2 className="titre_service">Liste de ce que l'animal {animal.prenom} à consommé</h2>
                     <div className='centrer' style={{ marginTop: "50px" }}>
                         {filtreAnimal.map((animal, index) => (
-                            <div key={index} className="div_zoo" style={{ width: "250px", height: "150px" }}>
+                            <div key={index} className="div_zoo_animaux">
                                 <p className="titre_service">Type de nourriture : {animal.nourriture}</p>
                                 <p className="titre_service">Quantité : {animal.quantite_nourriture}</p>
                                 <p className="titre_service">Date : {animal.date_nourriture}</p>
                             </div>
                         ))}
                     </div>
-                    <h1 className="titre_service">Ecrire compte rendu pour l'animal {animal.prenom}</h1>
+                    <h2 className="titre_service">Ecrire compte rendu pour l'animal {animal.prenom}</h2>
                     <div className="centrer">
                         <form className="formulaire">
                             <textarea
                                 name="etat"
-                                className="champsFormulaire"
+                                className="champsFormulaire_textarea"
                                 id="etat"
                                 placeholder="Etat animal..."
-                                style={{ width: "300px" }}
-                                //value={animal.etat}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="etat"></label>
@@ -135,7 +118,6 @@ const DetailsCompteRenduAnimaux = () => {
                                 id="date_soins"
                                 placeholder="Date et heure"
                                 style={{ width: "125px" }}
-                                //value={animal.date_soins}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="date_soins"></label>
