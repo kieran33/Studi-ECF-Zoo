@@ -75,7 +75,7 @@ const DetailsModificationPersonnels = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Modifier personnels {personnel.nom_utilisateur}</h1>
+                    <h2 className="titre_service">Modifier personnels {personnel.nom_utilisateur}</h2>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierPersonnels}>
                             <input

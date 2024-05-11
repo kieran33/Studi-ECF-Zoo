@@ -19,10 +19,9 @@ const DashboardAdminAnimaux = () => {
 
     return (
         <div>
-            <h3 className="dashboard_text" style={{ cursor: "auto" }}> Animaux </h3>
-            <p className="dashboard_text" onClick={pageAjoutAnimaux}>Ajouter</p>
-            <p className="dashboard_text" onClick={pageModificationAnimaux}>Modifier</p>
-            <p className="dashboard_text" onClick={pageSuppressionAnimaux}>Supprimer</p>
+            <h3 className="dashboard_text" onClick={pageAjoutAnimaux}>Ajouter animaux</h3>
+            <h3 className="dashboard_text" onClick={pageModificationAnimaux}>Modifier animaux</h3>
+            <h3 className="dashboard_text" onClick={pageSuppressionAnimaux}>Supprimer animaux</h3>
         </div>
     );
 };

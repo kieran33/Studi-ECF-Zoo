@@ -16,11 +16,9 @@ const AvisVisiteur = () => {
         loadData();
     }, []);
 
-    console.log('data avis', data)
-
     return (
         <div className="conteneurAvis">
-            <h1 className="titre_service">Nos visiteurs parle de nous</h1>
+            <h2 className="titre_service">Nos visiteurs parle de nous</h2>
             <div>
                 {data.map((avis, index) => (
                     < div className="avis_visiteur" key={index} >

@@ -63,7 +63,7 @@ const AjoutServicesEmploye = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Ajouter un service</h1>
+            <h2 className="titre_service">Ajouter un service</h2>
             <form className="formulaire" onSubmit={ajouterServices} >
                 <input
                     type="text"

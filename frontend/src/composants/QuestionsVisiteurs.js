@@ -26,7 +26,7 @@ const QuestionsVisiteurs = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Espace questions/messages des visiteurs</h1>
+                    <h2 className="titre_service">Espace questions/messages des visiteurs</h2>
                     <div className="conteneurAvis">
                         {data.map((questions, index) => (
                             <div className="avis_visiteur" index={index}>

@@ -78,24 +78,21 @@ const DetailsAvisHabitats = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Ecrire compte rendu pour l'habitat {habitat.nom} </h2>
-                    <div className="centrer">
-                        <form className="formulaire" onSubmit={avisHabitats}>
-                            <textarea
-                                name="etat"
-                                className="champsFormulaire_textarea"
-                                id="etat"
-                                placeholder="Etat de l'habitat..."
-                                defaultValue={habitat.etat}
-                                onChange={inputChangement}
-                            />
-                            <label htmlFor="etat"></label>
+                    <form className="formulaire" onSubmit={avisHabitats}>
+                        <textarea
+                            name="etat"
+                            className="champsFormulaire_textarea"
+                            id="etat"
+                            placeholder="Etat de l'habitat..."
+                            onChange={inputChangement}
+                        />
+                        <label htmlFor="etat"></label>
 
-                            <div className="centrer">
-                                <button type="submit" className="bouton_zoo">Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardVeterinaire}>Annuler</button>
-                            </div>
-                        </form>
-                    </div>
+                        <div className="centrer">
+                            <button type="submit" className="bouton_zoo">Confirmer</button>
+                            <button className="bouton_zoo" onClick={retourDashboardVeterinaire}>Annuler</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <Footer />

@@ -27,22 +27,24 @@ const BarreDashboardAdmin = () => {
 
     return (
         <div className="barre_dashboard_global">
-            <div className="barre_dashboard">
+            <div className="barre_dashboard_admin">
                 <h2>Dashboard admin</h2>
-                <DashboardAdminPersonnels />
-                <DashboardAdminAnimaux />
-                <DashboardAdminHabitats />
-                <DashboardAdminServices />
-                <div>
-                    <h3 className="dashboard_text" style={{ cursor: "auto" }}> Horaires </h3>
-                    <p className="dashboard_text" onClick={modifierHoraires}>Modifier</p>
+                <div className="composant_dashboard_admin">
+                    <DashboardAdminPersonnels />
+                    <DashboardAdminAnimaux />
+                    <DashboardAdminHabitats />
+                    <DashboardAdminServices />
+                    <div >
+                        <h3 className="dashboard_text" onClick={modifierHoraires}>Modifier horaires</h3>
+                    </div>
+                    <div>
+                        <h3 className="dashboard_text" onClick={etatAnimaux}>Etat animaux</h3>
+                        <h3 className="dashboard_text" onClick={etatHabitats}>Etat habitats</h3>
+                    </div>
+                    <div >
+                        <h3 className="dashboard_text" onClick={animauxPopulaires}>Animaux populaires</h3>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="dashboard_text" style={{ cursor: "auto" }}>Compte rendu vétérinaire</h3>
-                    <p className="dashboard_text" onClick={etatAnimaux}>Etat animaux</p>
-                    <p className="dashboard_text" onClick={etatHabitats}>Etat habitats</p>
-                </div>
-                <p className="dashboard_text" onClick={animauxPopulaires}>Animaux populaires</p>
             </div>
         </div>
     );

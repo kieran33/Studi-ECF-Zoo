@@ -21,7 +21,7 @@ const Habitats = () => {
     return (
         <div>
             <Navigation />
-            <h1 className="centrer">Les habitats</h1>
+            <h2 className="titre_service">Les habitats</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
                     <div className="habitat" key={index}>

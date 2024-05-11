@@ -12,7 +12,7 @@ const DashboardVeterinaire = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Dashboard vétérinaire</h1>
+                    <h2 className="titre_service">Dashboard vétérinaire</h2>
                 </div>
             </div>
             <Footer />

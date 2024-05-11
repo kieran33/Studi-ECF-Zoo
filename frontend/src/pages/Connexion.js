@@ -40,7 +40,7 @@ const Connexion = () => {
     return (
         <div>
             <Navigation />
-            <h1 className="titre_service">Connexion</h1>
+            <h2 className="titre_service">Connexion</h2>
             <form className="formulaire" onSubmit={seConnecter}>
                 <input
                     type="text"

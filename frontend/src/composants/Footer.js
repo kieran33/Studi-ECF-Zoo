@@ -18,7 +18,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <div className="conteneurHoraires">
-                <h3>Horaire d'ouverture du zoo</h3>
+                <h3 className="titre_service">Horaire d'ouverture du zoo</h3>
                 {data.map((horaire, index) => (
                     <div key={index} className="footer_horaires">
                         <div>{horaire.jour}</div>

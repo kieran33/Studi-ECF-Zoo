@@ -53,22 +53,6 @@ const DetailsAjoutNourritureAnimaux = () => {
         });
     };
 
-    /*const AjouterNourritureAnimaux = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-
-        formData.append("nourriture", animal.nourriture);
-        formData.append("quantite_nourriture", animal.quantite_nourriture);
-        formData.append("date_nourriture", animal.date_nourriture);
-
-        try {
-            await axios.put(`http://localhost:3002/ajout-nourriture/${id}`, formData)
-        } catch (error) {
-            console.log(error);
-        }
-    };*/
-
     const AjouterNourritureAnimaux = async (e) => {
         e.preventDefault();
 
@@ -97,17 +81,15 @@ const DetailsAjoutNourritureAnimaux = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Ajouter nourriture {animal.prenom}</h1>
+                    <h2 className="titre_service">Ajouter nourriture {animal.prenom}</h2>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={AjouterNourritureAnimaux}>
                             <input
                                 type="text"
                                 name="nourriture"
-                                className="champsFormulaire"
+                                className="champsFormulaire_nourrir"
                                 id="nourriture"
                                 placeholder="Nourriture de l'animal..."
-                                style={{ width: "200px" }}
-                                value={animal.nourriture}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="nourriture"></label>
@@ -115,11 +97,9 @@ const DetailsAjoutNourritureAnimaux = () => {
                             <input
                                 type="text"
                                 name="quantite_nourriture"
-                                className="champsFormulaire"
+                                className="champsFormulaire_nourrir"
                                 id="quantite_nourriture"
                                 placeholder="Quantitée nourriture..."
-                                style={{ width: "200px" }}
-                                value={animal.quantite_nourriture}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="quantite_nourriture"></label>
@@ -127,10 +107,8 @@ const DetailsAjoutNourritureAnimaux = () => {
                             <input
                                 type="date"
                                 name="date_nourriture"
-                                className="champsFormulaire"
+                                className="champsFormulaire_nourrir"
                                 id="date_nourriture"
-                                style={{ width: "200px" }}
-                                value={animal.date_nourriture}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="date_nourriture"></label>

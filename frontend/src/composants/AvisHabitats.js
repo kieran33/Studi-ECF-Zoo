@@ -18,7 +18,7 @@ const AvisHabitats = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Liste des habitats</h1>
+            <h2 className="titre_service">Liste des habitats</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
                     <div className="animal" key={index}>

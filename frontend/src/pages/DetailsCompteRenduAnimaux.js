@@ -90,9 +90,9 @@ const DetailsCompteRenduAnimaux = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Liste de ce que l'animal {animal.prenom} à consommé</h2>
-                    <div className='centrer' style={{ marginTop: "50px" }}>
+                    <div className='centrer' >
                         {filtreAnimal.map((animal, index) => (
-                            <div key={index} className="div_zoo_animaux">
+                            <div key={index} className="animal">
                                 <p className="titre_service">Type de nourriture : {animal.nourriture}</p>
                                 <p className="titre_service">Quantité : {animal.quantite_nourriture}</p>
                                 <p className="titre_service">Date : {animal.date_nourriture}</p>

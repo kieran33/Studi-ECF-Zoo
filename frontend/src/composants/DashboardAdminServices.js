@@ -19,10 +19,9 @@ const DashboardAdminServices = () => {
 
     return (
         <div>
-            <h3 className="dashboard_text" style={{ cursor: "auto" }}> Services </h3>
-            <p className="dashboard_text" onClick={pageAjoutServices}>Ajouter</p>
-            <p className="dashboard_text" onClick={pageModificationServices}>Modifier</p>
-            <p className="dashboard_text" onClick={pageSuppressionServices}>Supprimer</p>
+            <h3 className="dashboard_text" onClick={pageAjoutServices}>Ajouter services</h3>
+            <h3 className="dashboard_text" onClick={pageModificationServices}>Modifier services</h3>
+            <h3 className="dashboard_text" onClick={pageSuppressionServices}>Supprimer services</h3>
         </div>
     );
 };

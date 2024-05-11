@@ -28,7 +28,7 @@ const Accueil = () => {
         <div>
             <Navigation />
             <div className="centrer">
-                <img src={perroquet} width="300" height="auto" alt="perroquet zoo" />
+                <img src={perroquet} className="perroquet" width="300" height="auto" alt="perroquet zoo" />
             </div>
             <div className="centrer">
                 <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ex tellus, sagittis porttitor tempor ut, fringilla ut diam.

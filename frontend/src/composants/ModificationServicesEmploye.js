@@ -18,7 +18,7 @@ const ModificationServicesEmploye = () => {
 
     return (
         <div>
-            <h1 className="titre_service">Modifier services</h1>
+            <h2 className="titre_service">Modifier services</h2>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>

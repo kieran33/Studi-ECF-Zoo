@@ -19,10 +19,9 @@ const DashboardAdminPersonnels = () => {
 
     return (
         <div>
-            <h3 className="dashboard_text" style={{ cursor: "auto" }}> Personnels </h3>
-            <p className="dashboard_text" onClick={pageCreationPersonnels}>Créer</p>
-            <p className="dashboard_text" onClick={pageModificationPersonnels}>Modifier</p>
-            <p className="dashboard_text" onClick={pageSuppressionPersonnels}>Supprimer</p>
+            <h3 className="dashboard_text" onClick={pageCreationPersonnels}>Créer personnels</h3>
+            <h3 className="dashboard_text" onClick={pageModificationPersonnels}>Modifier personnels</h3>
+            <h3 className="dashboard_text" onClick={pageSuppressionPersonnels}>Supprimer personnels</h3>
         </div>
     );
 };

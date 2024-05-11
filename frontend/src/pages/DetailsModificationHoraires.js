@@ -81,7 +81,7 @@ const DetailsModificationHoraires = () => {
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h1 className="titre_service">Modifier horaire</h1>
+                    <h2 className="titre_service">Modifier horaire</h2>
                     <div className="centrer">
                         <div className="conteneurHoraires">
                             <p>Jour : {horaire.jour}</p>

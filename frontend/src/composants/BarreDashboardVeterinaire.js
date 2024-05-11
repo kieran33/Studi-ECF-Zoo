@@ -17,8 +17,10 @@ const BarreDashboardVeterinaire = () => {
         <div className="barre_dashboard_global">
             <div className="barre_dashboard">
                 <h2>Dashboard vétérinaire</h2>
-                <h3 className="dashboard_text" onClick={compteRenduAnimaux}>Etat animaux</h3>
-                <h3 className="dashboard_text" onClick={avisHabitats}>Etat habitats</h3>
+                <div className="composant_dashboard_admin">
+                    <h3 className="dashboard_text" onClick={compteRenduAnimaux}>Etat animaux</h3>
+                    <h3 className="dashboard_text" onClick={avisHabitats}>Etat habitats</h3>
+                </div>
             </div>
         </div>
     );
