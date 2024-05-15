@@ -13,7 +13,7 @@ const AnimalModel = require("./models/Animaux");
 mongoose.connect(process.env.MONGO_URL);
 
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -101,12 +101,19 @@ const filtreFichier = (req, file, cb) => {
 
 const exporter = multer({ storage: stockage, fileFilter: filtreFichier });
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'zoo'
-});
+let db;
+
+if (process.env.JAWSDB_URL) {
+
+    db = mysql.createConnection(process.env.JAWSDB_URL)
+} else {
+    db = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'zoo'
+    });
+}
 
 db.connect(err => {
     if (err) throw err;
