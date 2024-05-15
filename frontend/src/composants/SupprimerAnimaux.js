@@ -7,13 +7,13 @@ const SupprimerAnimaux = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [data]);
 
     const supprimerAnimaux = async (id, prenom) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet animal ?")) {
@@ -35,7 +35,7 @@ const SupprimerAnimaux = () => {
     };
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Choisissez l'animal à supprimer</h2>
             <div className="centrer">
                 {data.map((animal, index) => (
@@ -54,7 +54,7 @@ const SupprimerAnimaux = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 

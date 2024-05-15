@@ -7,8 +7,8 @@ const AjoutNourritureAnimaux = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const AjoutNourritureAnimaux = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Choisissez l'animal à nourrir</h2>
             <div className="centrer">
                 {data.map((animal, index) => (
@@ -33,7 +33,7 @@ const AjoutNourritureAnimaux = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 

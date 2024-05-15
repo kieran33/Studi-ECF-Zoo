@@ -19,17 +19,18 @@ const BarreDashboardEmploye = () => {
     };
 
     return (
-        <div className="barre_dashboard_global">
-            <div className="barre_dashboard">
-                <h2 >Dashboard employé</h2>
-                <div className="composant_dashboard_admin">
-                    <DashboardEmployeServices />
-                    <h3 className="dashboard_text" onClick={nourrirAnimaux}>Nourrir animaux</h3>
-                    <h3 className="dashboard_text" onClick={modererAvis}>Avis visiteurs</h3>
-                    <h3 className="dashboard_text" onClick={voirQuestionVisiteurs}>Questions visiteurs</h3>
-                </div>
+        <div className="barre_dashboard">
+            <h2 >Dashboard employé</h2>
+            <div className="composant_dashboard">
+                <DashboardEmployeServices />
+                <br></br>
+                <h3 className="dashboard_text" onClick={nourrirAnimaux}>Nourrir animaux</h3>
+                <br></br>
+                <h3 className="dashboard_text" onClick={modererAvis}>Avis visiteurs</h3>
+                <br></br>
+                <h3 className="dashboard_text" onClick={voirQuestionVisiteurs}>Questions visiteurs</h3>
             </div>
-        </div >
+        </div>
     );
 };
 

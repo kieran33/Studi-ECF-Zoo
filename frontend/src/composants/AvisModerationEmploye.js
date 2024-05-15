@@ -10,8 +10,8 @@ const AvisModerationEmploye = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get('http://localhost:3002/avis-non-verif')
-        setData(response.data)
+        const reponse = await axios.get('http://localhost:3002/avis-non-verif')
+        setData(reponse.data)
     }
 
     useEffect(() => {
@@ -37,14 +37,13 @@ const AvisModerationEmploye = () => {
     const approuverAvis = async (id, pseudo, message) => {
 
         try {
-            const response = await axios.post('http://localhost:3002/ajout-avis-verif', { pseudo, message }, {
+            const reponse = await axios.post('http://localhost:3002/ajout-avis-verif', { pseudo, message }, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log('Succès:', response.data);
             alert('Avis approuvé avec succès')
-            if (response.data) {
+            if (reponse.data) {
                 axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`);
                 setTimeout(() => loadData(), 500);
             }
@@ -54,8 +53,8 @@ const AvisModerationEmploye = () => {
     }
 
     return (
-        <div >
-            <div className="dashboard">
+        < >
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>
@@ -104,7 +103,7 @@ const AvisModerationEmploye = () => {
                 </div>
             </div>
             <Footer />
-        </div >
+        </ >
     );
 };
 

@@ -1,15 +1,16 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import Footer from '../composants/Footer';
 import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
 
 const DetailsModificationServicesEmploye = () => {
 
-    const navigate = useNavigate();
+    const nom = useRef("");
+    const description = useRef("");
+    const image = useRef("");
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -18,8 +19,8 @@ const DetailsModificationServicesEmploye = () => {
     const idNombre = Number(id);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/services");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/services");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -54,7 +55,7 @@ const DetailsModificationServicesEmploye = () => {
         });
     };
 
-    const modifierServices = async (e) => {
+    const modifierServices = (e) => {
         e.preventDefault();
 
         const headers = {
@@ -68,7 +69,10 @@ const DetailsModificationServicesEmploye = () => {
         formData.append("image", service.image);
 
         try {
-            await axios.put(`http://localhost:3002/services/modifier/${id}`, formData, { headers })
+            const reponse = axios.put(`http://localhost:3002/services/modifier/${id}`, formData, { headers })
+            if (reponse) {
+                alert(`Le service ${service.nom} a été modifié avec succès`);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -85,12 +89,18 @@ const DetailsModificationServicesEmploye = () => {
         };
     };
 
-    const retourDashboardEmploye = () => {
-        navigate("/dashboard-employe/modification-services");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            nom.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     }
 
     return (
-        <div>
+        <>
             <div className="dashboard">
                 <div>
                     <BarreDashboardEmploye />
@@ -107,6 +117,7 @@ const DetailsModificationServicesEmploye = () => {
                                 id="nom"
                                 placeholder="Nom du service..."
                                 defaultValue={service.nom}
+                                ref={nom}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="nom"></label>
@@ -117,6 +128,7 @@ const DetailsModificationServicesEmploye = () => {
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={service.description}
+                                ref={description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="description"></label>
@@ -126,20 +138,21 @@ const DetailsModificationServicesEmploye = () => {
                                 name="image"
                                 className="champsFormulaire_image"
                                 id="image"
+                                ref={image}
                                 onChange={imageChangement}
                             />
                             <label htmlFor="image"></label>
 
                             <div className="centrer">
                                 <button type="submit" className="bouton_zoo">Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardEmploye}>Annuler</button>
+                                <button className="bouton_zoo" onClick={effacer}>Annuler</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

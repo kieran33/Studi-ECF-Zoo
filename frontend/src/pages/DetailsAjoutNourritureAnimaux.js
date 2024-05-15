@@ -4,11 +4,13 @@ import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const DetailsAjoutNourritureAnimaux = () => {
 
-    const navigate = useNavigate();
+    const nourriture = useRef("");
+    const quantite_nourriture = useRef("");
+    const date_nourriture = useRef("");
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -18,8 +20,8 @@ const DetailsAjoutNourritureAnimaux = () => {
     const idNombre = Number(id);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -53,7 +55,7 @@ const DetailsAjoutNourritureAnimaux = () => {
         });
     };
 
-    const AjouterNourritureAnimaux = async (e) => {
+    const AjouterNourritureAnimaux = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -63,25 +65,34 @@ const DetailsAjoutNourritureAnimaux = () => {
         formData.append("date_nourriture", animal.date_nourriture);
 
         try {
-            await axios.put(`http://localhost:3002/ajout-nourriture2/${prenom}`, formData)
+            const reponse = axios.put(`http://localhost:3002/ajout-nourriture2/${prenom}`, formData)
+            if (reponse) {
+                alert(`Nourriture pour l'animal ${animal.prenom} ajouté avec succès`);
+                nourriture.current.value = "";
+                quantite_nourriture.current.value = "";
+                date_nourriture.current.value = "";
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const retourDashboardEmploye = () => {
-        navigate("/dashboard-employe/ajout-nourriture");
+    const effacer = (e) => {
+        e.preventDefault();
+        nourriture.current.value = "";
+        quantite_nourriture.current.value = "";
+        date_nourriture.current.value = "";
     }
 
     return (
-        <div>
-            <div className="dashboard" >
+        <>
+            <div className="dashboard_global" >
                 <div>
                     <BarreDashboardEmploye />
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <h2 className="titre_service">Ajouter nourriture {animal.prenom}</h2>
+                    <h2 className="titre_service">Ajouter nourriture pour l'animal {animal.prenom}</h2>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={AjouterNourritureAnimaux}>
                             <input
@@ -90,7 +101,9 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 className="champsFormulaire_nourrir"
                                 id="nourriture"
                                 placeholder="Nourriture de l'animal..."
+                                ref={nourriture}
                                 onChange={inputChangement}
+                                required
                             />
                             <label htmlFor="nourriture"></label>
 
@@ -100,7 +113,9 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 className="champsFormulaire_nourrir"
                                 id="quantite_nourriture"
                                 placeholder="Quantitée nourriture..."
+                                ref={quantite_nourriture}
                                 onChange={inputChangement}
+                                required
                             />
                             <label htmlFor="quantite_nourriture"></label>
 
@@ -109,20 +124,22 @@ const DetailsAjoutNourritureAnimaux = () => {
                                 name="date_nourriture"
                                 className="champsFormulaire_nourrir"
                                 id="date_nourriture"
+                                ref={date_nourriture}
                                 onChange={inputChangement}
+                                required
                             />
                             <label htmlFor="date_nourriture"></label>
 
                             <div className="centrer">
                                 <button type="submit" className="bouton_zoo">Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardEmploye}>Annuler</button>
+                                <button className="bouton_zoo" onClick={effacer}>Annuler</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

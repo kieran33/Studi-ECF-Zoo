@@ -6,8 +6,8 @@ import Footer from '../composants/Footer';
 
 const PageNourrirAnimauxEmploye = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>
@@ -17,7 +17,7 @@ const PageNourrirAnimauxEmploye = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

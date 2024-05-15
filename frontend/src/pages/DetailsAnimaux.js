@@ -19,13 +19,13 @@ const DetailsAnimaux = () => {
     const idNombre = Number(id);
 
     const loadData = async () => {
-        const response = await axios.get('http://localhost:3002/animaux')
-        setData(response.data);
+        const reponse = await axios.get('http://localhost:3002/animaux')
+        setData(reponse.data);
     }
 
     const loadDataHabitat = async () => {
-        const response = await axios.get('http://localhost:3002/habitats')
-        setDataHabitat(response.data);
+        const reponse = await axios.get('http://localhost:3002/habitats')
+        setDataHabitat(reponse.data);
     }
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const DetailsAnimaux = () => {
     };
 
     return (
-        <div>
+        <>
             <Navigation />
             <div className="centrer">
                 <div className="animal" >
@@ -119,7 +119,7 @@ const DetailsAnimaux = () => {
                 </div>
             </div>
             <Footer />
-        </div >
+        </>
     );
 };
 

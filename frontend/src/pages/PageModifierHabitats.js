@@ -7,8 +7,8 @@ import ModificationHabitats from '../composants/ModificationHabitats';
 
 const PageModifierHabitats = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -18,7 +18,7 @@ const PageModifierHabitats = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

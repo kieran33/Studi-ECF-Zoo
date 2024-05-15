@@ -6,8 +6,8 @@ import EtatHabitats from '../composants/EtatHabitats';
 
 const PageEtatHabitatsAdmin = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageEtatHabitatsAdmin = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

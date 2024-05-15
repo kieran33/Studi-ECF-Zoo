@@ -2,22 +2,22 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
-import AjoutServicesEmploye from '../composants/AjoutServicesEmploye';
+import AjoutServices from '../composants/AjoutServices';
 
 const PageAjouterServicesEmploye = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
-                    <AjoutServicesEmploye />
+                    <AjoutServices />
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

@@ -6,8 +6,8 @@ import AjoutServices from '../composants/AjoutServices';
 
 const PageAjouterServices = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageAjouterServices = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Animaux = () => {
 
+    const role = localStorage.getItem('role');
+
     const navigate = useNavigate();
 
     const [data, setData] = useState([]);
@@ -14,8 +16,8 @@ const Animaux = () => {
     const [id, setId] = useState("");
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -39,7 +41,6 @@ const Animaux = () => {
     }, [data]);
 
     const augmenterVue = () => {
-
         try {
             axios.put(`http://localhost:3002/augmenter-vues-animal`, { prenom })
         } catch (error) {
@@ -47,40 +48,55 @@ const Animaux = () => {
         }
     };
 
+
     const detailsAnimaux = () => {
         navigate(`/animaux/${id}/${prenom}`)
     }
 
     useEffect(() => {
-        augmenterVue()
+        if (role === null) {
+            augmenterVue()
+        }
         detailsAnimaux()
     }, [prenom])
 
     return (
-        <div>
+        <>
             <Navigation />
             <h2 className="titre_service">Nos animaux</h2>
             <div className="centrer">
                 {dataTrier.map((animal, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo_animaux" >
-                            <img className="image_zoo_animaux"
-                                src={`http://localhost:3002/image/${animal.image}`}
-                                alt={animal.prenom}
-                                onClick={() => {
-                                    setPrenom(animal.prenom)
-                                    setId(animal.id)
-                                    augmenterVue()
-                                    detailsAnimaux()
-                                }}>
-                            </img>
+                            {(role === null) ?
+                                <img className="image_zoo_animaux"
+                                    src={`http://localhost:3002/image/${animal.image}`}
+                                    alt={animal.prenom}
+                                    onClick={() => {
+                                        setPrenom(animal.prenom)
+                                        setId(animal.id)
+                                        augmenterVue()
+                                        detailsAnimaux()
+                                    }}>
+                                </img>
+                                :
+                                <img className="image_zoo_animaux"
+                                    src={`http://localhost:3002/image/${animal.image}`}
+                                    alt={animal.prenom}
+                                    onClick={() => {
+                                        setPrenom(animal.prenom)
+                                        setId(animal.id)
+                                        detailsAnimaux()
+                                    }}>
+                                </img>
+                            }
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                         </div>
                     </div>
                 ))}
             </div>
             <Footer />
-        </div >
+        </ >
     );
 };
 

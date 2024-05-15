@@ -4,18 +4,19 @@
   list-style-type: none;
 }
 
-html {
+/*html {
   height: 100%;
   box-sizing: border-box;
-}
+}*/
 
-body {
+/*body {
   margin: 0;
   padding: 0;
+  height: 100%;
   min-height: 100%;
   box-sizing: inherit;
   position: relative;
-}
+}*/
 
 @media only screen and (min-width: 674px) {
   .div_zoo {
@@ -74,12 +75,14 @@ body {
     gap: 10px;
     margin-left: 20px;
     margin-right: 20px;
+    text-align: center;
   }
 
   .barre_navigation_onglet {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 50px;
   }
 }
@@ -93,6 +96,7 @@ body {
     gap: 10px;
     margin-left: 20px;
     margin-right: 20px;
+    text-align: center;
   }
 
   .barre_navigation_onglet {
@@ -101,6 +105,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 50px;
+
   }
 }
 
@@ -142,6 +147,20 @@ body {
     border-radius: 5px;
     transition: 0.1s all ease-in-out;
   }
+
+  .avis_visiteur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 10px;
+    border: solid 1px lightgray;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
+    width: 400px;
+    text-align: center;
+  }
 }
 
 @media only screen and (max-width: 560px) {
@@ -156,6 +175,20 @@ body {
     object-fit: cover;
     border-radius: 5px;
     transition: 0.1s all ease-in-out;
+  }
+
+  .avis_visiteur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 10px;
+    border: solid 1px lightgray;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
   }
 }
 
@@ -201,6 +234,20 @@ body {
     object-fit: cover;
     border-radius: 5px;
   }
+
+  .avis_visiteur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 10px;
+    border: solid 1px lightgray;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
+    width: 600px;
+    text-align: center;
+  }
 }
 
 @media only screen and (max-width: 1060px) {
@@ -230,7 +277,26 @@ body {
   }
 }
 
+@media only screen and (min-width: 700px) {
+  .image_erreur {
+    width: 600px;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .image_erreur {
+    width: 400px;
+    height: auto;
+  }
+}
+
 @media only screen and (max-width: 460px) {
+  .image_erreur {
+    width: 200px;
+    height: auto;
+  }
+
   .image_service {
     width: 200px;
     height: 150px;
@@ -442,40 +508,18 @@ body {
   }
 }
 
-@media only screen and (min-width: 739px) {
+@media only screen and (min-width: 701px) {
   .barre_dashboard {
     background-color: #00752F;
     width: 250px;
     color: white;
-    min-height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
     gap: 10px;
-  }
-
-  .barre_dashboard_global {
-    display: flex;
+    padding-bottom: 100%;
     height: 100%;
-  }
-
-  .dashboard_text {
-    cursor: pointer;
-    background-color: white;
-    color: #00752F;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 5px;
-  }
-
-  .dashboard {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .dashboard_composants_centrer {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .barre_dashboard_admin {
@@ -487,6 +531,28 @@ body {
     flex-direction: column;
     text-align: center;
     gap: 10px;
+    height: auto;
+    padding-bottom: 100%;
+  }
+
+  .dashboard_text {
+    cursor: pointer;
+    background-color: white;
+    color: #00752F;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+    width: 200px;
+  }
+
+  .dashboard_global {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dashboard_composants_centrer {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -499,28 +565,20 @@ body {
   }
 }
 
-@media only screen and (max-width: 739px) {
+@media only screen and (max-width: 700px) {
   .barre_dashboard {
     background-color: #00752F;
     color: white;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
+    text-align: center;
+    border: red solid 5px;
   }
 
   .dashboard_categorie {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .barre_dashboard_global {
-    display: flex;
-    height: 100%;
+    border: yellow 5px solid;
   }
 
   .dashboard_text {
@@ -531,58 +589,39 @@ body {
     padding: 5px;
     margin: 10px;
     width: 200px;
+    border: solid blue 5px;
   }
 
-  .dashboard {
+  .dashboard_global {
     display: flex;
     flex-direction: column-reverse;
+    border: solid orange 5px;
+  }
+
+  .composant_dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: solid 5px pink;
   }
 
   .dashboard_composants_centrer {
     margin-left: auto;
     margin-right: auto;
   }
-
-  .barre_dashboard_admin {
-    background-color: #00752F;
-    color: white;
-    width: 100%;
-    text-align: center;
-  }
-
-  .composant_dashboard_admin {
-    border: solid 2px red;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
 }
-
 
 @media only screen and (max-width: 380px) {
   .barre_dashboard {
     background-color: #00752F;
     color: white;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
   }
 
   .dashboard_categorie {
     display: flex;
     flex-direction: column;
-  }
-
-  .barre_dashboard_global {
-    display: flex;
-    height: 100%;
   }
 
   .dashboard_text {
@@ -595,27 +634,16 @@ body {
     width: 200px;
   }
 
-  .dashboard {
+  .dashboard_global {
     display: flex;
     flex-direction: column-reverse;
+    /*height: 600%;*/
   }
 
   .dashboard_composants_centrer {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .barre_dashboard_admin {
-    background-color: #00752F;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+    border: pink solid 4px;
   }
 }
 
@@ -685,7 +713,6 @@ a {
   margin: 25px;
   gap: 25px;
   flex-wrap: wrap;
-  border: solid blue 2px;
 }
 
 .paragraphe {
@@ -800,20 +827,6 @@ a {
   opacity: 1;
 }
 
-.avis_visiteur {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: auto;
-  margin: 20px;
-  border: solid 1px lightgray;
-  box-shadow: 2px 2px 2px black;
-  border-radius: 5px;
-  width: auto;
-  text-align: center;
-}
-
 .conteneurAvis {
   display: flex;
   flex-direction: column;
@@ -824,36 +837,6 @@ a {
 .horaires_details {
   width: 100px;
 }
-
-.footer {
-  /*border: red solid 2px;*/
-  /*width: 100%;
-  height: auto;
-  position: fixed;
-  bottom: 0;*/
-
-  bottom: 0%;
-  width: 100%;
-  height: auto;
-  background-color: #E4D1B0;
-  box-sizing: border-box;
-}
-
-.footer_fixe {
-  bottom: 0%;
-  width: 100%;
-  height: 100%;
-  background-color: #E4D1B0;
-  position: fixed;
-}
-
-/*.horaires {
-  display: flex;
-  margin-top: 5px;
-  align-items: center;
-  width: 300px;
-  justify-content: space-between;
-}*/
 
 .footer_horaires {
   display: flex;
@@ -868,7 +851,6 @@ a {
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  border: blue solid 2px;
 }
 
 .tarif {
@@ -878,21 +860,26 @@ a {
 }
 
 .footer {
-  /*border: red solid 2px;*/
-  /*width: 100%;
   height: auto;
-  position: fixed;
-  bottom: 0;*/
-
-  bottom: 0%;
   width: 100%;
-  height: 100%;
   background-color: #E4D1B0;
-  /*padding-top: 10px;
-  padding-bottom: 10px;*/
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  border: red solid 2px;
+  margin-top: auto;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
 }

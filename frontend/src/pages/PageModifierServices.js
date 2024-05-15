@@ -6,8 +6,8 @@ import ModificationServices from '../composants/ModificationServices';
 
 const PageModifierServices = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageModifierServices = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

@@ -1,13 +1,11 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 
 const DetailsModificationHabitats = () => {
-
-    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -15,9 +13,13 @@ const DetailsModificationHabitats = () => {
 
     const idNombre = Number(id);
 
+    const nom = useRef("");
+    const description = useRef("");
+    const image = useRef("");
+
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/habitats");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -52,7 +54,7 @@ const DetailsModificationHabitats = () => {
         });
     };
 
-    const modifierHabitats = async (e) => {
+    const modifierHabitats = (e) => {
         e.preventDefault();
 
         const headers = {
@@ -66,7 +68,10 @@ const DetailsModificationHabitats = () => {
         formData.append("image", habitat.image);
 
         try {
-            await axios.put(`http://localhost:3002/habitats/modifier/${id}`, formData, { headers })
+            const reponse = axios.put(`http://localhost:3002/habitats/modifier/${id}`, formData, { headers })
+            if (reponse) {
+                alert(`Habitat ${habitat.nom} modifié avec succès`);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -80,17 +85,21 @@ const DetailsModificationHabitats = () => {
                 ...habitat,
                 image: img
             });
-            console.log(habitat)
         };
     };
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin/modification-habitats");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            nom.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     }
-
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -105,6 +114,7 @@ const DetailsModificationHabitats = () => {
                                 className="champsFormulaire"
                                 id="nom"
                                 placeholder="Nom..."
+                                ref={nom}
                                 defaultValue={habitat.nom}
                                 onChange={inputChangement}
                             />
@@ -115,6 +125,7 @@ const DetailsModificationHabitats = () => {
                                 className="champsFormulaire_textarea"
                                 id="description"
                                 placeholder="Description..."
+                                ref={description}
                                 defaultValue={habitat.description}
                                 onChange={inputChangement}
                             />
@@ -125,19 +136,20 @@ const DetailsModificationHabitats = () => {
                                 name="image"
                                 className="champsFormulaire_image"
                                 id="image"
+                                ref={image}
                                 onChange={imageChangement}
                             />
                             <label htmlFor="image"></label>
 
                             <div className="centrer">
                                 <button type="submit" className="bouton_zoo">Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                                <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

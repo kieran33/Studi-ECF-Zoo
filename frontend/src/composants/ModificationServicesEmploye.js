@@ -8,8 +8,8 @@ const ModificationServicesEmploye = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/services");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/services");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -17,8 +17,8 @@ const ModificationServicesEmploye = () => {
     }, []);
 
     return (
-        <div>
-            <h2 className="titre_service">Modifier services</h2>
+        <>
+            <h2 className="titre_service">Choisissez le service à modifier</h2>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>
@@ -34,7 +34,7 @@ const ModificationServicesEmploye = () => {
                     </div>
                 ))}
             </div>
-        </div >
+        </>
     );
 };
 

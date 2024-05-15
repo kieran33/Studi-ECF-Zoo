@@ -1,11 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const AjoutHabitats = () => {
-
-    const navigate = useNavigate();
 
     const [nouvelHabitat, setNouvelHabitat] = useState({
         id: "",
@@ -13,6 +10,10 @@ const AjoutHabitats = () => {
         description: "",
         image: ""
     });
+
+    const nom = useRef("");
+    const description = useRef("");
+    const image = useRef("");
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -48,21 +49,31 @@ const AjoutHabitats = () => {
         formData.append("description", nouvelHabitat.description);
         formData.append("image", nouvelHabitat.image);
 
-        axios.post("http://localhost:3002/ajout-habitats", formData, { headers })
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+        try {
+            const reponse = axios.post("http://localhost:3002/ajout-habitats", formData, { headers })
+            if (reponse) {
+                alert(`Nouvel habitat ${nouvelHabitat.nom} ajouté avec succès`);
+                nom.current.value = "";
+                description.current.value = "";
+                image.current.value = "";
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            nom.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     }
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Ajouter habitats</h2>
             <form className="formulaire" onSubmit={ajouterHabitats} >
                 <input
@@ -71,6 +82,7 @@ const AjoutHabitats = () => {
                     className="champsFormulaire"
                     id="nom"
                     placeholder="Nom..."
+                    ref={nom}
                     onChange={inputChangement}
                     required
                 />
@@ -81,6 +93,7 @@ const AjoutHabitats = () => {
                     className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
+                    ref={description}
                     onChange={inputChangement}
                     required
                 />
@@ -91,6 +104,7 @@ const AjoutHabitats = () => {
                     name="image"
                     className="champsFormulaire_image"
                     id="image"
+                    ref={image}
                     onChange={imageChangement}
                     required
                 />
@@ -98,10 +112,10 @@ const AjoutHabitats = () => {
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Ajouter</button>
-                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                    <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                 </div>
             </form>
-        </div >
+        </>
     );
 };
 

@@ -9,8 +9,8 @@ const ModificationHoraires = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/horaires");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/horaires");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const ModificationHoraires = () => {
     }
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Modifier horaire du zoo</h2>
             <div className="conteneurHoraires">
                 {data.map((horaire, index) => (
@@ -39,7 +39,7 @@ const ModificationHoraires = () => {
                     </div >
                 ))}
             </div >
-        </div>
+        </>
     );
 };
 

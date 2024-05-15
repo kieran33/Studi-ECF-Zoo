@@ -6,16 +6,18 @@ import ModificationPersonnels from '../composants/ModificationPersonnels';
 
 const PageModificationComptePersonnels = () => {
     return (
-        <div>
-            <div className="dashboard">
-                <BarreDashboardAdmin />
+        <>
+            <div className="dashboard_global">
+                <div>
+                    <BarreDashboardAdmin />
+                </div>
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <ModificationPersonnels />
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

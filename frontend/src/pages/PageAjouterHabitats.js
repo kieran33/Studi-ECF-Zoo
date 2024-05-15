@@ -6,8 +6,8 @@ import AjoutHabitats from '../composants/AjoutHabitats';
 
 const PageAjouterHabitats = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageAjouterHabitats = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

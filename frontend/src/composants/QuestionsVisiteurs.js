@@ -10,8 +10,8 @@ const QuestionsVisiteurs = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get('http://localhost:3002/questions')
-        setData(response.data)
+        const reponse = await axios.get('http://localhost:3002/questions')
+        setData(reponse.data)
     }
 
     useEffect(() => {
@@ -19,8 +19,8 @@ const QuestionsVisiteurs = () => {
     }, []);
 
     return (
-        <div >
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>
@@ -32,7 +32,7 @@ const QuestionsVisiteurs = () => {
                             <div className="avis_visiteur" index={index}>
                                 <h4 className="titre_service">Message de : {questions.email}</h4>
                                 <h4 className="titre_service">Titre : {questions.titre}</h4>
-                                <p className="titre_service" style={{ marginRight: "20px", marginLeft: "20px" }}>
+                                <p className="titre_service">
                                     <h4>Description :</h4>
                                     {questions.description}
                                 </p>
@@ -49,7 +49,7 @@ const QuestionsVisiteurs = () => {
                 </div>
             </div>
             <Footer />
-        </div >
+        </ >
     );
 };
 

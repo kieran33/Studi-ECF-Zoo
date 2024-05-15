@@ -6,8 +6,8 @@ import EtatAnimaux from '../composants/EtatAnimaux';
 
 const PageEtatAnimauxAdmin = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageEtatAnimauxAdmin = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

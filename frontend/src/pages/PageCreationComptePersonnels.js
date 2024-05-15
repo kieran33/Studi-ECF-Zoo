@@ -6,8 +6,8 @@ import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 
 const PageCreationComptePersonnels = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageCreationComptePersonnels = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

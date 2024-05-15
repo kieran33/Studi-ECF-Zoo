@@ -8,8 +8,8 @@ const ModificationHabitats = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/habitats");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const ModificationHabitats = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Choisissez l'habitat à modifier</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
@@ -35,7 +35,7 @@ const ModificationHabitats = () => {
                 ))
                 }
             </div >
-        </div>
+        </>
     );
 };
 

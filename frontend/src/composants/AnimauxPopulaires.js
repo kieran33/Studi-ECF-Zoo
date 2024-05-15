@@ -11,8 +11,8 @@ const AnimauxPopulaires = () => {
     const [dataAnimauxTrier, setDataAnimauxTrier] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -42,8 +42,8 @@ const AnimauxPopulaires = () => {
     }, [dataAnimaux]);
 
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -76,7 +76,7 @@ const AnimauxPopulaires = () => {
                 </div >
             </div>
             <Footer />
-        </div >
+        </ >
     );
 };
 

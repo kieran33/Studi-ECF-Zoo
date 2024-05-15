@@ -6,8 +6,8 @@ import SupprimerServices from '../composants/SupprimerServices';
 
 const PageSupprimerServices = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageSupprimerServices = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

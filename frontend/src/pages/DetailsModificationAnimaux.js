@@ -1,15 +1,12 @@
 import React from 'react';
 import Navigation from '../composants/Navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 import Footer from '../composants/Footer';
 
 const DetailsModificationAnimaux = () => {
-
-    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -19,9 +16,15 @@ const DetailsModificationAnimaux = () => {
 
     const idNombre = Number(id);
 
+    const prenomAnimal = useRef("");
+    const race = useRef("");
+    const habitat = useRef("");
+    const description = useRef("");
+    const image = useRef("");
+
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -80,7 +83,10 @@ const DetailsModificationAnimaux = () => {
         axios.put(`http://localhost:3002/animaux-soins/modifier/${prenom}`, { nouveauPrenom })
 
         try {
-            await axios.put(`http://localhost:3002/modifier-animaux-vues/${prenom}`, { nouveauPrenom })
+            const reponse_mongoDB = await axios.put(`http://localhost:3002/modifier-animaux-vues/${prenom}`, { nouveauPrenom })
+            if (reponse_mongoDB) {
+                alert(`Animal ${animal.prenom} modifié avec succès`);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -98,13 +104,21 @@ const DetailsModificationAnimaux = () => {
         };
     };
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin/modification-animaux");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            prenomAnimal.current.value = "";
+            race.current.value = "";
+            habitat.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     }
 
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -120,6 +134,7 @@ const DetailsModificationAnimaux = () => {
                                 id="prenom"
                                 placeholder="Prénom..."
                                 defaultValue={animal.prenom}
+                                ref={prenomAnimal}
                                 onChange={(e) => {
                                     setNouveauPrenom(e.target.value)
                                     inputChangement(e)
@@ -134,6 +149,7 @@ const DetailsModificationAnimaux = () => {
                                 id="race"
                                 placeholder="Race..."
                                 defaultValue={animal.race}
+                                ref={race}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="race"></label>
@@ -145,6 +161,7 @@ const DetailsModificationAnimaux = () => {
                                 id="habitat"
                                 placeholder="Habitat..."
                                 defaultValue={animal.habitat}
+                                ref={habitat}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="habitat"></label>
@@ -155,6 +172,7 @@ const DetailsModificationAnimaux = () => {
                                 id="description"
                                 placeholder="Description..."
                                 defaultValue={animal.description}
+                                ref={description}
                                 onChange={inputChangement}
                             />
                             <label htmlFor="description"></label>
@@ -164,20 +182,21 @@ const DetailsModificationAnimaux = () => {
                                 name="image"
                                 className="champsFormulaire_image"
                                 id="image"
+                                ref={image}
                                 onChange={imageChangement}
                             />
                             <label htmlFor="image"></label>
 
                             <div className="centrer">
                                 <button type="submit" className="bouton_zoo" onClick={modifierAnimaux}>Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                                <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

@@ -5,8 +5,8 @@ import Footer from '../composants/Footer';
 
 const DashboardVeterinaire = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardVeterinaire />
                 </div>
@@ -16,7 +16,7 @@ const DashboardVeterinaire = () => {
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

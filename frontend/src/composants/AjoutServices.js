@@ -1,11 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const AjoutServices = () => {
 
-    const navigate = useNavigate();
+    const nom = useRef("");
+    const description = useRef("");
+    const image = useRef("");
 
     const [nouveauService, setNouveauService] = useState({
         id: "",
@@ -48,21 +49,33 @@ const AjoutServices = () => {
         formData.append("description", nouveauService.description);
         formData.append("image", nouveauService.image);
 
-        axios.post("http://localhost:3002/ajout-services", formData, { headers })
-            .then(response => {
-                console.log(response.data);
+        const reponse = axios.post("http://localhost:3002/ajout-services", formData, { headers })
+            .then(reponse => {
+                console.log(reponse.data);
             })
             .catch(error => {
                 console.error(error);
             });
+        if (reponse) {
+            alert(`Service ${nouveauService.nom} ajouté avec succès`);
+            nom.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     };
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            nom.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     }
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Ajouter un service</h2>
             <form className="formulaire" onSubmit={ajouterServices} >
                 <input
@@ -71,6 +84,7 @@ const AjoutServices = () => {
                     className="champsFormulaire"
                     id="nom"
                     placeholder="Nom du service..."
+                    ref={nom}
                     onChange={inputChangement}
                     required
                 />
@@ -81,6 +95,7 @@ const AjoutServices = () => {
                     className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
+                    ref={description}
                     onChange={inputChangement}
                     required
                 />
@@ -91,6 +106,7 @@ const AjoutServices = () => {
                     name="image"
                     className="champsFormulaire_image"
                     id="image"
+                    ref={image}
                     onChange={imageChangement}
                     required
                 />
@@ -98,10 +114,10 @@ const AjoutServices = () => {
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Ajouter</button>
-                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                    <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                 </div>
             </form>
-        </div >
+        </>
     );
 };
 

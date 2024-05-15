@@ -27,17 +27,21 @@ const Contact = () => {
         });
     };
 
-    const EnvoyerQuestion = async (e) => {
+    const EnvoyerQuestion = (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:3002/envoyer-questions', nouvelleQuestion, {
+            const reponse = axios.post('http://localhost:3002/envoyer-questions', nouvelleQuestion, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log('Succès:', response.data);
-            alert('Merci d\'avoir laissé votre message, il sera traiter prochainement')
+            if (reponse) {
+                alert('Merci d\'avoir laissé votre message, il sera traiter prochainement');
+                titre.current.value = "";
+                description.current.value = "";
+                email.current.value = "";
+            }
         } catch (error) {
             console.error('Erreur:', error.response ? error.response.data : error.message);
         }
@@ -50,7 +54,7 @@ const Contact = () => {
     };
 
     return (
-        <div>
+        <>
             <Navigation />
             <h2 className="titre_service"> Une question ? Contactez-nous</h2>
             <form className="formulaire" onSubmit={EnvoyerQuestion}>
@@ -62,7 +66,7 @@ const Contact = () => {
                     placeholder="Titre..."
                     ref={titre}
                     onChange={inputChangement}
-                    value={nouvelleQuestion.titre}
+                    //value={nouvelleQuestion.titre}
                     required>
                 </input>
                 <label htmlFor="titre"></label>
@@ -74,7 +78,7 @@ const Contact = () => {
                     placeholder="Votre message..."
                     ref={description}
                     onChange={inputChangement}
-                    value={nouvelleQuestion.description}
+                    //value={nouvelleQuestion.description}
                     required>
                 </textarea>
                 <label htmlFor="description"></label>
@@ -98,7 +102,7 @@ const Contact = () => {
                 </div>
             </form >
             <Footer />
-        </div >
+        </>
     );
 };
 

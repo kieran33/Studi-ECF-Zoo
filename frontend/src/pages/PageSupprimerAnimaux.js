@@ -6,8 +6,8 @@ import SupprimerAnimaux from '../composants/SupprimerAnimaux';
 
 const PageSupprimerAnimaux = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageSupprimerAnimaux = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

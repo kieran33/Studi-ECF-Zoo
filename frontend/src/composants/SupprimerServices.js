@@ -7,13 +7,13 @@ const SupprimerServices = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/services");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/services");
+        setData(reponse.data);
     };
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [data]);
 
     const supprimerServices = (id) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce service ?")) {
@@ -23,7 +23,7 @@ const SupprimerServices = () => {
     };
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Supprimer services</h2>
             <div className="centrer">
                 {data.map((service, index) => (
@@ -39,7 +39,7 @@ const SupprimerServices = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 

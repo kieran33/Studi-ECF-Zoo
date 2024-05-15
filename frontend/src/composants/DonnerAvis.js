@@ -22,20 +22,19 @@ const DonnerAvis = () => {
         });
     };
 
-    const AjouterAvis = async (e) => {
+    const AjouterAvis = (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:3002/ajout-avis-non-verif', nouvelAvis, {
+            const reponse = axios.post('http://localhost:3002/ajout-avis-non-verif', nouvelAvis, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log('Succès:', response.data);
-            console.log('nouvelAvis', nouvelAvis)
-            //setNouvelAvis(getDefaultAvis());
-            setDonnerAvis(false);
-            alert('Merci d\'avoir laissé votre avis, il sera traiter prochainement')
+            if (reponse) {
+                setDonnerAvis(false);
+                alert('Merci d\'avoir laissé votre avis, il sera traiter prochainement')
+            }
         } catch (error) {
             console.error('Erreur:', error.response ? error.response.data : error.message);
         }
@@ -65,6 +64,7 @@ const DonnerAvis = () => {
                             className="champsFormulaire_textarea"
                             placeholder="Votre message"
                             onChange={inputChangement}
+                            required
                         />
                         <label htmlFor="message"></label>
                         <div className="centrer">

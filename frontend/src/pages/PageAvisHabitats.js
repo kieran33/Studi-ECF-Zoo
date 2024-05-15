@@ -7,8 +7,8 @@ import AvisHabitats from '../composants/AvisHabitats';
 
 const PageAvisHabitats = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardVeterinaire />
                 </div>
@@ -18,7 +18,7 @@ const PageAvisHabitats = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

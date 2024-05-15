@@ -1,14 +1,15 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
 
 const DetailsCompteRenduAnimaux = () => {
 
-    const navigate = useNavigate();
+    const date_soins = useRef("");
+    const etat = useRef("");
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -60,7 +61,7 @@ const DetailsCompteRenduAnimaux = () => {
         });
     };
 
-    const AjouterCompteRenduAnimaux = async (e) => {
+    const AjouterCompteRenduAnimaux = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -69,21 +70,31 @@ const DetailsCompteRenduAnimaux = () => {
         formData.append("date_soins", animal.date_soins)
 
         try {
-            await axios.post(`http://localhost:3002/ajout-soins/${prenom}`, formData)
+            const reponse = axios.post(`http://localhost:3002/ajout-soins/${prenom}`, formData)
+            if (reponse) {
+                alert(`Compte rendu pour l'animal ${animal.prenom} envoyé avec succès`);
+                date_soins.current.value = "";
+                etat.current.value = "";
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const retourDashboardVeterinaire = () => {
-        navigate("/dashboard-veterinaire/compte-rendu-animaux");
-    }
-
     const filtreAnimal = dataNourriture.filter(nourriture => nourriture.prenom === animal.prenom);
 
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            date_soins.current.value = "";
+            etat.current.value = "";
+        }
+    };
+
     return (
-        <div>
-            <div className="dashboard" >
+        <>
+            <div className="dashboard_global" >
                 <div>
                     <BarreDashboardVeterinaire />
                 </div>
@@ -101,13 +112,15 @@ const DetailsCompteRenduAnimaux = () => {
                     </div>
                     <h2 className="titre_service">Ecrire compte rendu pour l'animal {animal.prenom}</h2>
                     <div className="centrer">
-                        <form className="formulaire">
+                        <form className="formulaire" onSubmit={AjouterCompteRenduAnimaux}>
                             <textarea
                                 name="etat"
                                 className="champsFormulaire_textarea"
                                 id="etat"
                                 placeholder="Etat animal..."
+                                ref={etat}
                                 onChange={inputChangement}
+                                required
                             />
                             <label htmlFor="etat"></label>
 
@@ -118,20 +131,22 @@ const DetailsCompteRenduAnimaux = () => {
                                 id="date_soins"
                                 placeholder="Date et heure"
                                 style={{ width: "125px" }}
+                                ref={date_soins}
                                 onChange={inputChangement}
+                                required
                             />
                             <label htmlFor="date_soins"></label>
 
                             <div className="centrer">
-                                <button type="submit" className="bouton_zoo" onClick={AjouterCompteRenduAnimaux}>Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardVeterinaire}>Annuler</button>
+                                <button type="submit" className="bouton_zoo">Confirmer</button>
+                                <button className="bouton_zoo" onClick={effacer}>Annuler</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

@@ -10,8 +10,8 @@ const CompteRenduAnimaux = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/animaux");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/animaux");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -19,8 +19,8 @@ const CompteRenduAnimaux = () => {
     }, []);
 
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardVeterinaire />
                 </div>
@@ -45,7 +45,7 @@ const CompteRenduAnimaux = () => {
                 </div>
             </div>
             <Footer />
-        </div >
+        </ >
     );
 };
 

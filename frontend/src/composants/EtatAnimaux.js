@@ -38,7 +38,7 @@ const EtatAnimaux = () => {
     }
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Liste des compte-rendus du vétérinaire</h2>
             <div className="barre_filtre" style={{ marginLeft: "20px", marginRight: "20px" }}>
                 <div className="barre_filtre_composant">
@@ -148,7 +148,7 @@ const EtatAnimaux = () => {
                         </div>
                 }
             </div>
-        </div >
+        </ >
     );
 };
 

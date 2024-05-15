@@ -8,8 +8,8 @@ const AvisHabitats = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/habitats");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const AvisHabitats = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Liste des habitats</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
@@ -31,12 +31,10 @@ const AvisHabitats = () => {
                             </Link>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{habitat.nom}</div>
                         </div>
-
                     </div>
                 ))}
             </div>
-
-        </div >
+        </>
     );
 };
 

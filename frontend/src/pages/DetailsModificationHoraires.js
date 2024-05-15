@@ -1,10 +1,10 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Footer from '../composants/Footer';
 import Navigation from '../composants/Navigation';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const DetailsModificationHoraires = () => {
 
@@ -16,9 +16,12 @@ const DetailsModificationHoraires = () => {
 
     const idNombre = Number(id);
 
+    const heure_ouverture = useRef("");
+    const heure_fermeture = useRef("");
+
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/horaires");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/horaires");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -54,14 +57,15 @@ const DetailsModificationHoraires = () => {
         });
     };
 
-    const modifierHoraires = async (e) => {
+    const modifierHoraires = (e) => {
         e.preventDefault();
 
-        alert("Horaire pour le " + horaire.jour + " modifier avec succès")
-        retourDashboardAdminHoraires();
         try {
-            console.log('je suis dans try')
-            await axios.put(`http://localhost:3002/horaires/modifier/${id}`, horaire)
+            const reponse = axios.put(`http://localhost:3002/horaires/modifier/${id}`, horaire)
+            if (reponse) {
+                alert(`Horaire pour le ${horaire.jour} modifier avec succès`)
+                retourDashboardAdminHoraires();
+            }
         } catch (error) {
             console.log(error);
         }
@@ -73,9 +77,21 @@ const DetailsModificationHoraires = () => {
         }, "10");
     }
 
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation && horaire.ouvert_fermer === "Ouvert") {
+            heure_ouverture.current.value = "";
+            heure_fermeture.current.value = "";
+        } else {
+            document.querySelector('input[name="ouvert_fermer"]').checked = false;
+            window.location.reload();
+        }
+    }
+
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -104,6 +120,7 @@ const DetailsModificationHoraires = () => {
                                         min="00:00"
                                         max="12:00"
                                         style={{ width: "auto" }}
+                                        ref={heure_ouverture}
                                         onChange={inputChangement}
                                     />
                                     <label htmlFor="heure_ouverture"></label>
@@ -116,6 +133,7 @@ const DetailsModificationHoraires = () => {
                                         min="00:00"
                                         max="12:00"
                                         style={{ width: "auto" }}
+                                        ref={heure_fermeture}
                                         onChange={inputChangement}
                                     />
                                     <label htmlFor="heure_fermeture"></label>
@@ -156,14 +174,14 @@ const DetailsModificationHoraires = () => {
                             }
                             <div className="centrer">
                                 <button className="bouton_zoo" onClick={modifierHoraires}>Confirmer</button>
-                                <button className="bouton_zoo" onClick={retourDashboardAdminHoraires}>Annuler</button>
+                                <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

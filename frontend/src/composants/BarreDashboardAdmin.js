@@ -26,24 +26,28 @@ const BarreDashboardAdmin = () => {
     };
 
     return (
-        <div className="barre_dashboard_global">
-            <div className="barre_dashboard_admin">
-                <h2>Dashboard admin</h2>
-                <div className="composant_dashboard_admin">
-                    <DashboardAdminPersonnels />
-                    <DashboardAdminAnimaux />
-                    <DashboardAdminHabitats />
-                    <DashboardAdminServices />
-                    <div >
-                        <h3 className="dashboard_text" onClick={modifierHoraires}>Modifier horaires</h3>
-                    </div>
-                    <div>
-                        <h3 className="dashboard_text" onClick={etatAnimaux}>Etat animaux</h3>
-                        <h3 className="dashboard_text" onClick={etatHabitats}>Etat habitats</h3>
-                    </div>
-                    <div >
-                        <h3 className="dashboard_text" onClick={animauxPopulaires}>Animaux populaires</h3>
-                    </div>
+        <div className="barre_dashboard">
+            <h2>Dashboard admin</h2>
+            <div className="composant_dashboard">
+                <DashboardAdminPersonnels />
+                <br></br>
+                <DashboardAdminAnimaux />
+                <br></br>
+                <DashboardAdminHabitats />
+                <br></br>
+                <DashboardAdminServices />
+                <br></br>
+                <div >
+                    <h3 className="dashboard_text" onClick={modifierHoraires}>Modifier horaires</h3>
+                </div>
+                <br></br>
+                <div>
+                    <h3 className="dashboard_text" onClick={etatAnimaux}>Etat animaux</h3>
+                    <h3 className="dashboard_text" onClick={etatHabitats}>Etat habitats</h3>
+                </div>
+                <br></br>
+                <div >
+                    <h3 className="dashboard_text" onClick={animauxPopulaires}>Animaux populaires</h3>
                 </div>
             </div>
         </div>

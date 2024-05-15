@@ -38,7 +38,7 @@ const Connexion = () => {
     };
 
     return (
-        <div>
+        <>
             <Navigation />
             <h2 className="titre_service">Connexion</h2>
             <form className="formulaire" onSubmit={seConnecter}>
@@ -73,7 +73,7 @@ const Connexion = () => {
                 </div>
             </form>
             <Footer />
-        </div>
+        </>
     );
 };
 

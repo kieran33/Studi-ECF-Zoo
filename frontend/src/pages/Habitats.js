@@ -10,8 +10,8 @@ const Habitats = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/habitats");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Habitats = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <Navigation />
             <h2 className="titre_service">Les habitats</h2>
             <div className="centrer">
@@ -36,7 +36,7 @@ const Habitats = () => {
                 ))}
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

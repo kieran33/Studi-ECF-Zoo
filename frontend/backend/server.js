@@ -37,11 +37,11 @@ app.put("/augmenter-vues-animal", (req, res) => {
 });
 
 app.post("/ajout-animaux-vues", (req, res) => {
-    const { prenom } = req.body;
-    console.log(prenom)
+    const { prenomAnimal } = req.body;
+    console.log(prenomAnimal)
 
     AnimalModel.insertMany(
-        { prenom: prenom },
+        { prenom: prenomAnimal },
         { nombreVues: 0 })
         .then(animals => res.json(animals))
         .catch(animals => res.json(animals))
@@ -369,22 +369,6 @@ app.post("/ajout-animaux", exporter.single("image"), (req, res) => {
             }
         });
 });
-
-/*app.post("/ajout-nourrir-animaux", exporter.single("image"), (req, res) => {
-    const { prenom } = req.body;
-    console.log('nourrir animaux prenom', prenom)
-
-    db.query("INSERT INTO nourrir_animaux (prenom) VALUES (?)",
-        [prenom], (error, result) => {
-            if (error) {
-                console.log(error);
-                res.status(500).send("Erreur lors de l'ajout de l'animal");
-            }
-            else {
-                res.status(201).send("Animal ajouté avec succès");
-            }
-        });
-});*/
 
 app.post("/ajout-services", exporter.single("image"), (req, res) => {
     const { nom, description } = req.body;

@@ -14,13 +14,12 @@ const BarreDashboardVeterinaire = () => {
     };
 
     return (
-        <div className="barre_dashboard_global">
-            <div className="barre_dashboard">
-                <h2>Dashboard vétérinaire</h2>
-                <div className="composant_dashboard_admin">
-                    <h3 className="dashboard_text" onClick={compteRenduAnimaux}>Etat animaux</h3>
-                    <h3 className="dashboard_text" onClick={avisHabitats}>Etat habitats</h3>
-                </div>
+        <div className="barre_dashboard">
+            <h2>Dashboard vétérinaire</h2>
+            <div className="composant_dashboard">
+                <h3 className="dashboard_text" onClick={compteRenduAnimaux}>Etat animaux</h3>
+                <br></br>
+                <h3 className="dashboard_text" onClick={avisHabitats}>Etat habitats</h3>
             </div>
         </div>
     );

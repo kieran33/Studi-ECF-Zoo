@@ -7,23 +7,23 @@ const SuppressionPersonnels = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/personnels");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/personnels");
+        setData(reponse.data);
     };
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [data]);
 
     const supprimerPersonnels = (id) => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce personnel ?")) {
+        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce compte personnel ?")) {
             axios.delete(`http://localhost:3002/personnels/supprimer/${id}`);
             setTimeout(() => loadData(), 500);
         };
     };
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Liste du personnel</h2>
             <div className="centrer">
                 {data.filter(personnel => personnel.role !== "admin").map((personnel, index) => (
@@ -34,7 +34,7 @@ const SuppressionPersonnels = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 

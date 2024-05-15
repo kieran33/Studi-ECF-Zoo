@@ -6,8 +6,8 @@ import ModificationServicesEmploye from '../composants/ModificationServicesEmplo
 
 const PageModifierServicesEmploye = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>
@@ -17,7 +17,7 @@ const PageModifierServicesEmploye = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

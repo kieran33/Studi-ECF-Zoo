@@ -9,8 +9,8 @@ const Services = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/services");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/services");
+        setData(reponse.data);
     };
 
     useEffect(() => {

@@ -6,8 +6,8 @@ import ModificationAnimaux from '../composants/ModificationAnimaux';
 
 const PageModifierAnimaux = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageModifierAnimaux = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

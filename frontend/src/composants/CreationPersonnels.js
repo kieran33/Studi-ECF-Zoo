@@ -1,9 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const CreationPersonnels = () => {
+
+    const nom_utilisateur = useRef("");
+    const mot_de_passe = useRef("");
 
     const [nouveauxPersonnels, setNouveauxPersonnels] = useState({
         id: "",
@@ -11,8 +13,6 @@ const CreationPersonnels = () => {
         mot_de_passe: "",
         role: ""
     });
-
-    const navigate = useNavigate();
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -39,9 +39,17 @@ const CreationPersonnels = () => {
                         "Content-Type": "application/json",
                     },
                 });
-                console.log("succès: ", reponse.data);
+                console.log(reponse)
+                if (reponse.status === 201 || reponse.status === 200) {
+                    alert("Nouveau compte personnel créer avec succès");
+                    nom_utilisateur.current.value = "";
+                    mot_de_passe.current.value = "";
+                    document.querySelector("#role_employe").checked = false;
+                    document.querySelector("#role_veterinaire").checked = false;
+                }
             } catch (error) {
                 console.error("Erreur :", error.reponse ? error.reponse.data : error.message);
+                alert("Erreur lors de l'ajout du nouveau compte personnel")
             }
         }
         else {
@@ -49,12 +57,19 @@ const CreationPersonnels = () => {
         }
     }
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            nom_utilisateur.current.value = "";
+            mot_de_passe.current.value = "";
+            document.querySelector("#role_employe").checked = false;
+            document.querySelector("#role_veterinaire").checked = false;
+        }
     }
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Création compte personnel du zoo</h2>
             <form className="formulaire" onSubmit={creerPersonnels}>
                 <input
@@ -63,7 +78,7 @@ const CreationPersonnels = () => {
                     className="champsFormulaire"
                     id="nom_utilisateur"
                     placeholder="Nom utilisateur..."
-                    value={nouveauxPersonnels.nom_utilisateur}
+                    ref={nom_utilisateur}
                     onChange={inputChangement}
                     required
                 />
@@ -75,7 +90,7 @@ const CreationPersonnels = () => {
                     className="champsFormulaire"
                     id="mot_de_passe"
                     placeholder="Mot de passe..."
-                    value={nouveauxPersonnels.mot_de_passe}
+                    ref={mot_de_passe}
                     onChange={inputChangement}
                     required
                 />
@@ -84,7 +99,7 @@ const CreationPersonnels = () => {
                     type="radio"
                     name="role"
                     className="champsFormulaire"
-                    id="role"
+                    id="role_employe"
                     value="employé"
                     onChange={inputChangement}
                     required
@@ -95,7 +110,7 @@ const CreationPersonnels = () => {
                     type="radio"
                     name="role"
                     className="champsFormulaire"
-                    id="role"
+                    id="role_veterinaire"
                     value="vétérinaire"
                     onChange={inputChangement}
                     required
@@ -104,10 +119,10 @@ const CreationPersonnels = () => {
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Créer</button>
-                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                    <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                 </div>
             </form>
-        </div>
+        </>
     );
 };
 

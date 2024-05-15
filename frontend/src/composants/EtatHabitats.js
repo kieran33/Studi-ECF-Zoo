@@ -4,12 +4,10 @@ import axios from 'axios';
 
 const EtatHabitats = () => {
     const [data, setData] = useState([]);
-    const [animalPrenom, setAnimalPrenom] = useState("");
-    const [dateSoins, setDateSoins] = useState("");
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/habitats");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
     };
 
     useEffect(() => {
@@ -17,13 +15,13 @@ const EtatHabitats = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Liste des habitats et leur état</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo_etat" >
-                            <img className="image_zoo_animaux" /*style={{ transition: "none", cursor: "auto", transform: "none" }}*/
+                            <img className="image_zoo_animaux"
                                 src={`http://localhost:3002/image/${habitat.image}`}
                                 alt={habitat.nom}>
                             </img>
@@ -33,7 +31,7 @@ const EtatHabitats = () => {
                     </div>
                 ))}
             </div>
-        </div >
+        </ >
     );
 };
 

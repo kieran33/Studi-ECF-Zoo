@@ -6,8 +6,8 @@ import SuppressionPersonnels from '../composants/SuppressionPersonnels';
 
 const PageSuppressionComptePersonnels = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageSuppressionComptePersonnels = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

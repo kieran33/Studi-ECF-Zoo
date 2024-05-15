@@ -6,8 +6,8 @@ import SupprimerHabitats from '../composants/SupprimerHabitats';
 
 const PageSupprimerHabitats = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardAdmin />
                 </div>
@@ -17,7 +17,7 @@ const PageSupprimerHabitats = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

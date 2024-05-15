@@ -7,8 +7,8 @@ const Footer = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get('http://localhost:3002/horaires')
-        setData(response.data)
+        const reponse = await axios.get('http://localhost:3002/horaires')
+        setData(reponse.data)
     }
 
     useEffect(() => {

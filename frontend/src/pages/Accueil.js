@@ -25,7 +25,7 @@ const Accueil = () => {
     };
 
     return (
-        <div>
+        <>
             <Navigation />
             <div className="centrer">
                 <img src={perroquet} className="perroquet" width="300" height="auto" alt="perroquet zoo" />
@@ -51,7 +51,7 @@ const Accueil = () => {
             </div>
             <AvisVisiteur />
             <Footer />
-        </div >
+        </>
     );
 };
 

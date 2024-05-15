@@ -6,8 +6,8 @@ import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
 
 const PageSupprimerServicesEmploye = () => {
     return (
-        <div>
-            <div className="dashboard">
+        <>
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>
@@ -17,7 +17,7 @@ const PageSupprimerServicesEmploye = () => {
                 </div >
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

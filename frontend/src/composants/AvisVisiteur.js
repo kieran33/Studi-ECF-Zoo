@@ -8,8 +8,8 @@ const AvisVisiteur = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get('http://localhost:3002/avis-verif')
-        setData(response.data)
+        const reponse = await axios.get('http://localhost:3002/avis-verif')
+        setData(reponse.data)
     }
 
     useEffect(() => {

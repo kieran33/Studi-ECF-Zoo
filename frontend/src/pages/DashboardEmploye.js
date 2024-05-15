@@ -6,18 +6,16 @@ import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
 
 const DashboardEmploye = () => {
     return (
-        <div>
-            <div className="dashboard">
-                <div>
-                    <BarreDashboardEmploye />
-                </div>
-                <div className="dashboard_composants_centrer">
+        <>
+            <div className="dashboard_global">
+                <BarreDashboardEmploye />
+                <div >
                     <Navigation />
                     <h2 className="titre_service">Dashboard employé</h2>
                 </div>
             </div >
             <Footer />
-        </div>
+        </>
     );
 };
 

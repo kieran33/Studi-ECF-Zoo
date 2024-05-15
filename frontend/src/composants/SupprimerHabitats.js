@@ -7,13 +7,13 @@ const SupprimerHabitats = () => {
     const [data, setData] = useState([]);
 
     const loadData = async () => {
-        const response = await axios.get("http://localhost:3002/habitats");
-        setData(response.data);
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
     };
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [data]);
 
     const supprimerHabitats = (id) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet habitat ?")) {
@@ -23,7 +23,7 @@ const SupprimerHabitats = () => {
     };
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Liste des habitats</h2>
             <div className="centrer">
                 {data.map((habitat, index) => (
@@ -38,7 +38,7 @@ const SupprimerHabitats = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,13 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const AjoutAnimaux = () => {
 
-    const navigate = useNavigate();
-
-    const [prenom, setPrenom] = useState("");
+    const [prenomAnimal, setPrenomAnimal] = useState("");
 
     const [nouvelAnimal, setNouvelAnimal] = useState({
         id: "",
@@ -16,6 +13,12 @@ const AjoutAnimaux = () => {
         description: "",
         image: ""
     });
+
+    const prenom = useRef("");
+    const race = useRef("");
+    const habitat = useRef("");
+    const description = useRef("");
+    const image = useRef("");
 
     const inputChangement = (e) => {
         const { name, value } = e.target;
@@ -53,27 +56,37 @@ const AjoutAnimaux = () => {
         formData.append("description", nouvelAnimal.description);
         formData.append("image", nouvelAnimal.image);
 
-        axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
 
         try {
-            axios.post("http://localhost:3002/ajout-animaux-vues", { prenom })
+            const reponse = axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
+            const reponse_mongoDB = axios.post("http://localhost:3002/ajout-animaux-vues", { prenomAnimal })
+            if (reponse && reponse_mongoDB) {
+                alert(`Animal ${nouvelAnimal.prenom} ajouté avec succès`);
+                prenom.current.value = "";
+                race.current.value = "";
+                habitat.current.value = "";
+                description.current.value = "";
+                image.current.value = "";
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const retourDashboardAdmin = () => {
-        navigate("/dashboard-admin");
+    const effacer = (e) => {
+        e.preventDefault();
+        const confirmation = window.confirm("Etes-vous sûr de vouloir effacer votre saisie ?");
+        if (confirmation) {
+            prenom.current.value = "";
+            race.current.value = "";
+            habitat.current.value = "";
+            description.current.value = "";
+            image.current.value = "";
+        }
     }
 
     return (
-        <div>
+        <>
             <h2 className="titre_service">Ajouter animaux</h2>
             <form className="formulaire" onSubmit={ajouterAnimaux} >
                 <input
@@ -82,8 +95,9 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire"
                     id="prenom"
                     placeholder="Prénom..."
+                    ref={prenom}
                     onChange={(e) => {
-                        setPrenom(e.target.value)
+                        setPrenomAnimal(e.target.value)
                         inputChangement(e)
                     }}
                     required
@@ -96,6 +110,7 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire"
                     id="race"
                     placeholder="Race..."
+                    ref={race}
                     onChange={inputChangement}
                     required
                 />
@@ -107,6 +122,7 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire"
                     id="habitat"
                     placeholder="Habitat..."
+                    ref={habitat}
                     onChange={inputChangement}
                     required
                 />
@@ -117,6 +133,7 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
+                    ref={description}
                     onChange={inputChangement}
                     required
                 />
@@ -127,6 +144,7 @@ const AjoutAnimaux = () => {
                     name="image"
                     className="champsFormulaire_image"
                     id="image"
+                    ref={image}
                     onChange={imageChangement}
                     required
                 />
@@ -134,10 +152,10 @@ const AjoutAnimaux = () => {
 
                 <div className="centrer">
                     <button type="submit" className="bouton_zoo">Ajouter</button>
-                    <button className="bouton_zoo" onClick={retourDashboardAdmin}>Annuler</button>
+                    <button className="bouton_zoo" onClick={effacer}>Effacer</button>
                 </div>
             </form>
-        </div >
+        </ >
     );
 };
 
