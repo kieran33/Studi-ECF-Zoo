@@ -1,10 +1,12 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 const AjoutAnimaux = () => {
 
     const [prenomAnimal, setPrenomAnimal] = useState("");
+    const [data, setData] = useState([]);
+    const [dataNomHabitat, setDataNomHabitat] = useState([]);
 
     const [nouvelAnimal, setNouvelAnimal] = useState({
         id: "",
@@ -13,6 +15,24 @@ const AjoutAnimaux = () => {
         description: "",
         image: ""
     });
+
+    const loadData = async () => {
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setData(reponse.data);
+    };
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    useEffect(() => {
+        if (data.length > 0) {
+            const dataFiltrer = data.map(habitat => habitat.nom);
+            setDataNomHabitat(dataFiltrer);
+        }
+    }, [data]);
+
+    console.log(dataNomHabitat)
 
     const prenom = useRef("");
     const race = useRef("");
@@ -55,7 +75,6 @@ const AjoutAnimaux = () => {
         formData.append("habitat", nouvelAnimal.habitat);
         formData.append("description", nouvelAnimal.description);
         formData.append("image", nouvelAnimal.image);
-
 
         try {
             const reponse = axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
@@ -116,17 +135,22 @@ const AjoutAnimaux = () => {
                 />
                 <label htmlFor="race"></label>
 
-                <input
-                    type="text"
+                <select
                     name="habitat"
-                    className="champsFormulaire"
                     id="habitat"
-                    placeholder="Habitat..."
+                    className="champsFormulaire"
                     ref={habitat}
+                    style={{ width: "140px" }}
                     onChange={inputChangement}
                     required
-                />
-                <label htmlFor="habitat"></label>
+                >
+                    <option value="">Choisissez l'habitat</option>
+                    {dataNomHabitat.map((nomHabitat, index) => (
+                        <option key={index} value={nomHabitat}>
+                            {nomHabitat}
+                        </option>
+                    ))}
+                </select>
 
                 <textarea
                     name="description"

@@ -9,7 +9,7 @@ const DashboardEmploye = () => {
         <>
             <div className="dashboard_global">
                 <BarreDashboardEmploye />
-                <div >
+                <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Dashboard employé</h2>
                 </div>

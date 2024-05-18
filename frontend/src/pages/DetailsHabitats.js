@@ -52,10 +52,14 @@ const DetailsHabitats = () => {
                     </img>
                     <p>{dataHabitat.nom}</p>
                     <p className="paragraphe">{dataHabitat.description}</p>
-                    <div>
-                        <h3 className="titre_service">L'avis du vétérinaire sur l'état de l'habitat</h3>
-                        <p style={{ textAlign: "center" }}>{dataHabitat.etat}</p>
-                    </div>
+                    {dataHabitat.etat === "" ?
+                        <></>
+                        :
+                        <div>
+                            <h3 className="titre_service">L'avis du vétérinaire sur l'état de l'habitat</h3>
+                            <p style={{ textAlign: "center" }}>{dataHabitat.etat}</p>
+                        </div>
+                    }
                     <h3 className="titre_service">Liste des animaux qui vivent dans cet habitat</h3>
                     <div className="centrer">
                         {dataAnimaux.filter(animal => (animal.habitat === dataHabitat.nom)).map(animal => (
@@ -63,7 +67,7 @@ const DetailsHabitats = () => {
                                 {
                                     <div className="animal">
                                         <div className="div_zoo_animaux" >
-                                            <Link to={`/animaux/${animal.id}`} onClick={recharger} style={{ opacity: "1" }}>
+                                            <Link to={`/animaux/${animal.id}/${animal.prenom}`} onClick={recharger} style={{ opacity: "1" }}>
                                                 <img className="image_zoo_animaux"
                                                     src={`http://localhost:3002/image/${animal.image}`}
                                                     alt={animal.prenom}>

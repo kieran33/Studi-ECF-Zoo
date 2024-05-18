@@ -101,7 +101,7 @@ const DetailsModificationServicesEmploye = () => {
 
     return (
         <>
-            <div className="dashboard">
+            <div className="dashboard_global">
                 <div>
                     <BarreDashboardEmploye />
                 </div>

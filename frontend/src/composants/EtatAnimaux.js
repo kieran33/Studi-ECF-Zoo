@@ -82,7 +82,7 @@ const EtatAnimaux = () => {
                                         {
                                             animal_soins.prenom === animal.prenom ?
                                                 < div className="div_zoo_etat">
-                                                    <img className="image_zoo_animaux"
+                                                    <img className="image_zoo_animaux_etat"
                                                         src={`http://localhost:3002/image/${animal.image}`}
                                                         alt={animal.prenom}>
                                                     </img>
@@ -107,7 +107,7 @@ const EtatAnimaux = () => {
                                             {
                                                 animal_soins.prenom === animal.prenom ?
                                                     < div className="div_zoo_etat" >
-                                                        <img className="image_zoo_animaux"
+                                                        <img className="image_zoo_animaux_etat"
                                                             src={`http://localhost:3002/image/${animal.image}`}
                                                             alt={animal.prenom}>
                                                         </img>
@@ -131,7 +131,7 @@ const EtatAnimaux = () => {
                                             {
                                                 animal_soins.prenom === animal.prenom ?
                                                     < div className="div_zoo_etat">
-                                                        <img className="image_zoo_animaux"
+                                                        <img className="image_zoo_animaux_etat"
                                                             src={`http://localhost:3002/image/${animal.image}`}
                                                             alt={animal.prenom}>
                                                         </img>

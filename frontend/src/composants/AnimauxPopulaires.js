@@ -53,14 +53,12 @@ const AnimauxPopulaires = () => {
                     <div className="centrer">
                         {dataAnimauxTrier.map((dataAnimal, index) => (
                             <div className="animal" key={index}>
-
                                 <p className="titre_service">{dataAnimal.nombreVues} vues</p>
-
                                 {data.map((animal, index) => (
                                     <div key={index}>
                                         {
                                             dataAnimal.prenom === animal.prenom ?
-                                                <img className="image_zoo_animaux"
+                                                <img className="image_zoo_animaux_etat"
                                                     src={`http://localhost:3002/image/${animal.image}`}
                                                     alt={animal.prenom}
                                                 >

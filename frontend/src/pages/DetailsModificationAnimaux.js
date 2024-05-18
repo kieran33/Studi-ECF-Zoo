@@ -13,6 +13,8 @@ const DetailsModificationAnimaux = () => {
     const [dataAnimal, setDataAnimal] = useState([]);
     const { prenom } = useParams();
     const [nouveauPrenom, setNouveauPrenom] = useState("")
+    const [dataHabitat, setDataHabitat] = useState([]);
+    const [dataNomHabitat, setDataNomHabitat] = useState([]);
 
     const idNombre = Number(id);
 
@@ -27,13 +29,21 @@ const DetailsModificationAnimaux = () => {
         setData(reponse.data);
     };
 
+    const loadDataHabitat = async () => {
+        const reponse = await axios.get("http://localhost:3002/habitats");
+        setDataHabitat(reponse.data);
+    };
+
     useEffect(() => {
         loadData();
+        loadDataHabitat();
     }, []);
 
     useEffect(() => {
         if (data.length > 0) {
             setDataAnimal(data.find(animal => animal.id === idNombre));
+            const dataFiltrer = dataHabitat.map(habitat => habitat.nom);
+            setDataNomHabitat(dataFiltrer);
         }
     }, [data]);
 
@@ -116,6 +126,8 @@ const DetailsModificationAnimaux = () => {
         }
     }
 
+    console.log(dataNomHabitat)
+
     return (
         <>
             <div className="dashboard_global">
@@ -154,17 +166,28 @@ const DetailsModificationAnimaux = () => {
                             />
                             <label htmlFor="race"></label>
 
-                            <input
-                                type="text"
+                            <select
                                 name="habitat"
-                                className="champsFormulaire"
                                 id="habitat"
-                                placeholder="Habitat..."
-                                defaultValue={animal.habitat}
+                                className="champsFormulaire"
                                 ref={habitat}
+                                style={{ width: "140px" }}
                                 onChange={inputChangement}
-                            />
-                            <label htmlFor="habitat"></label>
+                            >
+                                <option value="">{animal.habitat}</option>
+                                {dataNomHabitat.map((nomHabitat, index) => (
+                                    <>
+                                        {
+                                            animal.habitat === nomHabitat ?
+                                                <></>
+                                                :
+                                                <option key={index} value={nomHabitat}>
+                                                    {nomHabitat}
+                                                </option>
+                                        }
+                                    </>
+                                ))}
+                            </select>
 
                             <textarea
                                 name="description"

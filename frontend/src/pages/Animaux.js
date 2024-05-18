@@ -27,10 +27,10 @@ const Animaux = () => {
     useEffect(() => {
         if (data.length > 0) {
             setDataTrier(data.sort(function compare(a, b) {
-                if (a.prenom < b.prenom) {
+                if (a.prenom.toUpperCase() < b.prenom.toUpperCase()) {
                     return -1;
                 }
-                else if (a.prenom > b.prenom) {
+                else if (a.prenom.toUpperCase() > b.prenom.toUpperCase()) {
                     return 1;
                 }
                 else {
@@ -47,7 +47,6 @@ const Animaux = () => {
             console.log(error);
         }
     };
-
 
     const detailsAnimaux = () => {
         navigate(`/animaux/${id}/${prenom}`)

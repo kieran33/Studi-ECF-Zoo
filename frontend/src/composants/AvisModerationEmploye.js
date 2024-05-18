@@ -63,7 +63,7 @@ const AvisModerationEmploye = () => {
                     <h2 className="titre_service">Espace modération des avis</h2>
                     <div style={{ width: "100%", display: "flex" }}>
                         <button className="bouton_zoo" style={{ margin: "auto", marginBottom: "20px" }} onClick={() => supprimerTousLesAvis()}>
-                            Supprimer tous les avis vérifiés
+                            Supprimer tous les avis de la page d'accueil
                         </button>
                     </div>
                     <div className="conteneurAvis">

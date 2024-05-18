@@ -27,7 +27,6 @@ app.get("/vues-animaux", (req, res) => {
 
 app.put("/augmenter-vues-animal", (req, res) => {
     const { prenom } = req.body;
-    console.log(prenom)
 
     AnimalModel.findOneAndUpdate(
         { prenom: prenom },
@@ -38,7 +37,6 @@ app.put("/augmenter-vues-animal", (req, res) => {
 
 app.post("/ajout-animaux-vues", (req, res) => {
     const { prenomAnimal } = req.body;
-    console.log(prenomAnimal)
 
     AnimalModel.insertMany(
         { prenom: prenomAnimal },
@@ -49,7 +47,6 @@ app.post("/ajout-animaux-vues", (req, res) => {
 
 app.delete("/supprimer-animaux-vues/:prenom", (req, res) => {
     const { prenom } = req.params;
-    console.log(prenom);
 
     AnimalModel.findOneAndDelete({ prenom: prenom })
         .then(animals => res.json(animals))
@@ -58,18 +55,13 @@ app.delete("/supprimer-animaux-vues/:prenom", (req, res) => {
 
 app.put("/modifier-animaux-vues/:prenom", (req, res) => {
     const { prenom } = req.params;
-    console.log('JE SUIS DANS MODIFIER ANIMAUX VUES MONGODB')
-    console.log(prenom)
-
     const { nouveauPrenom } = req.body;
-    console.log("nouveau prenom", nouveauPrenom)
 
     AnimalModel.findOneAndUpdate(
         { prenom: prenom },
         { $set: { prenom: nouveauPrenom } })
         .then(animals => res.json(animals))
         .catch(animals => res.json(animals))
-    console.log('apres le model ')
 });
 
 app.use("/image", express.static(path.join(__dirname, "image")));
@@ -203,7 +195,7 @@ db.connect(err => {
         creerTableAvisNonVerif, creerTableAvisVerif, creerTableHoraires,
         creerTableQuestions, creerTableNourrirAnimaux, creerTableSoins), err => {
             if (err) throw err;
-            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif', 'horaires', 'questions', 'nourrir_animaux' et 'soins sont prêtes");
+            console.log("Les tables 'animaux', 'habitats', 'personnels', 'services', 'avis_non_verif', 'avis_verif', 'horaires', 'questions', 'nourrir_animaux' et 'soins' sont prêtes");
         });
 });
 
@@ -279,8 +271,6 @@ app.get("/soins-animaux", (req, res) => {
 
 app.post("/connexion", (req, res) => {
     const { nom_utilisateur, mot_de_passe } = req.body;
-    console.log("nom utilisateur", nom_utilisateur)
-    console.log('mot de passe', mot_de_passe)
 
     db.query("SELECT * FROM personnels WHERE nom_utilisateur = ?", [nom_utilisateur], (err, results) => {
         if (err) {
@@ -289,22 +279,18 @@ app.post("/connexion", (req, res) => {
         if (results.length === 0) {
             res.status(401).send("Utilisateur non trouvé");
         } else {
-            console.log('result', results)
+            console.log("Connexion réussis")
         }
 
         if (mot_de_passe.includes("admin")) {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(mot_de_passe, salt, (err, hash) => {
-                    console.log("mot de passe salt", mot_de_passe)
-                    console.log("hash", hash)
                     const utilisateur = results[0];
                     bcrypt.compare(utilisateur.mot_de_passe, hash, (err, result) => {
-                        console.log('result bcrypt compare2', result)
                         if (result) {
                             res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
                         } else {
                             console.log(result)
-                            console.log('erreur bcrypt else', err)
                             res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
                         }
                     })
@@ -312,17 +298,12 @@ app.post("/connexion", (req, res) => {
             })
         }
         else {
-            console.log("je suis dans else")
             const utilisateur = results[0];
-            console.log("mot de passe", mot_de_passe)
-            console.log("utilisateur . mot de passe", utilisateur.mot_de_passe)
             bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe, (err, result) => {
-                console.log('result bcrypt compare2', result)
                 if (result) {
                     res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
                 } else {
                     console.log(result)
-                    console.log('erreur bcrypt else', err)
                     res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
                 }
             })
@@ -465,28 +446,6 @@ app.post("/ajout-soins/:prenom", exporter.single("image"), (req, res) => {
         });
 });
 
-
-/*app.put("/compte-rendu-animaux/:id", exporter.single(), (req, res) => {
-    const { id } = req.params;
-    console.log('id', id)
-    console.log('etat', req.body.etat)
-    console.log('date soins', req.body.date_soins)
-
-    const request = "UPDATE animaux SET `etat`=?, `date_soins`=? WHERE id=?";
-
-    db.query(request, [req.body.etat, req.body.date_soins, id], (error, result) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log(result);
-        }
-    });
-});*/
-
-
-
-
 app.delete("/animaux/supprimer/:id", (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM animaux WHERE id = ?";
@@ -579,8 +538,6 @@ app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
 
-    console.log('JE SUIS DANS ANIMAUX MODIFIER ID')
-
     if (nom_image === null) {
         const request = "UPDATE animaux SET `prenom`=?, `race`=?, `habitat`=?, `description`=? WHERE id=?";
         db.query(request, [req.body.prenom, req.body.race, req.body.habitat, req.body.description, id], (error, result) => {
@@ -608,9 +565,6 @@ app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
 app.put("/animaux-nourriture/modifier/:prenom", exporter.single("image"), (req, res) => {
     const { prenom } = req.params;
     const { nouveauPrenom } = req.body;
-    console.log('JE SUIS DANS ANIMAUX NOURRITURE MODIFIER')
-    console.log('ancien prenom', prenom)
-    console.log("nouveau prenom nourriture modif", nouveauPrenom)
 
     const request = "UPDATE nourrir_animaux SET `prenom`=? WHERE prenom=?";
     db.query(request, [req.body.nouveauPrenom, prenom], (error, result) => {
@@ -626,9 +580,6 @@ app.put("/animaux-nourriture/modifier/:prenom", exporter.single("image"), (req, 
 app.put("/animaux-soins/modifier/:prenom", exporter.single("image"), (req, res) => {
     const { prenom } = req.params;
     const { nouveauPrenom } = req.body;
-    console.log('JE SUIS DANS ANIMAUX NOURRITURE MODIFIER')
-    console.log('ancien prenom', prenom)
-    console.log("nouveau prenom nourriture modif", nouveauPrenom)
 
     const request = "UPDATE soins SET `prenom`=? WHERE prenom=?";
     db.query(request, [req.body.nouveauPrenom, prenom], (error, result) => {
@@ -644,10 +595,6 @@ app.put("/animaux-soins/modifier/:prenom", exporter.single("image"), (req, res) 
 
 app.put("/ajout-nourriture/:id", exporter.single(), (req, res) => {
     const { id } = req.params;
-    console.log('id', id)
-    console.log('nourriture animal', req.body.nourriture)
-    console.log('quantité nourriture animal', req.body.quantite_nourriture)
-    console.log('date nourriture animal', req.body.date_nourriture)
 
     const request = "UPDATE animaux SET `nourriture`=?, `quantite_nourriture`=?, `date_nourriture`=? WHERE id=?";
 
@@ -664,10 +611,6 @@ app.put("/ajout-nourriture/:id", exporter.single(), (req, res) => {
 app.put("/ajout-nourriture2/:prenom", exporter.single(), (req, res) => {
     const { prenom } = req.params;
     const { nourriture, quantite_nourriture, date_nourriture } = req.body;
-    console.log('prenom', prenom)
-    console.log(nourriture)
-    console.log(quantite_nourriture)
-    console.log(date_nourriture)
 
     db.query("INSERT INTO nourrir_animaux (prenom, nourriture, quantite_nourriture, date_nourriture) VALUES (?, ?, ?, ?)",
         [prenom, nourriture, quantite_nourriture, date_nourriture], (error, result) => {
@@ -681,29 +624,8 @@ app.put("/ajout-nourriture2/:prenom", exporter.single(), (req, res) => {
         });
 });
 
-/*
-app.put("/compte-rendu-animaux/:id", exporter.single(), (req, res) => {
-    const { id } = req.params;
-    console.log('id', id)
-    console.log('etat', req.body.etat)
-    console.log('date soins', req.body.date_soins)
-
-    const request = "UPDATE animaux SET `etat`=?, `date_soins`=? WHERE id=?";
-
-    db.query(request, [req.body.etat, req.body.date_soins, id], (error, result) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log(result);
-        }
-    });
-});*/
-
 app.put("/avis-habitats/:id", exporter.single(), (req, res) => {
     const { id } = req.params;
-    console.log('id', id)
-    console.log('etat', req.body.etat)
 
     const request = "UPDATE habitats SET `etat`=? WHERE id=?";
 
@@ -720,7 +642,6 @@ app.put("/avis-habitats/:id", exporter.single(), (req, res) => {
 app.put("/services/modifier/:id", exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
-    console.log('nom services', req.body.nom)
 
     if (nom_image === null) {
         const request = "UPDATE services SET `nom`=?, `description`=? WHERE id=?";
@@ -776,36 +697,40 @@ app.put("/habitats/modifier/:id", exporter.single("image"), (req, res) => {
 
 app.put("/personnels/modifier/:id", (req, res) => {
     const { id } = req.params;
+    const { mot_de_passe } = req.body;
+    const { nom_utilisateur } = req.body;
+    const { role } = req.body;
 
-    console.log('nom user', req.body.nom_utilisateur)
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(mot_de_passe, salt, (err, hash) => {
+            if (err) {
+                return res.status(500).send("Erreur lors du hashage");
+            }
 
-    const request = "UPDATE personnels SET `nom_utilisateur`=?, `mot_de_passe`=?, `role`=? WHERE id=?";
-    db.query(request, [req.body.nom_utilisateur, req.body.mot_de_passe, req.body.role, id], (error, result) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log(result);
-        }
+            const request = "UPDATE personnels SET `nom_utilisateur`=?, `mot_de_passe`=?, `role`=? WHERE id=?";
+
+            db.query(request, [nom_utilisateur, hash, role, id], (error, result) => {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log(result);
+                }
+            });
+        });
     });
 });
 
 app.put("/horaires/modifier/:id", (req, res) => {
     const { id } = req.params;
-    console.log("id", id)
-    console.log('heure ouverture', req.body.heure_ouverture);
-    console.log('heure fermeture', req.body.heure_fermeture);
-    console.log('ouvert ou fermer ?', req.body.ouvert_fermer)
 
     const request = "UPDATE horaires SET `heure_ouverture`=?, `heure_fermeture`=?, `ouvert_fermer`=? WHERE id=?";
     db.query(request, [req.body.heure_ouverture, req.body.heure_fermeture, req.body.ouvert_fermer, id], (error, result) => {
         if (error) {
             console.log(error);
-            console.log('aie aie erreur')
         }
         else {
             console.log(result);
-            console.log('nice c\'est ok')
         }
     });
 });

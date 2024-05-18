@@ -21,7 +21,7 @@ const EtatHabitats = () => {
                 {data.map((habitat, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo_etat" >
-                            <img className="image_zoo_animaux"
+                            <img className="image_zoo_animaux_etat"
                                 src={`http://localhost:3002/image/${habitat.image}`}
                                 alt={habitat.nom}>
                             </img>
