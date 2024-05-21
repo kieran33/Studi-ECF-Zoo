@@ -8,6 +8,8 @@ import { useState, useEffect, useRef } from 'react';
 
 const DetailsAjoutNourritureAnimaux = () => {
 
+    const navigate = useNavigate();
+
     const nourriture = useRef("");
     const quantite_nourriture = useRef("");
     const date_nourriture = useRef("");
@@ -84,6 +86,10 @@ const DetailsAjoutNourritureAnimaux = () => {
         date_nourriture.current.value = "";
     }
 
+    const retour = () => {
+        navigate("/dashboard-employe/ajout-nourriture");
+    };
+
     return (
         <>
             <div className="dashboard_global" >
@@ -93,6 +99,9 @@ const DetailsAjoutNourritureAnimaux = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Ajouter nourriture pour l'animal {animal.prenom}</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={AjouterNourritureAnimaux}>
                             <input

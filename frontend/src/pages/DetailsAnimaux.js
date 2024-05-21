@@ -10,12 +10,15 @@ import { Link } from 'react-router-dom';
 
 const DetailsAnimaux = () => {
 
+    const role = localStorage.getItem('role');
+
     const [data, setData] = useState([]);
     const [dataAnimal, setDataAnimal] = useState([]);
     const [dataHabitat, setDataHabitat] = useState([]);
     const [dataEtat, setDataEtat] = useState([]);
     const [dataEtatAnimal, setDataEtatAnimal] = useState([]);
     const [dernierSoins, setDernierSoins] = useState([]);
+    const [prenomNouvelAnimal, setPrenomNouvelAnimal] = useState("")
     const { id } = useParams();
     const { prenom } = useParams();
 
@@ -59,7 +62,19 @@ const DetailsAnimaux = () => {
         }
     }, [dataEtatAnimal])
 
-    console.log(dernierSoins)
+    const augmenterVue = () => {
+        try {
+            axios.put(`http://localhost:3002/augmenter-vues-animal`, { prenomNouvelAnimal })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        if (role === null) {
+            augmenterVue()
+        }
+    }, [prenomNouvelAnimal])
 
     return (
         <>
@@ -113,21 +128,36 @@ const DetailsAnimaux = () => {
                     <div className="centrer">
                         {data.filter(animaux => (animaux.habitat === dataAnimal.habitat) && (animaux.prenom !== dataAnimal.prenom)).map((animal, index) => (
                             <div className="animal" key={index}>
-                                <div className="div_zoo_animaux">
-                                    <Link to={`/animaux/${animal.id}/${animal.prenom}`}
-                                        onClick={() => {
-                                            setTimeout(() => {
-                                                recharger();
-                                            }, "100")
-                                        }}
-                                        style={{ opacity: "1" }}>
-                                        <img className="image_zoo_animaux"
-                                            src={`http://localhost:3002/image/${animal.image}`}
-                                            alt={animal.prenom}>
-                                        </img>
-                                    </Link>
-                                    <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
-                                </div>
+                                {(role === null) ?
+                                    <div className="div_zoo_animaux">
+                                        <Link to={`/animaux/${animal.id}/${animal.prenom}`}
+                                            onClick={() => {
+                                                setPrenomNouvelAnimal(animal.prenom)
+                                                augmenterVue()
+                                                setTimeout(() => {
+                                                    recharger();
+                                                }, "100")
+                                            }}
+                                            style={{ opacity: "1" }}>
+                                            <img className="image_zoo_animaux"
+                                                src={`http://localhost:3002/image/${animal.image}`}
+                                                alt={animal.prenom}>
+                                            </img>
+                                        </Link>
+                                        <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
+                                    </div>
+                                    :
+                                    <div className="div_zoo_animaux">
+                                        <Link to={`/animaux/${animal.id}/${animal.prenom}`}
+                                            style={{ opacity: "1" }}>
+                                            <img className="image_zoo_animaux"
+                                                src={`http://localhost:3002/image/${animal.image}`}
+                                                alt={animal.prenom}>
+                                            </img>
+                                        </Link>
+                                        <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
+                                    </div>
+                                }
                             </div>
                         ))}
                     </div>

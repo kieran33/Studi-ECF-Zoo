@@ -3,8 +3,11 @@ import Navigation from '../composants/Navigation';
 import Footer from '../composants/Footer';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AnimauxPopulaires = () => {
+
+    const navigate = useNavigate();
 
     const [dataAnimaux, setDataAnimaux] = useState([]);
     const [data, setData] = useState([]);
@@ -41,6 +44,10 @@ const AnimauxPopulaires = () => {
         }
     }, [dataAnimaux]);
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -50,6 +57,9 @@ const AnimauxPopulaires = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Animaux populaires</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         {dataAnimauxTrier.map((dataAnimal, index) => (
                             <div className="animal" key={index}>

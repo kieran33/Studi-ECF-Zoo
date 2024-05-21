@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ModificationHoraires = () => {
+
     const navigate = useNavigate();
 
     const [data, setData] = useState([]);
@@ -21,9 +22,16 @@ const ModificationHoraires = () => {
         navigate(`/dashboard-admin/modifier-horaires/${id}`)
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Modifier horaire du zoo</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <div className="conteneurHoraires">
                 {data.map((horaire, index) => (
                     <div key={index} className="horaires">

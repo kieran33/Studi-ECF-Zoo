@@ -31,9 +31,9 @@ const Accueil = () => {
                 <img src={perroquet} className="perroquet" width="300" height="auto" alt="perroquet zoo" />
             </div>
             <div className="centrer">
-                <p className="paragraphe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ex tellus, sagittis porttitor tempor ut, fringilla ut diam.
-                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                    Donec sagittis fermentum nisi sed venenatis. Mauris ac volutpat ante, sed luctus libero.</p>
+                <p className="paragraphe">Implanté sur prés de 5 hectares, le zoo d’Asson est unique de part la richesse et l’originalité de ses collections et les modes de présentation des espèces choisis.
+                    ici, les animaux (répartis en une centaine d’espèces) sont issus de contrées lointaines d’Asie, d’Amérique du Sud, d’Afrique tropicale et d’Australie et évoluent dans un cadre verdoyant et exotique.
+                </p>
             </div>
             <div className="centrer">
                 <div className="div_zoo" style={{ marginBottom: "40px" }} onClick={directionAnimaux}>

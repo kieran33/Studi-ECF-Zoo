@@ -4,8 +4,11 @@ import axios from 'axios';
 import Navigation from './Navigation';
 import BarreDashboardEmploye from './BarreDashboardEmploye';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 const AvisModerationEmploye = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -52,6 +55,10 @@ const AvisModerationEmploye = () => {
         }
     }
 
+    const retour = () => {
+        navigate("/dashboard-employe");
+    };
+
     return (
         < >
             <div className="dashboard_global">
@@ -61,10 +68,11 @@ const AvisModerationEmploye = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Espace modération des avis</h2>
-                    <div style={{ width: "100%", display: "flex" }}>
-                        <button className="bouton_zoo" style={{ margin: "auto", marginBottom: "20px" }} onClick={() => supprimerTousLesAvis()}>
+                    <div className="service">
+                        <button className="bouton_zoo" style={{ marginRight: "20px", marginLeft: "20px", marginBottom: "20px" }} onClick={() => supprimerTousLesAvis()}>
                             Supprimer tous les avis de la page d'accueil
                         </button>
+                        <button className="bouton_zoo" style={{ marginBottom: "20px" }} onClick={retour}>Retour</button>
                     </div>
                     <div className="conteneurAvis">
                         {data.map((avis, index) => (
@@ -103,7 +111,7 @@ const AvisModerationEmploye = () => {
                 </div>
             </div>
             <Footer />
-        </ >
+        </>
     );
 };
 

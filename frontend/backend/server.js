@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const path = require("path");
 const multer = require("multer");
-
 const mongoose = require("mongoose");
 require("dotenv").config();
 const AnimalModel = require("./models/Animaux");
@@ -13,7 +12,9 @@ const AnimalModel = require("./models/Animaux");
 mongoose.connect(process.env.MONGO_URL);
 
 const app = express();
-const port = 3002;
+const port = /*process.env.PORT* ||*/ 3002;
+
+/*console.log(process.env.PORT)*/
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,12 +28,23 @@ app.get("/vues-animaux", (req, res) => {
 
 app.put("/augmenter-vues-animal", (req, res) => {
     const { prenom } = req.body;
+    const { prenomNouvelAnimal } = req.body;
 
-    AnimalModel.findOneAndUpdate(
-        { prenom: prenom },
-        { $inc: { nombreVues: 1 } })
-        .then(animals => res.json(animals))
-        .catch(animals => res.json(animals))
+    if (prenom !== undefined) {
+        AnimalModel.findOneAndUpdate(
+            { prenom: prenom },
+            { $inc: { nombreVues: 1 } })
+            .then(animals => res.json(animals))
+            .catch(animals => res.json(animals))
+    }
+
+    if (prenomNouvelAnimal !== undefined) {
+        AnimalModel.findOneAndUpdate(
+            { prenom: prenomNouvelAnimal },
+            { $inc: { nombreVues: 1 } })
+            .then(animals => res.json(animals))
+            .catch(animals => res.json(animals))
+    }
 });
 
 app.post("/ajout-animaux-vues", (req, res) => {
@@ -93,12 +105,21 @@ const filtreFichier = (req, file, cb) => {
 
 const exporter = multer({ storage: stockage, fileFilter: filtreFichier });
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'zoo'
-});
+let db;
+
+if (process.env.JAWSDB_URL) {
+    db = mysql.createConnection(process.env.JAWSDB_URL)
+    console.log("connexion mysql avec process.env.JAWSDB_URL");
+} else {
+    console.log("connexion avec mysql en local");
+    db = mysql.createConnection({
+        host: 'localhost',
+        user: 'root', // remplacez par votre utilisateur
+        password: '', // remplacez par votre mot de passe
+        database: 'zoo' // remplacez par le nom de votre base de données
+        // Paramètres de connexion MySQL
+    });
+}
 
 db.connect(err => {
     if (err) throw err;

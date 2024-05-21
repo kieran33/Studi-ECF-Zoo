@@ -4,8 +4,11 @@ import axios from 'axios';
 import Navigation from './Navigation';
 import BarreDashboardEmploye from './BarreDashboardEmploye';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionsVisiteurs = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -18,6 +21,10 @@ const QuestionsVisiteurs = () => {
         loadData();
     }, []);
 
+    const retour = () => {
+        navigate("/dashboard-employe");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -27,6 +34,9 @@ const QuestionsVisiteurs = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Espace questions/messages des visiteurs</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="conteneurAvis">
                         {data.map((questions, index) => (
                             <div className="avis_visiteur" index={index}>

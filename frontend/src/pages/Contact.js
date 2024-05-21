@@ -66,7 +66,6 @@ const Contact = () => {
                     placeholder="Titre..."
                     ref={titre}
                     onChange={inputChangement}
-                    //value={nouvelleQuestion.titre}
                     required>
                 </input>
                 <label htmlFor="titre"></label>
@@ -78,7 +77,6 @@ const Contact = () => {
                     placeholder="Votre message..."
                     ref={description}
                     onChange={inputChangement}
-                    //value={nouvelleQuestion.description}
                     required>
                 </textarea>
                 <label htmlFor="description"></label>

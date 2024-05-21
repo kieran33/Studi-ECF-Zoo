@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SuppressionPersonnels = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -22,9 +25,16 @@ const SuppressionPersonnels = () => {
         };
     };
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Liste du personnel</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <div className="centrer">
                 {data.filter(personnel => personnel.role !== "admin").map((personnel, index) => (
                     <div className="animal" key={index}>

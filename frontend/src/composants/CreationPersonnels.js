@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreationPersonnels = () => {
+
+    const navigate = useNavigate();
 
     const nom_utilisateur = useRef("");
     const mot_de_passe = useRef("");
@@ -68,9 +71,16 @@ const CreationPersonnels = () => {
         }
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Création compte personnel du zoo</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <form className="formulaire" onSubmit={creerPersonnels}>
                 <input
                     type="text"

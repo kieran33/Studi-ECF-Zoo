@@ -5,8 +5,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 import Footer from '../composants/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const DetailsModificationServices = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -98,6 +101,10 @@ const DetailsModificationServices = () => {
         }
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin/modification-services");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -107,6 +114,9 @@ const DetailsModificationServices = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Modifier le service {service.nom}</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierServices}>
                             <input

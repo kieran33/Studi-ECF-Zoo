@@ -4,8 +4,11 @@ import Footer from '../composants/Footer';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
+import { useNavigate } from 'react-router-dom';
 
 const CompteRenduAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -18,6 +21,10 @@ const CompteRenduAnimaux = () => {
         loadData();
     }, []);
 
+    const retour = () => {
+        navigate("/dashboard-veterinaire");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -27,6 +34,9 @@ const CompteRenduAnimaux = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Choisissez un animal pour voir ce qu'il a consommé</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         {data.map((animal, index) => (
                             <div className="animal" key={index}>

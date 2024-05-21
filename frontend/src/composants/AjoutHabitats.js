@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AjoutHabitats = () => {
+
+    const navigate = useNavigate();
 
     const [nouvelHabitat, setNouvelHabitat] = useState({
         id: "",
@@ -72,9 +75,16 @@ const AjoutHabitats = () => {
         }
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Ajouter habitats</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <form className="formulaire" onSubmit={ajouterHabitats} >
                 <input
                     type="text"

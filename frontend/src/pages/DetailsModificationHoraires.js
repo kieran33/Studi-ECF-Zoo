@@ -89,6 +89,10 @@ const DetailsModificationHoraires = () => {
         }
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin/modifier-horaires");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -98,6 +102,9 @@ const DetailsModificationHoraires = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Modifier horaire</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         <div className="conteneurHoraires">
                             <p>Jour : {horaire.jour}</p>

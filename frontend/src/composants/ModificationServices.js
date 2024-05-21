@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ModificationServices = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -16,9 +19,16 @@ const ModificationServices = () => {
         loadData();
     }, []);
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Choisissez le service à modifier</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>

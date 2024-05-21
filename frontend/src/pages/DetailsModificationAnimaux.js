@@ -2,11 +2,13 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 import Footer from '../composants/Footer';
 
 const DetailsModificationAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -126,7 +128,9 @@ const DetailsModificationAnimaux = () => {
         }
     }
 
-    console.log(dataNomHabitat)
+    const retour = () => {
+        navigate("/dashboard-admin/modification-animaux");
+    };
 
     return (
         <>
@@ -137,6 +141,9 @@ const DetailsModificationAnimaux = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Modifier l'animal {animal.prenom}</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         <form className="formulaire">
                             <input

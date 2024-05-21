@@ -6,7 +6,7 @@ import BarreDashboardEmploye from '../composants/BarreDashboardEmploye';
 
 const DashboardEmploye = () => {
     return (
-        <>
+        <div>
             <div className="dashboard_global">
                 <BarreDashboardEmploye />
                 <div className="dashboard_composants_centrer">
@@ -15,7 +15,7 @@ const DashboardEmploye = () => {
                 </div>
             </div >
             <Footer />
-        </>
+        </div>
     );
 };
 

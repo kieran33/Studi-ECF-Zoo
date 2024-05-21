@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SupprimerAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -34,9 +37,16 @@ const SupprimerAnimaux = () => {
         };
     };
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Choisissez l'animal à supprimer</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <div className="centrer">
                 {data.map((animal, index) => (
                     <div className="animal" key={index}>

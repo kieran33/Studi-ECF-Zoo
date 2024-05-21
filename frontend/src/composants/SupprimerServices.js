@@ -1,8 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SupprimerServices = () => {
+
+    const navigate = useNavigate();
+
+    const role = localStorage.getItem('role');
 
     const [data, setData] = useState([]);
 
@@ -22,9 +27,20 @@ const SupprimerServices = () => {
         };
     };
 
+    const retour = () => {
+        if (role === "admin") {
+            navigate("/dashboard-admin");
+        } else {
+            navigate("/dashboard-employe")
+        }
+    };
+
     return (
         <>
             <h2 className="titre_service">Supprimer services</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <div className="centrer">
                 {data.map((service, index) => (
                     <div className="animal" key={index}>

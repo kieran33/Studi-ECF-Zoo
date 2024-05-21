@@ -5,8 +5,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
 import Footer from '../composants/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const DetailsAvisHabitats = () => {
+
+    const navigate = useNavigate();
 
     const etat = useRef("");
 
@@ -76,6 +79,10 @@ const DetailsAvisHabitats = () => {
         }
     };
 
+    const retour = () => {
+        navigate("/dashboard-veterinaire/avis-habitats");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -85,6 +92,9 @@ const DetailsAvisHabitats = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Ecrire compte rendu pour l'habitat {habitat.nom} </h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <form className="formulaire" onSubmit={avisHabitats}>
                         <textarea
                             name="etat"

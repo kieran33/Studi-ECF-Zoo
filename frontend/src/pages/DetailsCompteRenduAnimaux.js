@@ -5,8 +5,11 @@ import Footer from '../composants/Footer';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import BarreDashboardVeterinaire from '../composants/BarreDashboardVeterinaire';
+import { useNavigate } from 'react-router-dom';
 
 const DetailsCompteRenduAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const date_soins = useRef("");
     const etat = useRef("");
@@ -92,6 +95,10 @@ const DetailsCompteRenduAnimaux = () => {
         }
     };
 
+    const retour = () => {
+        navigate("/dashboard-veterinaire/compte-rendu-animaux");
+    };
+
     return (
         <>
             <div className="dashboard_global" >
@@ -101,6 +108,9 @@ const DetailsCompteRenduAnimaux = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Liste de ce que l'animal {animal.prenom} à consommé</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className='centrer' >
                         {filtreAnimal.map((animal, index) => (
                             <div key={index} className="animal">

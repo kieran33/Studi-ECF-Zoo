@@ -2,10 +2,12 @@ import React from 'react';
 import Navigation from '../composants/Navigation';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BarreDashboardAdmin from '../composants/BarreDashboardAdmin';
 
 const DetailsModificationHabitats = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const { id } = useParams();
@@ -97,6 +99,11 @@ const DetailsModificationHabitats = () => {
             image.current.value = "";
         }
     }
+
+    const retour = () => {
+        navigate("/dashboard-admin/modification-habitats");
+    };
+
     return (
         <>
             <div className="dashboard_global">
@@ -106,6 +113,9 @@ const DetailsModificationHabitats = () => {
                 <div className="dashboard_composants_centrer">
                     <Navigation />
                     <h2 className="titre_service">Modifier l'habitat {habitat.nom}</h2>
+                    <div className="service">
+                        <button className="bouton_zoo" onClick={retour}>Retour</button>
+                    </div>
                     <div className="centrer">
                         <form className="formulaire" onSubmit={modifierHabitats}>
                             <input

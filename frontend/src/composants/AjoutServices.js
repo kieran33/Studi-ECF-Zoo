@@ -1,8 +1,13 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AjoutServices = () => {
+
+    const navigate = useNavigate();
+
+    const role = localStorage.getItem('role');
 
     const nom = useRef("");
     const description = useRef("");
@@ -74,9 +79,20 @@ const AjoutServices = () => {
         }
     }
 
+    const retour = () => {
+        if (role === "admin") {
+            navigate("/dashboard-admin");
+        } else {
+            navigate("/dashboard-employe")
+        }
+    };
+
     return (
         <>
             <h2 className="titre_service">Ajouter un service</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <form className="formulaire" onSubmit={ajouterServices} >
                 <input
                     type="text"

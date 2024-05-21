@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const EtatAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const [animalPrenom, setAnimalPrenom] = useState("");
@@ -37,6 +40,10 @@ const EtatAnimaux = () => {
         setDateSoins("");
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Liste des compte-rendus du vétérinaire</h2>
@@ -67,8 +74,8 @@ const EtatAnimaux = () => {
                         onChange={(e) => setDateSoins(e.target.value)}
                     />
                     <label htmlFor="date_nourriture"></label>
-
-                    <button className="bouton_zoo" onClick={reinitialiserFiltre}>Réinitialiser</button>
+                    <button className="bouton_zoo" onClick={reinitialiserFiltre} style={{ width: "100px" }}>Réinitialiser</button>
+                    <button className="bouton_zoo" onClick={retour} style={{ width: "100px" }}>Retour</button>
                 </div>
             </div>
 

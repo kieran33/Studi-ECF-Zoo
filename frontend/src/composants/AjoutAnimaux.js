@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AjoutAnimaux = () => {
+
+    const navigate = useNavigate();
 
     const [prenomAnimal, setPrenomAnimal] = useState("");
     const [data, setData] = useState([]);
@@ -104,9 +107,16 @@ const AjoutAnimaux = () => {
         }
     }
 
+    const retour = () => {
+        navigate("/dashboard-admin");
+    };
+
     return (
         <>
             <h2 className="titre_service">Ajouter animaux</h2>
+            <div className="service">
+                <button className="bouton_zoo" onClick={retour}>Retour</button>
+            </div>
             <form className="formulaire" onSubmit={ajouterAnimaux} >
                 <input
                     type="text"
