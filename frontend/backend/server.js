@@ -12,9 +12,7 @@ const AnimalModel = require("./models/Animaux");
 mongoose.connect(process.env.MONGO_URL);
 
 const app = express();
-const port = /*process.env.PORT* ||*/ 3002;
-
-/*console.log(process.env.PORT)*/
+const port = 3002;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -111,7 +109,7 @@ if (process.env.JAWSDB_URL) {
     db = mysql.createConnection(process.env.JAWSDB_URL)
     console.log("connexion mysql avec process.env.JAWSDB_URL");
 } else {
-    console.log("connexion avec mysql en local");
+    console.log("connexion avec localhost");
     db = mysql.createConnection({
         host: 'localhost',
         user: 'root', // remplacez par votre utilisateur

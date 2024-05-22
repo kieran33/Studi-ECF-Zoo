@@ -4,19 +4,18 @@
   list-style-type: none;
 }
 
-/*html {
+html,
+body,
+#root {
   height: 100%;
-  box-sizing: border-box;
-}*/
-
-/*body {
-  margin: 0;
   padding: 0;
-  height: 100%;
-  min-height: 100%;
-  box-sizing: inherit;
-  position: relative;
-}*/
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
 
 @media only screen and (min-width: 674px) {
   .div_zoo {
@@ -614,14 +613,12 @@
     color: white;
     gap: 10px;
     text-align: center;
-    border: red solid 5px;
   }
 
   .dashboard_categorie {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: yellow 5px solid;
   }
 
   .dashboard_text {
@@ -632,13 +629,11 @@
     padding: 5px;
     margin: 10px;
     width: 200px;
-    border: solid blue 5px;
   }
 
   .dashboard_global {
     display: flex;
     flex-direction: column-reverse;
-    border: solid orange 5px;
   }
 
   .composant_dashboard {
@@ -646,7 +641,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    border: solid 5px pink;
   }
 
   .dashboard_composants_centrer {
@@ -823,51 +817,6 @@ a {
   opacity: 1;
 }
 
-.animal2 {
-  width: 250px;
-  display: flex;
-  justify-content: center;
-}
-
-.div_zoo2 {
-  width: 250px;
-  position: relative;
-}
-
-.image_zoo2 {
-  display: block;
-  margin: auto;
-  object-fit: cover;
-  border-radius: 5px;
-  transition: 0.1s all ease-in-out;
-}
-
-.image_zoo2:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
-.text_zoo2 {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  opacity: 0;
-  transition: 0.1s;
-  background-color: #00752F;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.text_zoo2:hover {
-  opacity: 1;
-}
-
 .conteneurAvis {
   display: flex;
   flex-direction: column;
@@ -910,17 +859,4 @@ a {
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: auto;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
 }

@@ -21,8 +21,6 @@ const AvisModerationEmploye = () => {
         loadData();
     }, []);
 
-    console.log('data', data)
-
     const supprimerAvis = (id) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet avis ?")) {
             axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`);

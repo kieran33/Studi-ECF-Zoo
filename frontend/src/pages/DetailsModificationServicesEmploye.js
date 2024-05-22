@@ -84,7 +84,6 @@ const DetailsModificationServicesEmploye = () => {
     const imageChangement = (e) => {
         if (e.target.files && e.target.files[0]) {
             const img = e.target.files[0];
-            console.log(img)
             setService({
                 ...service,
                 image: img

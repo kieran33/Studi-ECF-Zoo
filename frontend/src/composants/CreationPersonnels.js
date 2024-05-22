@@ -42,7 +42,6 @@ const CreationPersonnels = () => {
                         "Content-Type": "application/json",
                     },
                 });
-                console.log(reponse)
                 if (reponse.status === 201 || reponse.status === 200) {
                     alert("Nouveau compte personnel créer avec succès");
                     nom_utilisateur.current.value = "";

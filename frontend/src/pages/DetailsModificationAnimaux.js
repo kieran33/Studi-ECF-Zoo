@@ -107,12 +107,10 @@ const DetailsModificationAnimaux = () => {
     const imageChangement = (e) => {
         if (e.target.files && e.target.files[0]) {
             const img = e.target.files[0];
-            console.log(img)
             setAnimal({
                 ...animal,
                 image: img
             });
-            console.log(animal)
         };
     };
 

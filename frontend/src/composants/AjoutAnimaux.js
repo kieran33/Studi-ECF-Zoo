@@ -35,8 +35,6 @@ const AjoutAnimaux = () => {
         }
     }, [data]);
 
-    console.log(dataNomHabitat)
-
     const prenom = useRef("");
     const race = useRef("");
     const habitat = useRef("");
