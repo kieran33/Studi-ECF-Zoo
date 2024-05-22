@@ -110,7 +110,8 @@ Une fois connecté on est à l'accueil, toutes les applis que l'on a créées se
 
 Pour importer les données : 
 
-
+- télécharger le fichier .sql, celui présent en haut de ce fichier README
+  
 - aller sur la page d'accueil de mysql workbench sélectionner la nouvelle connexion que l'on vient juste de créer 
 
 - puis cliquer "Administration" en bas à droite 
