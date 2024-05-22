@@ -2,7 +2,17 @@
 
 Lien vers logiciel de gestion de projet Trello : https://trello.com/b/VNy4du8F/projet-ecf-zoo-kanban
 
-Lien vers l'application déployée : https://arcadia-zoo-jose-aae84af1a94a.herokuapp.com/
+Lien vers l'application déployée : https://arcadia-zoo-ecf-96a9f0778582.herokuapp.com/
+
+Lien manuel d'utilisation : https://drive.google.com/file/d/1UAWVCThUJERe-K1JbJ9xrCC5uTPcZFQp/view?usp=drive_link
+
+Lien charte graphique : https://drive.google.com/file/d/1VR2Toh_Qmc2UfrSBAlvZ4JgeLKNXa4tu/view?usp=drive_link
+
+Lien documentation gestion de projet : https://drive.google.com/file/d/1yfWuMSxj_OUJjfjvJln4HRdoCGkPSXjy/view?usp=drive_link
+
+Lien documentation technique : https://drive.google.com/file/d/1A3LLg0wAGMmlRLkx8pcjsGgkZJ3e-te8/view
+
+Lien fichier création base de donnée SQL : https://drive.google.com/file/d/1dCzLlWCygnmtWGXGarRZzuFg_oDTlshi/view?usp=drive_link
 
 Démarche à suivre pour déployer l'application en local avec Heroku :
 
@@ -100,7 +110,8 @@ Une fois connecté on est à l'accueil, toutes les applis que l'on a créées se
 
 Pour importer les données : 
 
-
+- télécharger le fichier .sql, celui présent en haut de ce fichier README
+  
 - aller sur la page d'accueil de mysql workbench sélectionner la nouvelle connexion que l'on vient juste de créer 
 
 - puis cliquer "Administration" en bas à droite 
