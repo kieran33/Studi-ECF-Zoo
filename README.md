@@ -114,7 +114,7 @@ Pour importer les données :
   
 - aller sur la page d'accueil de mysql workbench sélectionner la nouvelle connexion que l'on vient juste de créer 
 
-- puis cliquer "Administration" en bas à droite 
+- puis cliquer sur "Administration" en bas à droite 
 
  - puis dans "Management" sélectionner "Data Import"  
 
@@ -130,7 +130,7 @@ Pour importer les données :
 Puis dans VScode dans le dossier du backend, dans le fichier server.js  
 
 
- - écrire >>>  
+ - écrire (s'il y a déjà du code pour la création de la connexion avec mysql le remplacer par le suivant) >>>  
  
 
 let db; 
@@ -157,9 +157,7 @@ let db;
         		database: 'zoo' // remplacez par le nom de votre base de données 
 
         		// Paramètres de connexion MySQL 
-
     		}); 
-
 	} 
 
 
