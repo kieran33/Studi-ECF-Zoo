@@ -179,5 +179,6 @@ Ensuite faire :
 
     npm run server 
 
+Puis cliquer sur le lien de l'application déployée : https://arcadia-zoo-ecf-96a9f0778582.herokuapp.com/
 
 Et voilà l'application est désormais déployée en local. 
