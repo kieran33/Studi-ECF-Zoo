@@ -2,7 +2,7 @@
 
 Lien vers logiciel de gestion de projet Trello : https://trello.com/b/VNy4du8F/projet-ecf-zoo-kanban
 
-Lien vers l'application déployée : https://arcadia-zoo-jose-aae84af1a94a.herokuapp.com/
+Lien vers l'application déployée : https://arcadia-zoo-ecf-96a9f0778582.herokuapp.com/
 
 Démarche à suivre pour déployer l'application en local avec Heroku :
 
