@@ -56,7 +56,9 @@ const Animaux = () => {
         if (role === null) {
             augmenterVue()
         }
-        detailsAnimaux()
+        if (id !== "") {
+            detailsAnimaux()
+        }
     }, [prenom])
 
     return (
@@ -67,28 +69,14 @@ const Animaux = () => {
                 {dataTrier.map((animal, index) => (
                     <div className="animal" key={index}>
                         <div className="div_zoo_animaux" >
-                            {(role === null) ?
-                                <img className="image_zoo_animaux"
-                                    src={`http://localhost:3002/image/${animal.image}`}
-                                    alt={animal.prenom}
-                                    onClick={() => {
-                                        setPrenom(animal.prenom)
-                                        setId(animal.id)
-                                        augmenterVue()
-                                        detailsAnimaux()
-                                    }}>
-                                </img>
-                                :
-                                <img className="image_zoo_animaux"
-                                    src={`http://localhost:3002/image/${animal.image}`}
-                                    alt={animal.prenom}
-                                    onClick={() => {
-                                        setPrenom(animal.prenom)
-                                        setId(animal.id)
-                                        detailsAnimaux()
-                                    }}>
-                                </img>
-                            }
+                            <img className="image_zoo_animaux"
+                                src={`http://localhost:3002/image/${animal.image}`}
+                                alt={animal.prenom}
+                                onClick={() => {
+                                    setPrenom(animal.prenom)
+                                    setId(animal.id)
+                                }}>
+                            </img>
                             <div className="text_zoo" style={{ textTransform: 'capitalize' }}>{animal.prenom}</div>
                         </div>
                     </div>
