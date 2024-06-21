@@ -22,6 +22,7 @@ const Connexion = () => {
             if (reponse.data.success) {
                 localStorage.setItem('role', reponse.data.role);
                 localStorage.setItem('connecté', reponse.data.success);
+                localStorage.setItem('token', reponse.data.token);
                 navigate("/");
             } else {
                 alert("Identifiants incorrets");

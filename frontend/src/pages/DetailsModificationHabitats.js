@@ -59,8 +59,11 @@ const DetailsModificationHabitats = () => {
     const modifierHabitats = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         const headers = {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
 
         const formData = new FormData();
@@ -69,13 +72,17 @@ const DetailsModificationHabitats = () => {
         formData.append("description", habitat.description);
         formData.append("image", habitat.image);
 
-        try {
-            const reponse = axios.put(`http://localhost:3002/habitats/modifier/${id}`, formData, { headers })
-            if (reponse) {
-                alert(`Habitat ${habitat.nom} modifié avec succès`);
+        if (token) {
+            try {
+                const reponse = axios.put(`http://localhost:3002/habitats/modifier/${id}`, formData, { headers })
+                if (reponse) {
+                    alert(`Habitat ${habitat.nom} modifié avec succès`);
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

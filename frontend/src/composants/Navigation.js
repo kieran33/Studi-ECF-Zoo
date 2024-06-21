@@ -20,6 +20,7 @@ const Navigation = () => {
     const deconnexion = () => {
         localStorage.removeItem('role');
         localStorage.removeItem('connecté');
+        localStorage.removeItem('token');
         navigate("/");
     };
 

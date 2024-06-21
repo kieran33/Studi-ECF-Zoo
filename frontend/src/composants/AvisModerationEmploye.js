@@ -22,34 +22,63 @@ const AvisModerationEmploye = () => {
     }, []);
 
     const supprimerAvis = (id) => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet avis ?")) {
-            axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`);
-            setTimeout(() => loadData(), 500);
+
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
+        if (token) {
+            if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet avis ?")) {
+                axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`, { headers });
+                setTimeout(() => loadData(), 500);
+            }
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     }
 
     const supprimerTousLesAvis = () => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement tous ces avis ?")) {
-            axios.delete(`http://localhost:3002/supprimer/avis-verif`);
-            setTimeout(() => loadData(), 500);
+
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
+        if (token) {
+            if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement tous ces avis ?")) {
+                axios.delete(`http://localhost:3002/supprimer/avis-verif`, { headers });
+                setTimeout(() => loadData(), 500);
+            }
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     }
 
     const approuverAvis = async (id, pseudo, message) => {
 
-        try {
-            const reponse = await axios.post('http://localhost:3002/ajout-avis-verif', { pseudo, message }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            alert('Avis approuvé avec succès')
-            if (reponse.data) {
-                axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`);
-                setTimeout(() => loadData(), 500);
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            'Content-Type': 'application/json',
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
+        if (token) {
+            try {
+                const reponse = await axios.post('http://localhost:3002/ajout-avis-verif', { pseudo, message }, { headers });
+                alert('Avis approuvé avec succès')
+                if (reponse.data) {
+                    axios.delete(`http://localhost:3002/supprimer/avis-non-verif/${id}`, { headers });
+                    setTimeout(() => loadData(), 500);
+                }
+            } catch (error) {
+                console.error('Erreur:', error.response ? error.response.data : error.message);
             }
-        } catch (error) {
-            console.error('Erreur:', error.response ? error.response.data : error.message);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     }
 

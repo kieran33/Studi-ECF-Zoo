@@ -19,10 +19,21 @@ const SupprimerHabitats = () => {
     }, [data]);
 
     const supprimerHabitats = (id) => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet habitat ?")) {
-            axios.delete(`http://localhost:3002/habitats/supprimer/${id}`);
-            setTimeout(() => loadData(), 500);
+
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
+
+        if (token) {
+            if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet habitat ?")) {
+                axios.delete(`http://localhost:3002/habitats/supprimer/${id}`, { headers });
+                //setTimeout(() => loadData(), 500);
+            };
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
+        }
     };
 
     const retour = () => {

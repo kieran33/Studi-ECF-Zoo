@@ -59,14 +59,24 @@ const DetailsModificationPersonnels = () => {
     const modifierPersonnels = (e) => {
         e.preventDefault();
 
-        try {
-            const reponse = axios.put(`http://localhost:3002/personnels/modifier/${id}`, personnel)
-            if (reponse) {
-                alert(`Compte personnel ${personnel.nom_utilisateur} modifié avec succès`);
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
+        if (token) {
+            try {
+                const reponse = axios.put(`http://localhost:3002/personnels/modifier/${id}`, personnel, { headers })
+                if (reponse) {
+                    alert(`Compte personnel ${personnel.nom_utilisateur} modifié avec succès`);
+                }
+            } catch (error) {
+                console.log(error);
+                alert("Erreur lors de la modification du compte personnel")
             }
-        } catch (error) {
-            console.log(error);
-            alert("Erreur lors de la modification du compte personnel")
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

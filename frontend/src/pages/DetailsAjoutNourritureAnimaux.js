@@ -60,22 +60,32 @@ const DetailsAjoutNourritureAnimaux = () => {
     const AjouterNourritureAnimaux = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
         const formData = new FormData();
 
         formData.append("nourriture", animal.nourriture);
         formData.append("quantite_nourriture", animal.quantite_nourriture);
         formData.append("date_nourriture", animal.date_nourriture);
 
-        try {
-            const reponse = axios.put(`http://localhost:3002/ajout-nourriture2/${prenom}`, formData)
-            if (reponse) {
-                alert(`Nourriture pour l'animal ${animal.prenom} ajouté avec succès`);
-                nourriture.current.value = "";
-                quantite_nourriture.current.value = "";
-                date_nourriture.current.value = "";
+        if (token) {
+            try {
+                const reponse = axios.put(`http://localhost:3002/ajout-nourriture/${prenom}`, formData, { headers })
+                if (reponse) {
+                    alert(`Nourriture pour l'animal ${animal.prenom} ajouté avec succès`);
+                    nourriture.current.value = "";
+                    quantite_nourriture.current.value = "";
+                    date_nourriture.current.value = "";
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

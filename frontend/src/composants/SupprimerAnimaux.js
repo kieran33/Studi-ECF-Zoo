@@ -16,25 +16,35 @@ const SupprimerAnimaux = () => {
 
     useEffect(() => {
         loadData();
-    }, [data]);
+    }, []);
 
     const supprimerAnimaux = async (id, prenom) => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet animal ?")) {
 
-            axios.delete(`http://localhost:3002/animaux/supprimer/${id}`);
+        const token = localStorage.getItem("token");
 
-            axios.delete(`http://localhost:3002/animaux-nourriture/supprimer/${prenom}`);
-
-            axios.delete(`http://localhost:3002/animaux-soins/supprimer/${prenom}`);
-
-            try {
-                await axios.delete(`http://localhost:3002/supprimer-animaux-vues/${prenom}`);
-            } catch (error) {
-                console.log(error)
-            }
-
-            setTimeout(() => loadData(), 500);
+        const headers = {
+            //"Content-Type": "multipart/form-data",
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
+
+        if (token) {
+            if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement cet animal ?")) {
+
+                const reponse = axios.delete(`http://localhost:3002/animaux/supprimer/${id}`, { headers });
+
+                if (reponse) {
+                    await axios.delete(`http://localhost:3002/supprimer-animaux-vues/${prenom}`);
+                    await axios.delete(`http://localhost:3002/animaux-soins/supprimer/${prenom}`);
+                    await axios.delete(`http://localhost:3002/animaux-nourriture/supprimer/${prenom}`);
+                }
+                else {
+                    alert("La requête à échoué");
+                }
+            };
+        }
+        else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
+        }
     };
 
     const retour = () => {

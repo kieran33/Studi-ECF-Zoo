@@ -42,8 +42,11 @@ const AjoutHabitats = () => {
     const ajouterHabitats = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         const headers = {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
 
         const formData = new FormData();
@@ -52,16 +55,20 @@ const AjoutHabitats = () => {
         formData.append("description", nouvelHabitat.description);
         formData.append("image", nouvelHabitat.image);
 
-        try {
-            const reponse = axios.post("http://localhost:3002/ajout-habitats", formData, { headers })
-            if (reponse) {
-                alert(`Nouvel habitat ${nouvelHabitat.nom} ajouté avec succès`);
-                nom.current.value = "";
-                description.current.value = "";
-                image.current.value = "";
+        if (token) {
+            try {
+                const reponse = axios.post("http://localhost:3002/ajout-habitats", formData, { headers })
+                if (reponse) {
+                    alert(`Nouvel habitat ${nouvelHabitat.nom} ajouté avec succès`);
+                    nom.current.value = "";
+                    description.current.value = "";
+                    image.current.value = "";
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     }
 

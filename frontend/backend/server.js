@@ -8,6 +8,7 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const AnimalModel = require("./models/Animaux");
+const jwt = require("jsonwebtoken");
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -17,6 +18,22 @@ const port = 3002;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+function verifierToken(req, res, next) {
+    const headerToken = req.headers['authorization'];
+    if (typeof headerToken !== "undefined") {
+        jwt.verify(headerToken, process.env.JWT_SECRET, (err, authData) => {
+            console.log(authData)
+            if (err) {
+                res.status(403).send('Token érroné');
+            } else {
+                req.token = headerToken;
+                req.authData = authData;
+                next();
+            }
+        })
+    }
+}
 
 app.get("/vues-animaux", (req, res) => {
     AnimalModel.find()
@@ -76,10 +93,10 @@ app.put("/modifier-animaux-vues/:prenom", (req, res) => {
 
 app.use("/image", express.static(path.join(__dirname, "image")));
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' http://localhost:5000;");
     return next();
-});
+});*/
 
 const repertoireImage = path.join(__dirname, "image");
 
@@ -103,7 +120,7 @@ const filtreFichier = (req, file, cb) => {
 
 const exporter = multer({ storage: stockage, fileFilter: filtreFichier });
 
-let db;
+/*let db;
 
 if (process.env.JAWSDB_URL) {
     db = mysql.createConnection(process.env.JAWSDB_URL)
@@ -117,7 +134,14 @@ if (process.env.JAWSDB_URL) {
         database: 'zoo' // remplacez par le nom de votre base de données
         // Paramètres de connexion MySQL
     });
-}
+}*/
+
+const db = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
+});
 
 db.connect(err => {
     if (err) throw err;
@@ -307,10 +331,15 @@ app.post("/connexion", (req, res) => {
                     const utilisateur = results[0];
                     bcrypt.compare(utilisateur.mot_de_passe, hash, (err, result) => {
                         if (result) {
-                            res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
+
+                            const token = jwt.sign({ utilisateur_id: utilisateur.id, nom_utilisateur: utilisateur.nom_utilisateur }, process.env.JWT_SECRET, {
+                                expiresIn: "24h"
+                            })
+
+                            res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role, token });
                         } else {
                             console.log(result)
-                            res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
+                            res.status(401).json({ success: false, message: "Mot de passe incorrect" });
                         }
                     })
                 })
@@ -320,17 +349,22 @@ app.post("/connexion", (req, res) => {
             const utilisateur = results[0];
             bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe, (err, result) => {
                 if (result) {
-                    res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role });
+
+                    const token = jwt.sign({ utilisateur_id: utilisateur.id, nom_utilisateur: utilisateur.nom_utilisateur }, process.env.JWT_SECRET, {
+                        expiresIn: "24h"
+                    })
+
+                    res.status(200).json({ success: true, message: "connexion réussis", role: utilisateur.role, token });
                 } else {
                     console.log(result)
-                    res.status(401).json({ success: false, message: "Mot de passe incorrect", role: utilisateur.role });
+                    res.status(401).json({ success: false, message: "Mot de passe incorrect" });
                 }
             })
         }
     });
 });
 
-app.post("/creer-personnels", (req, res) => {
+app.post("/creer-personnels", verifierToken, (req, res) => {
     const { nom_utilisateur, mot_de_passe, role } = req.body;
 
     bcrypt.genSalt(10, (err, salt) => {
@@ -354,9 +388,12 @@ app.post("/creer-personnels", (req, res) => {
     });
 });
 
-app.post("/ajout-animaux", exporter.single("image"), (req, res) => {
+app.post("/ajout-animaux", verifierToken, exporter.single("image"), (req, res) => {
     const { prenom, race, habitat, description } = req.body;
     const nom_image = req.file ? req.file.filename : null;
+
+    console.log('req.token ajout animaux', req.token)
+    console.log('req.authdata ajout animaux', req.authData)
 
     db.query("INSERT INTO animaux (prenom, race, habitat, image, description) VALUES (?, ?, ?, ?, ?)",
         [prenom, race, habitat, nom_image, description], (error, result) => {
@@ -370,7 +407,7 @@ app.post("/ajout-animaux", exporter.single("image"), (req, res) => {
         });
 });
 
-app.post("/ajout-services", exporter.single("image"), (req, res) => {
+app.post("/ajout-services", verifierToken, exporter.single("image"), (req, res) => {
     const { nom, description } = req.body;
     const nom_image = req.file ? req.file.filename : null;
 
@@ -387,7 +424,7 @@ app.post("/ajout-services", exporter.single("image"), (req, res) => {
         });
 });
 
-app.post("/ajout-habitats", exporter.single("image"), (req, res) => {
+app.post("/ajout-habitats", verifierToken, exporter.single("image"), (req, res) => {
     const { nom, description } = req.body;
     const nom_image = req.file ? req.file.filename : null;
 
@@ -419,7 +456,7 @@ app.post('/ajout-avis-non-verif', (req, res) => {
     });
 });
 
-app.post('/ajout-avis-verif', (req, res) => {
+app.post('/ajout-avis-verif', verifierToken, (req, res) => {
     const { pseudo, message } = req.body;
 
     db.query("INSERT INTO avis_verif (pseudo, message) VALUE (?, ?)", [pseudo, message], (error, result) => {
@@ -449,7 +486,7 @@ app.post('/envoyer-questions', (req, res) => {
     });
 });
 
-app.post("/ajout-soins/:prenom", exporter.single("image"), (req, res) => {
+app.post("/ajout-soins/:prenom", verifierToken, exporter.single("image"), (req, res) => {
     const { prenom } = req.params;
     const { etat, date_soins } = req.body;
 
@@ -465,7 +502,7 @@ app.post("/ajout-soins/:prenom", exporter.single("image"), (req, res) => {
         });
 });
 
-app.delete("/animaux/supprimer/:id", (req, res) => {
+app.delete("/animaux/supprimer/:id", verifierToken, (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM animaux WHERE id = ?";
 
@@ -500,7 +537,7 @@ app.delete("/animaux-soins/supprimer/:prenom", (req, res) => {
     });
 });
 
-app.delete("/services/supprimer/:id", (req, res) => {
+app.delete("/services/supprimer/:id", verifierToken, (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM services WHERE id = ?";
 
@@ -511,7 +548,7 @@ app.delete("/services/supprimer/:id", (req, res) => {
     });
 });
 
-app.delete("/habitats/supprimer/:id", (req, res) => {
+app.delete("/habitats/supprimer/:id", verifierToken, (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM habitats WHERE id = ?";
 
@@ -522,7 +559,7 @@ app.delete("/habitats/supprimer/:id", (req, res) => {
     });
 });
 
-app.delete("/personnels/supprimer/:id", (req, res) => {
+app.delete("/personnels/supprimer/:id", verifierToken, (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM personnels WHERE id = ?";
 
@@ -533,7 +570,7 @@ app.delete("/personnels/supprimer/:id", (req, res) => {
     });
 });
 
-app.delete("/supprimer/avis-non-verif/:id", (req, res) => {
+app.delete("/supprimer/avis-non-verif/:id", verifierToken, (req, res) => {
     const { id } = req.params;
     const request = "DELETE FROM avis_non_verif WHERE id = ?";
 
@@ -544,7 +581,7 @@ app.delete("/supprimer/avis-non-verif/:id", (req, res) => {
     });
 });
 
-app.delete('/supprimer/avis-verif', (req, res) => {
+app.delete('/supprimer/avis-verif', verifierToken, (req, res) => {
     const request = "DELETE FROM avis_verif";
     db.query(request, (error, result) => {
         if (error) {
@@ -553,7 +590,7 @@ app.delete('/supprimer/avis-verif', (req, res) => {
     });
 });
 
-app.put("/animaux/modifier/:id", exporter.single("image"), (req, res) => {
+app.put("/animaux/modifier/:id", verifierToken, exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
 
@@ -611,23 +648,7 @@ app.put("/animaux-soins/modifier/:prenom", exporter.single("image"), (req, res) 
     });
 });
 
-
-app.put("/ajout-nourriture/:id", exporter.single(), (req, res) => {
-    const { id } = req.params;
-
-    const request = "UPDATE animaux SET `nourriture`=?, `quantite_nourriture`=?, `date_nourriture`=? WHERE id=?";
-
-    db.query(request, [req.body.nourriture, req.body.quantite_nourriture, req.body.date_nourriture, id], (error, result) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log(result);
-        }
-    });
-});
-
-app.put("/ajout-nourriture2/:prenom", exporter.single(), (req, res) => {
+app.put("/ajout-nourriture/:prenom", verifierToken, exporter.single(), (req, res) => {
     const { prenom } = req.params;
     const { nourriture, quantite_nourriture, date_nourriture } = req.body;
 
@@ -643,7 +664,7 @@ app.put("/ajout-nourriture2/:prenom", exporter.single(), (req, res) => {
         });
 });
 
-app.put("/avis-habitats/:id", exporter.single(), (req, res) => {
+app.put("/avis-habitats/:id", verifierToken, exporter.single(), (req, res) => {
     const { id } = req.params;
 
     const request = "UPDATE habitats SET `etat`=? WHERE id=?";
@@ -658,7 +679,7 @@ app.put("/avis-habitats/:id", exporter.single(), (req, res) => {
     });
 });
 
-app.put("/services/modifier/:id", exporter.single("image"), (req, res) => {
+app.put("/services/modifier/:id", verifierToken, exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
 
@@ -686,7 +707,7 @@ app.put("/services/modifier/:id", exporter.single("image"), (req, res) => {
     }
 });
 
-app.put("/habitats/modifier/:id", exporter.single("image"), (req, res) => {
+app.put("/habitats/modifier/:id", verifierToken, exporter.single("image"), (req, res) => {
     const { id } = req.params;
     const nom_image = req.file ? req.file.filename : null;
 
@@ -714,7 +735,7 @@ app.put("/habitats/modifier/:id", exporter.single("image"), (req, res) => {
     }
 });
 
-app.put("/personnels/modifier/:id", (req, res) => {
+app.put("/personnels/modifier/:id", verifierToken, (req, res) => {
     const { id } = req.params;
     const { mot_de_passe } = req.body;
     const { nom_utilisateur } = req.body;
@@ -740,7 +761,7 @@ app.put("/personnels/modifier/:id", (req, res) => {
     });
 });
 
-app.put("/horaires/modifier/:id", (req, res) => {
+app.put("/horaires/modifier/:id", verifierToken, (req, res) => {
     const { id } = req.params;
 
     const request = "UPDATE horaires SET `heure_ouverture`=?, `heure_fermeture`=?, `ouvert_fermer`=? WHERE id=?";

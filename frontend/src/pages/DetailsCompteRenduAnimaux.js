@@ -67,20 +67,30 @@ const DetailsCompteRenduAnimaux = () => {
     const AjouterCompteRenduAnimaux = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
         const formData = new FormData();
 
         formData.append("etat", animal.etat);
         formData.append("date_soins", animal.date_soins)
 
-        try {
-            const reponse = axios.post(`http://localhost:3002/ajout-soins/${prenom}`, formData)
-            if (reponse) {
-                alert(`Compte rendu pour l'animal ${animal.prenom} envoyé avec succès`);
-                date_soins.current.value = "";
-                etat.current.value = "";
+        if (token) {
+            try {
+                const reponse = axios.post(`http://localhost:3002/ajout-soins/${prenom}`, formData, { headers })
+                if (reponse) {
+                    alert(`Compte rendu pour l'animal ${animal.prenom} envoyé avec succès`);
+                    date_soins.current.value = "";
+                    etat.current.value = "";
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

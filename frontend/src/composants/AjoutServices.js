@@ -44,8 +44,11 @@ const AjoutServices = () => {
     const ajouterServices = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         const headers = {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
 
         const formData = new FormData();
@@ -54,18 +57,22 @@ const AjoutServices = () => {
         formData.append("description", nouveauService.description);
         formData.append("image", nouveauService.image);
 
-        const reponse = axios.post("http://localhost:3002/ajout-services", formData, { headers })
-            .then(reponse => {
+        if (token) {
+            const reponse = axios.post("http://localhost:3002/ajout-services", formData, { headers })
+            /*.then(reponse => {
                 console.log(reponse.data);
             })
             .catch(error => {
                 console.error(error);
-            });
-        if (reponse) {
-            alert(`Service ${nouveauService.nom} ajouté avec succès`);
-            nom.current.value = "";
-            description.current.value = "";
-            image.current.value = "";
+            });*/
+            if (reponse) {
+                alert(`Service ${nouveauService.nom} ajouté avec succès`);
+                nom.current.value = "";
+                description.current.value = "";
+                image.current.value = "";
+            }
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

@@ -76,8 +76,11 @@ const DetailsModificationAnimaux = () => {
     const modifierAnimaux = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         const headers = {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Authorization": token
         };
 
         const formData = new FormData();
@@ -88,19 +91,19 @@ const DetailsModificationAnimaux = () => {
         formData.append("description", animal.description);
         formData.append("image", animal.image);
 
-        axios.put(`http://localhost:3002/animaux/modifier/${id}`, formData, { headers })
+        if (token) {
+            const reponse = axios.put(`http://localhost:3002/animaux/modifier/${id}`, formData, { headers })
 
-        axios.put(`http://localhost:3002/animaux-nourriture/modifier/${prenom}`, { nouveauPrenom })
-
-        axios.put(`http://localhost:3002/animaux-soins/modifier/${prenom}`, { nouveauPrenom })
-
-        try {
-            const reponse_mongoDB = await axios.put(`http://localhost:3002/modifier-animaux-vues/${prenom}`, { nouveauPrenom })
-            if (reponse_mongoDB) {
+            if (reponse) {
+                axios.put(`http://localhost:3002/animaux-nourriture/modifier/${prenom}`, { nouveauPrenom })
+                axios.put(`http://localhost:3002/animaux-soins/modifier/${prenom}`, { nouveauPrenom })
+                await axios.put(`http://localhost:3002/modifier-animaux-vues/${prenom}`, { nouveauPrenom })
                 alert(`Animal ${animal.prenom} modifié avec succès`);
+            } else {
+                alert("La requête à échoué");
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

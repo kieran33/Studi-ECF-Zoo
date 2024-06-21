@@ -20,6 +20,8 @@ const Animaux = () => {
         setData(reponse.data);
     };
 
+    console.log('data', data)
+
     useEffect(() => {
         loadData();
     }, []);

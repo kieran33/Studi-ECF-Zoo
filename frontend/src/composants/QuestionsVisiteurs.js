@@ -12,6 +12,8 @@ const QuestionsVisiteurs = () => {
 
     const [data, setData] = useState([]);
 
+    const token = localStorage.getItem("token");
+
     const loadData = async () => {
         const reponse = await axios.get('http://localhost:3002/questions')
         setData(reponse.data)
@@ -46,18 +48,29 @@ const QuestionsVisiteurs = () => {
                                     <h4>Description :</h4>
                                     {questions.description}
                                 </p>
-                                <button
-                                    className="bouton_zoo"
-                                    style={{ marginBottom: "20px" }}
-                                    onClick={() => window.location = `mailto:${questions.email}`}
-                                >
-                                    Répondre
-                                </button>
+                                {token ?
+                                    <button
+                                        className="bouton_zoo"
+                                        style={{ marginBottom: "20px" }}
+                                        onClick={() => window.location = `mailto:${questions.email}`}
+                                    >
+                                        Répondre
+                                    </button>
+                                    :
+                                    <button
+                                        className="bouton_zoo"
+                                        style={{ marginBottom: "20px" }}
+                                        onClick={() => alert("Vous n'êtes pas autorisé à effectuer cette action")}
+                                    >
+                                        Répondre
+                                    </button>
+                                }
+
                             </div>
                         ))}
                     </div>
                 </div>
-            </div>
+            </div >
             <Footer />
         </ >
     );

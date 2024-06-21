@@ -65,8 +65,11 @@ const AjoutAnimaux = () => {
     const ajouterAnimaux = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         const headers = {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
 
         const formData = new FormData();
@@ -77,21 +80,30 @@ const AjoutAnimaux = () => {
         formData.append("description", nouvelAnimal.description);
         formData.append("image", nouvelAnimal.image);
 
-        try {
-            const reponse = axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
-            const reponse_mongoDB = axios.post("http://localhost:3002/ajout-animaux-vues", { prenomAnimal })
-            if (reponse && reponse_mongoDB) {
-                alert(`Animal ${nouvelAnimal.prenom} ajouté avec succès`);
-                prenom.current.value = "";
-                race.current.value = "";
-                habitat.current.value = "";
-                description.current.value = "";
-                image.current.value = "";
+        if (token) {
+            try {
+                const reponse = axios.post("http://localhost:3002/ajout-animaux", formData, { headers })
+                if (reponse) {
+                    const reponse_mongoDB = axios.post("http://localhost:3002/ajout-animaux-vues", { prenomAnimal })
+                    if (reponse_mongoDB) {
+                        alert(`Animal ${nouvelAnimal.prenom} ajouté avec succès`);
+                        prenom.current.value = "";
+                        race.current.value = "";
+                        habitat.current.value = "";
+                        description.current.value = "";
+                        image.current.value = "";
+                    }
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        }
+        else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
+
+    console.log('prenom animal', prenomAnimal)
 
     const effacer = (e) => {
         e.preventDefault();
@@ -122,7 +134,7 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire"
                     id="prenom"
                     placeholder="Prénom..."
-                    ref={prenom}
+                    //ref={prenom}
                     onChange={(e) => {
                         setPrenomAnimal(e.target.value)
                         inputChangement(e)
@@ -137,7 +149,7 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire"
                     id="race"
                     placeholder="Race..."
-                    ref={race}
+                    //ref={race}
                     onChange={inputChangement}
                     required
                 />
@@ -147,7 +159,7 @@ const AjoutAnimaux = () => {
                     name="habitat"
                     id="habitat"
                     className="champsFormulaire"
-                    ref={habitat}
+                    //ref={habitat}
                     style={{ width: "140px" }}
                     onChange={inputChangement}
                     required
@@ -165,7 +177,7 @@ const AjoutAnimaux = () => {
                     className="champsFormulaire_textarea"
                     id="description"
                     placeholder="Description..."
-                    ref={description}
+                    //ref={description}
                     onChange={inputChangement}
                     required
                 />
@@ -176,7 +188,7 @@ const AjoutAnimaux = () => {
                     name="image"
                     className="champsFormulaire_image"
                     id="image"
-                    ref={image}
+                    //ref={image}
                     onChange={imageChangement}
                     required
                 />

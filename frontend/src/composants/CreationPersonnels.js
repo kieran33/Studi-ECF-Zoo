@@ -29,33 +29,40 @@ const CreationPersonnels = () => {
     const creerPersonnels = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
         const contientChiffres = /\d/.test(nouveauxPersonnels.mot_de_passe);
 
         const testLettres = /[a-zA-Z]/g;
 
         const contientLettres = testLettres.test(nouveauxPersonnels.mot_de_passe);
 
-        if ((contientChiffres === true) && (contientLettres === true)) {
-            try {
-                const reponse = await axios.post("http://localhost:3002/creer-personnels", nouveauxPersonnels, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-                if (reponse.status === 201 || reponse.status === 200) {
-                    alert("Nouveau compte personnel créer avec succès");
-                    nom_utilisateur.current.value = "";
-                    mot_de_passe.current.value = "";
-                    document.querySelector("#role_employe").checked = false;
-                    document.querySelector("#role_veterinaire").checked = false;
+        if (token) {
+            if ((contientChiffres === true) && (contientLettres === true)) {
+                try {
+                    const reponse = await axios.post("http://localhost:3002/creer-personnels", nouveauxPersonnels, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": token
+                        },
+                    });
+                    if (reponse.status === 201 || reponse.status === 200) {
+                        alert("Nouveau compte personnel créer avec succès");
+                        nom_utilisateur.current.value = "";
+                        mot_de_passe.current.value = "";
+                        document.querySelector("#role_employe").checked = false;
+                        document.querySelector("#role_veterinaire").checked = false;
+                    }
+                } catch (error) {
+                    console.error("Erreur :", error.reponse ? error.reponse.data : error.message);
+                    alert("Erreur lors de l'ajout du nouveau compte personnel")
                 }
-            } catch (error) {
-                console.error("Erreur :", error.reponse ? error.reponse.data : error.message);
-                alert("Erreur lors de l'ajout du nouveau compte personnel")
             }
-        }
-        else {
-            alert("Veuillez choisir un mot de passe contenant des lettres et des chiffres");
+            else {
+                alert("Veuillez choisir un mot de passe contenant des lettres et des chiffres");
+            }
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     }
 

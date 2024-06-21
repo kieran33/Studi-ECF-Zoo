@@ -21,10 +21,21 @@ const SupprimerServices = () => {
     }, [data]);
 
     const supprimerServices = (id) => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce service ?")) {
-            axios.delete(`http://localhost:3002/services/supprimer/${id}`);
-            setTimeout(() => loadData(), 500);
+
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
+
+        if (token) {
+            if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce service ?")) {
+                axios.delete(`http://localhost:3002/services/supprimer/${id}`, { headers });
+                //setTimeout(() => loadData(), 500);
+            };
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
+        }
     };
 
     const retour = () => {

@@ -19,10 +19,20 @@ const SuppressionPersonnels = () => {
     }, [data]);
 
     const supprimerPersonnels = (id) => {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce compte personnel ?")) {
-            axios.delete(`http://localhost:3002/personnels/supprimer/${id}`);
-            setTimeout(() => loadData(), 500);
+
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
         };
+
+        if (token) {
+            if (window.confirm("Êtes-vous sûr de vouloir supprimer définitivement ce compte personnel ?")) {
+                axios.delete(`http://localhost:3002/personnels/supprimer/${id}`, { headers });
+            };
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
+        }
     };
 
     const retour = () => {

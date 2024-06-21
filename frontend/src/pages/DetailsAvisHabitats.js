@@ -56,18 +56,28 @@ const DetailsAvisHabitats = () => {
     const avisHabitats = (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
         const formData = new FormData();
 
         formData.append("etat", habitat.etat);
 
-        try {
-            const reponse = axios.put(`http://localhost:3002/avis-habitats/${id}`, formData)
-            if (reponse) {
-                alert(`Avis pour l'état de l'habitat ${habitat.nom} envoyé avec succès`);
-                etat.current.value = "";
+        if (token) {
+            try {
+                const reponse = axios.put(`http://localhost:3002/avis-habitats/${id}`, formData, { headers })
+                if (reponse) {
+                    alert(`Avis pour l'état de l'habitat ${habitat.nom} envoyé avec succès`);
+                    etat.current.value = "";
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 

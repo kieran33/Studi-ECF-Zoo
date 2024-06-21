@@ -60,14 +60,24 @@ const DetailsModificationHoraires = () => {
     const modifierHoraires = (e) => {
         e.preventDefault();
 
-        try {
-            const reponse = axios.put(`http://localhost:3002/horaires/modifier/${id}`, horaire)
-            if (reponse) {
-                alert(`Horaire pour le ${horaire.jour} modifier avec succès`)
-                retourDashboardAdminHoraires();
+        const token = localStorage.getItem("token");
+
+        const headers = {
+            "Authorization": token // Ajout du token dans l'en-tête Authorization
+        };
+
+        if (token) {
+            try {
+                const reponse = axios.put(`http://localhost:3002/horaires/modifier/${id}`, horaire, { headers })
+                if (reponse) {
+                    alert(`Horaire pour le ${horaire.jour} modifier avec succès`)
+                    retourDashboardAdminHoraires();
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            alert("Vous n'êtes pas autorisé à effectuer cette action");
         }
     };
 
