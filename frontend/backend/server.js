@@ -120,7 +120,7 @@ const filtreFichier = (req, file, cb) => {
 
 const exporter = multer({ storage: stockage, fileFilter: filtreFichier });
 
-/*let db;
+let db;
 
 if (process.env.JAWSDB_URL) {
     db = mysql.createConnection(process.env.JAWSDB_URL)
@@ -134,14 +134,14 @@ if (process.env.JAWSDB_URL) {
         database: 'zoo' // remplacez par le nom de votre base de données
         // Paramètres de connexion MySQL
     });
-}*/
+}
 
-const db = mysql.createConnection({
+/*const db = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
-});
+});*/
 
 db.connect(err => {
     if (err) throw err;
